@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Intern\Admin;
+use App\Http\Controllers\Intern;
+use App\Http\Controllers\Frontend;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,32 +20,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['namespace' => 'App\Http\Controllers'], function () {
+Route::namespace('App\Http\Controllers')->group(function () {
 
     // Index Page
-    Route::get('/', function () {
-        return view('welcome');
+    Route::name('frontend.')->namespace('Frontend')->group(function () {
+        Route::get('/', [Frontend\IndexController::class, 'index'])->name('index');
     });
 
     // Gäste Route
-    Route::group(['middleware' => ['guest']] , function () {
+    Route::middleware('guest')->group(function () {
         Auth::routes(['register' => false]);
     });
 
     // Interne/AdminRoute
-    Route::group(['middleware' => ['auth', 'permission']], function () {
+    Route::middleware(['auth', 'permission'])->group(function () {
         // Intern
-        Route::group(['prefix' => 'intern', 'namespace' => 'Intern'], function () {
+        Route::name('intern.')->prefix('intern')->namespace('Intern')->group(function () {
 
             // Admin
-            Route::group(['prefix' => 'intern', 'namespace' => 'Admin'], function () {
+            Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
                 Route::resource('users', Admin\UsersController::class);
             });
-
-            
         });
     });
-
 });
 
 // Cache & Sitemap Route
