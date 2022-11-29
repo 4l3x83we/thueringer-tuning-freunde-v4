@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Intern\Admin;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,15 +16,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes(['register' => false]);
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
+    // Index Page
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    // Gäste Route
+    Route::group(['middleware' => ['guest']] , function () {
+        Auth::routes(['register' => false]);
+    });
+
+    // Interne/AdminRoute
+    Route::group(['middleware' => ['auth', 'permission']], function () {
+        // Intern
+        Route::group(['prefix' => 'intern', 'namespace' => 'Intern'], function () {
+
+            // Admin
+            Route::group(['prefix' => 'intern', 'namespace' => 'Admin'], function () {
+                Route::resource('users', Admin\UsersController::class);
+            });
+
+            
+        });
+    });
+
+});
 
 // Cache & Sitemap Route
 Route::middleware(['auth'])->group(function () {
