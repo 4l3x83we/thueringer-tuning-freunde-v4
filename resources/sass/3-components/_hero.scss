@@ -1,0 +1,15 @@
+#hero {
+    img {
+        width: 100%;
+        height: rem(420);
+        object-fit: cover;
+        object-position: 100% 30%;
+    }
+
+    h1,
+    h2 {
+        span {
+            color: $primary;
+        }
+    }
+}

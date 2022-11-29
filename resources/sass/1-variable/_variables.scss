@@ -1,0 +1,129 @@
+//@import url(https://fonts.bunny.net/css?family=gluten:100,200,300,400,500,600,700,800,900|nunito:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|racing-sans-one:400);
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.6;
+
+@function rem($pixels, $context: 16) {
+    @if (unitless($pixels)) {
+        $pixels: $pixels * 1px;
+    }
+
+    @if (unitless($context)) {
+        $context: $context * 1px;
+    }
+
+    @return calc($pixels / $context) * 1rem;
+}
+
+$variable-prefix:             bs- !default; // Deprecated in v5.2.0 for the shorter `$prefix`
+$prefix:                      $variable-prefix !default;
+
+$gray-100: #cccccc;
+$gray-200: #b8b8b8;
+$gray-300: #a3a3a3;
+$gray-400: #8f8f8f;
+$gray-500: #7a7a7a;
+$gray-600: #666666;
+$gray-700: #525252;
+$gray-800: #3d3d3d;
+$gray-900: #292929;
+$blue: #2196f3;
+$body-bg: #121212;
+$indigo: #3f51b5;
+$purple: #9c27b0;
+$pink: #e91e63;
+$red: #f44336;
+$orange: #ff4400;
+$yellow: #ffeb3b;
+$green: #4caf50;
+$teal: #009688;
+$cyan: #00bcd4;
+$dark: $gray-900;
+$black: #000000;
+$white: #FFFFFF;
+$ttfgreen: #7cf12e;
+$facebook: #3c5a99;
+$twitter: #1D9BF0;
+$instagram-1: #405DE6;
+$instagram-2: #5851DB;
+$instagram-3: #833AB4;
+$instagram-4: #C13584;
+$instagram-5: #E1306C;
+$instagram-6: #FD1D1D;
+$instagram-7: #F56040;
+$instagram-8: #F77737;
+$instagram-9: #FCAF45;
+$instagram-10: #FFDC80;
+$enable-responsive-font-sizes: true;
+$body-color: $gray-100;
+$primary: $orange;
+$nav-tabs-link-active-color: $gray-300;
+$navbar-dark-color: rgba($gray-100, .5);
+$navbar-dark-hover-color: rgba($gray-100, .75);
+$navbar-dark-disabled-color: rgba($gray-100, .25);
+$navbar-dark-active-color: $orange;
+$navbar-dark-toggler-border-color: rgba($gray-100, .1);
+$dropdown-bg: $body-color;
+$dropdown-link-color: $body-bg;
+$dropdown-color: $body-bg;
+$dropdown-link-hover-color: darken($orange, 5%);
+$dropdown-link-hover-bg: $gray-300;
+$pagination-bg: $body-color;
+$pagination-color: $gray-900;
+$jumbotron-bg: $gray-900;
+$card-bg: $gray-900;
+$card-border-color: rgba($gray-100, .125);
+$card-cap-bg: rgba($gray-100, .03);
+$tooltip-color: $gray-100;
+$popover-bg: $gray-900;
+$popover-border-color: rgba($gray-100, .2);
+$popover-box-shadow: 0 .25rem .5rem rgba($gray-100, .2);
+$toast-background-color: rgba($gray-900, .85);
+$toast-box-shadow: 0 .25rem .75rem rgba($gray-100, .1);
+$toast-header-color: $gray-100;
+$toast-header-background-color: rgba($gray-900, .85);
+$modal-content-bg: $gray-900;
+$modal-content-border-color: rgba($gray-100, .2);
+$modal-content-box-shadow-xs: 0 .25rem .5rem rgba($gray-100, .5);
+$modal-content-box-shadow-sm-up: 0 .5rem 1rem rgba($gray-100, .5);
+$modal-backdrop-bg: $gray-100;
+$progress-bg: $gray-900;
+$progress-box-shadow: inset 0 .1rem .1rem rgba($gray-100, .1);
+$progress-bar-color: $gray-100;
+$list-group-bg: $gray-900;
+$list-group-border-color: rgba($gray-100, .125);
+$list-group-action-color: $gray-100;
+$list-group-hover-bg: $gray-800;
+$breadcrumb-bg: $gray-900;
+$breadcrumb-divider-color: $gray-300;
+$breadcrumb-active-color: $gray-300;
+$carousel-control-color: $gray-900;
+$carousel-indicator-active-bg: $gray-900;
+$carousel-caption-color: $gray-100;
+$box-shadow-sm: 0 .125rem .25rem rgba($black, .925);
+$box-shadow: 0 .5rem 1rem rgba($black, .85);
+$box-shadow-lg: 0 1rem 3rem rgba($black, .825);
+$box-shadow-inset: inset 0 1px 2px rgba($black, .925);
+/*$input-bg: $white;
+$input-color: $gray-700;*/
+$input-group-addon-color: $body-bg;
+$form-check-input-bg: $gray-100;
+$form-switch-color: $gray-900;
+$input-group-addon-bg: $gray-800;
+$input-group-addon-color: $body-color;
+
+$table-color:                 var(--#{$prefix}body-color) !default;
+$table-bg:                    $gray-900;
+
+$table-striped-color:         $table-color !default;
+$table-striped-bg-factor:     .05 !default;
+$table-striped-bg:            rgba($white, $table-striped-bg-factor) !default;
+
+$table-active-color:          $table-color !default;
+$table-active-bg-factor:      .1 !default;
+$table-active-bg:             rgba($white, $table-active-bg-factor) !default;
+
+$table-hover-color:           $table-color !default;
+$table-hover-bg-factor:       .075 !default;
+$table-hover-bg:              rgba($white, $table-hover-bg-factor) !default;

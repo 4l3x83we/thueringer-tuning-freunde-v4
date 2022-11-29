@@ -1,0 +1,44 @@
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+#header {
+    //height: rem(70);
+    /*transition: all 0.5s;
+    z-index: 997;*/
+
+    .navbar-brand {
+        color: $ttfgreen;
+        line-height: 1;
+        font-size: rem(20px);
+
+        .slogan {
+            font-size: rem(16px);
+            text-align: end;
+
+            span {
+                color: $primary;
+            }
+        }
+
+        &:hover {
+            color: $primary;
+
+            .slogan span {
+                color: $ttfgreen;
+            }
+        }
+
+        img {
+            padding: 0;
+            margin: 0;
+            max-height: rem(40px);
+            width: 100%;
+        }
+
+        font-family: "Racing Sans One", cursive;
+    }
+}
+
+.scrolled-offset {
+    margin-top: rem(70);
+}

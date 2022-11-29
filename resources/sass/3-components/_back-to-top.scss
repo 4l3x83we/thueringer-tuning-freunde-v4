@@ -1,0 +1,32 @@
+/**------------------------------------------------------------------------
+ * *                           Back to top
+ *------------------------------------------------------------------------**/
+.back-to-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: rem(15);
+    bottom: rem(15);
+    z-index: 996;
+    background: $primary;
+    width: rem(40);
+    height: rem(40);
+    border-radius: rem(4);
+    transition: all 0.4s;
+
+    em, i {
+        font-size: rem(20);
+        color: $black;
+        line-height: 0;
+    }
+
+    &:hover {
+        background: lighten($primary, 5%);
+        color: $black;
+    }
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
+}

@@ -1,0 +1,87 @@
+.gaestebuch {
+    .entry {
+        padding: rem(20);
+        margin-bottom: rem(24);
+        border-radius: rem(10);
+
+        .entry-title {
+            font-size: rem(28);
+            font-weight: bold;
+            padding: 0;
+            margin: 0 0 rem(20);
+            transition: 0.3s;
+        }
+
+        .entry-meta {
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+                align-items: center;
+                padding: 0;
+                margin: 0;
+
+                li + li {
+                    padding-left: rem(6);
+                }
+            }
+
+            em, i {
+                font-size: rem(16);
+                margin-right: rem(8);
+                line-height: 0;
+                color: $body-color;
+                transition: 0.3s;
+
+                &.bi-facebook:hover {
+                    color: $facebook;
+                }
+
+                &.bi-twitter:hover {
+                    color: $twitter;
+                }
+
+                &.bi-instagram:hover {
+                    background: radial-gradient(circle at 30% 100%, $instagram-10 0%, $instagram-8 20%, $instagram-6 40%, $instagram-4 60%, $instagram-2 80%, $instagram-1 100%);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    transition: 0.3s;
+                }
+            }
+
+            a {
+                color: $body-color;
+                display: inline-block;
+                line-height: 1;
+            }
+
+            p {
+                line-height: rem(24);
+            }
+        }
+
+        .entry-content {
+            h3 {
+                font-size: rem(22);
+                margin-top: rem(20);
+                font-weight: bold;
+            }
+        }
+
+        .entry-footer {
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+                justify-content: space-between;
+                padding: 0;
+                margin: 0;
+
+                li + li {
+                    padding-left: rem(6);
+                }
+            }
+        }
+    }
+}

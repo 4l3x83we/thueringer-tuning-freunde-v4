@@ -1,0 +1,289 @@
+.team,
+.fahrzeuge {
+
+    .member {
+        margin-bottom: rem(20);
+        overflow: hidden;
+        text-align: center;
+        border-radius: rem(10);
+        background: $gray-900;
+
+        .member-img {
+            position: relative;
+            overflow: hidden;
+            background: $gray-800;
+
+            img {
+                width: 100%;
+                height: rem(306);
+                object-fit: cover;
+                object-position: 50% 50%;
+                transition: all 0.3s;
+            }
+
+            .member-img-background {
+                background: $gray-800;
+
+                .member-img-abbreviation {
+                    color: $body-color;
+                    width: 100%;
+                    height: rem(306);
+                    font-size: rem(144);
+                    font-weight: bold;
+                    line-height: rem(306);
+                    margin: 0 auto;
+                    transition: all 0.3s;
+                }
+            }
+        }
+
+        .social {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: rem(40);
+            opacity: 0;
+            transition: ease-in-out 0.3s;
+            background-color: rgba($body-bg, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            a {
+                transition: color 0.3s;
+                margin: 0 rem(10);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                color: $body-color;
+
+                i, em {
+                    line-height: 0;
+                    color: $body-color;
+
+                    &:hover {
+                        color: $primary;
+                    }
+                }
+            }
+
+            i, em {
+                font-size: rem(18);
+                margin: 0 rem(2);
+            }
+        }
+
+        .member-info {
+            padding: rem(25) rem(15);
+
+            h4 {
+                font-weight: 700;
+                margin-bottom: rem(5);
+                font-size: rem(18);
+                color: $body-color;
+            }
+
+            span {
+                display: block;
+                font-weight: 400;
+                font-size: rem(13);
+            }
+
+            p {
+                font-style: italic;
+                font-size: rem(14);
+                line-height: rem(26);
+                color: $body-color;
+                height: rem(90);
+            }
+
+            a {
+                color: $body-color;
+                transition: color 0.3s;
+
+                &:hover {
+                    color: $primary;
+                }
+            }
+        }
+
+        &:hover {
+            .social {
+                opacity: 1;
+            }
+
+            .member-img {
+                img {
+                    transform: scale(1.1);
+                }
+
+                .member-img-background {
+                    background: none;
+
+                    .member-img-abbreviation {
+                        color: $primary;
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+
+    .teamDetails {
+        .sidebar {
+            padding: rem(16);
+
+            hr {
+                border-top: rem(2) solid $primary;
+            }
+
+            span {
+                display: block;
+                padding: rem(5) 0;
+            }
+
+            a {
+                cursor: pointer;
+
+                &:hover {
+                    color: $primary;
+                }
+            }
+
+            .social {
+                a {
+                    color: $body-color;
+                    transition: 0.3s;
+
+                    &:hover {
+                        color: $primary;
+                    }
+                }
+
+                i, em {
+                    font-size: rem(18);
+                    margin: 0 rem(2);
+                }
+            }
+
+            .profilImage {
+                height: rem(40);
+                width: rem(40);
+                border-radius: rem(5);
+                font-size: rem(14);
+                font-weight: bold;
+                text-align: center;
+                line-height: rem(40);
+            }
+        }
+    }
+
+    #teamEditModal, #fahrzeugeEditModal {
+        .teamEdit, .fahrzeugeEdit {
+            padding: 0;
+            border-radius: rem(10);
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: rem(10) rem(24);
+                background: $gray-800;
+                border-radius: rem(10) rem(10) 0 0;
+
+                h5 {
+                    margin-bottom: 0;
+                }
+
+                h1 {
+                    margin-bottom: -5px;
+                }
+            }
+
+            .body {
+                padding: rem(10) rem(24);
+
+                label {
+                    small {
+                        top: rem(-3);
+                        color: $danger;
+                    }
+
+                    span {
+                        color: $body-color;
+                        font-size: rem(14);
+                    }
+                }
+            }
+
+            .img-wrapper {
+                position: relative;
+                transition: 0.3s;
+                overflow: hidden;
+                z-index: 1;
+                background: rgba($body-bg, 0.6);
+                border-radius: rem(5);
+                margin: rem(5);
+
+                &:before {
+                    content: "";
+                    background: rgba($body-bg, 0.6);
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    transition: all ease-in-out 0.3s;
+                    z-index: 2;
+                    opacity: 0;
+                }
+
+                .imageDelete {
+                    opacity: 0;
+                    position: absolute;
+                    left: 0;
+                    right: 5px;
+                    top: 5px;
+                    bottom: 0;
+                    text-align: center;
+                    z-index: 3;
+                    transition: all ease-in-out 0.3s;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: end;
+                    align-items: start;
+                    color: $danger;
+                }
+
+                img {
+                    width: rem(150);
+                    height: rem(150);
+                    object-fit: cover;
+                    object-position: 50% 50%;
+                    transition: all 0.3s;
+                }
+
+                label {
+                    margin-top: 2px;
+                    margin-left: 5px;
+                }
+
+                &:hover {
+                    &:before {
+                        opacity: 1;
+                        border-radius: rem(5);
+                    }
+
+                    .imageDelete {
+                        opacity: 1;
+                    }
+
+                    img {
+                        transform: scale(1.2);
+                    }
+                }
+            }
+        }
+    }
+}

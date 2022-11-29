@@ -1,8 +1,59 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+//@import url('https://fonts.bunny.net/css?family=Nunito');
 
 // Variables
-@import 'variables';
+@import '1-variable/variables';
+@import '1-variable/fonts';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Krajee File Upload
+@import "bootstrap-fileinput/css/fileinput.css";
+
+@import "aos/src/sass/aos";
+
+@import "glightbox/dist/css/glightbox.css";
+@import "glightbox/dist/css/plyr.css";
+
+@import "swiper/css/bundle";
+
+@import "datatables.net-bs5";
+
+@import "@fancyapps/ui/dist/fancybox.css";
+
+// Theme Components
+@import "3-components/about";
+@import "3-components/animationen";
+@import "3-components/antrag";
+@import "3-components/back-to-top";
+@import "3-components/contact";
+@import "3-components/counts";
+@import "3-components/dashboard";
+@import "3-components/fahrzeuge";
+@import "3-components/footer";
+@import "3-components/gallery";
+@import "3-components/guestbook";
+@import "3-components/header";
+@import "3-components/hero";
+@import "3-components/internAntrag";
+@import "3-components/main";
+@import "3-components/media-query";
+@import "3-components/preloader";
+@import "3-components/section";
+@import "3-components/tables";
+@import "3-components/team";
+@import "3-components/topbar";
+@import "3-components/veranstaltungen";
+
+// Theme Utilities
+
+
+// 3rd party Plugins
+
+
+// 3rd party Plugin Styles
+
+
+// Theme Customs
+@import "6-custom/customs";

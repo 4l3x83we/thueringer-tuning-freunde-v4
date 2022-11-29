@@ -1,0 +1,76 @@
+.ueber-uns {
+    .container {
+        border-radius: rem(10);
+        background: $body-bg;
+        padding-bottom: rem(15);
+    }
+
+    .icon-box {
+        padding: rem(40) rem(30);
+        border-radius: rem(10);
+        background: $gray-900;
+        transition: all ease-in-out 0.3s;
+        height: 100%;
+
+        em, i {
+            font-size: rem(42);
+            margin-bottom: rem(15);
+            display: block;
+            line-height: 0;
+        }
+
+        h3 {
+            margin-bottom: rem(15);
+            font-size: rem(20);
+
+            span {
+                transition: 0.3s;
+            }
+        }
+
+        p {
+            line-height: rem(24);
+            font-size: rem(14);
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            background: $primary;
+
+            i, em, a, h3, span, p {
+                color: $black;
+                font-weight: normal;
+            }
+        }
+    }
+
+    .ueber-uns__images {
+        padding: rem(32);
+        background-color: $gray-900;
+    }
+
+    .content {
+        h3 {
+            font-size: rem(26);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+
+            li {
+                padding-bottom: rem(10);
+            }
+
+            em, i {
+                font-size: rem(20);
+                padding-right: rem(4);
+            }
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

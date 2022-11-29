@@ -1,0 +1,28 @@
+.internAntrag {
+    .internTable {
+        padding: rem(30) rem(15);
+        border-radius: rem(10);
+    }
+
+    #internAntragShow {
+        .background, .header, .body {
+            border-radius: rem(10);
+        }
+
+        .body {
+            background: $body-bg;
+        }
+
+        .carImage, .profilImage {
+            width: 156px;
+            height: 153px;
+            object-fit: cover;
+            object-position: 50% 50%;
+        }
+
+        .carImage {
+            object-fit: scale-down;
+            margin: rem(5);
+        }
+    }
+}

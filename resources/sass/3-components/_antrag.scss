@@ -1,0 +1,37 @@
+.antrag {
+    .text-bg-dark {
+        border-radius: rem(10);
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: rem(10) rem(24);
+        background: $gray-800;
+        border-radius: rem(10) rem(10) 0 0;
+
+        h1 {
+            margin: 0;
+            line-height: 1;
+            font-size: rem(28);
+        }
+    }
+
+    .body {
+        padding: rem(10) rem(24);
+
+        label {
+            small {
+                top: rem(-3);
+                color: $danger;
+            }
+
+            span {
+                color: $body-color;
+                font-size: rem(14);
+            }
+        }
+
+    }
+}

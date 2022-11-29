@@ -1,5 +1,9 @@
 import './bootstrap';
 
 import '../sass/app.scss'
+import './customs/custom'
 
-import * as bootstrap from 'bootstrap'
+import.meta.glob([
+    '../images/**',
+    '../fonts/**',
+]);

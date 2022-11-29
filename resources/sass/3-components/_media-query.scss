@@ -1,0 +1,134 @@
+/**------------------------------------------------------------------------
+ * *                           Media Query
+ *------------------------------------------------------------------------**/
+// = max-width
+
+@include media-breakpoint-down(xxl) {
+
+}
+
+@include media-breakpoint-down(xl) {
+    .fahrzeuge .fahrzeugeDetails .background {
+        border-top-left-radius: 0;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    #hero {
+        img {
+            height: rem(280);
+            object-position: 100% 40%;
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    [data-aos-delay] {
+        transition: 0s !important;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    #topbar {
+        display: none !important;
+    }
+
+    .navbar-brand {
+        font-size: 100% !important;
+        .slogan {
+            font-size: 85% !important;
+        }
+    }
+
+    .ueber-uns {
+        .container {
+            background-color: transparent;
+            box-shadow: none !important;
+        }
+
+        .icon-box {
+            background-color: $body-bg;
+            color: $body-color;
+        }
+
+        .ueber-uns__images {
+            background-color: $body-bg;
+        }
+    }
+
+    .counts {
+        .count-box {
+            background-color: $body-bg;
+        }
+    }
+
+    .gaestebuch {
+        .entry {
+            .entry-title {
+                font-size: 100%;
+            }
+
+            .entry-content {
+                h3 {
+                    font-size: 100%;
+                }
+
+                p {
+                    font-size: 90%;
+                }
+            }
+        }
+    }
+
+    .antrag {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+
+            h1 {
+                font-size: 100%;
+            }
+        }
+    }
+}
+
+// = min-width
+@include media-breakpoint-up(sm) {
+
+}
+
+@include media-breakpoint-up(md) {
+    .event-box {
+        .event-box-time-social {
+            width: 20% !important;
+        }
+
+        .event-box-content {
+            h4 {
+                font-size: rem(18) !important;
+                height: 58px;
+            }
+        }
+
+        .event-box-content-items {
+            .event-box-content-items-icons {
+                opacity: 1 !important;
+                width: 5% !important;
+            }
+            .event-box-content-items-content {
+                width: 95% !important;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(lg) {
+}
+
+@include media-breakpoint-up(xl) {
+
+}
+
+@include media-breakpoint-up(xxl) {
+
+}

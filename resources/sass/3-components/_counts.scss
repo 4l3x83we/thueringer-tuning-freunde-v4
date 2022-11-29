@@ -1,0 +1,29 @@
+.counts {
+    .count-box {
+        padding: rem(30);
+        width: 100%;
+        border-radius: rem(10);
+        background-color: $gray-900;
+
+        i, em {
+            display: block;
+            font-size: rem(48);
+            float: left;
+            line-height: 0;
+        }
+
+        span {
+            font-size: rem(28);
+            line-height: rem(12);
+            display: block;
+            font-weight: 700;
+            margin-left: rem(60);
+        }
+
+        p {
+            padding: rem(10) 0 0;
+            margin: 0 0 0 rem(60);
+            font-size: rem(14);
+        }
+    }
+}

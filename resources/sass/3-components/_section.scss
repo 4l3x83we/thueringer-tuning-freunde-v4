@@ -1,0 +1,37 @@
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+#main section {
+    padding: rem(70) 0;
+    overflow: hidden;
+
+
+    .section-title {
+        padding-bottom: rem(30);
+        text-align: center;
+
+        h2 {
+            font-size: rem(32);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: rem(20);
+            padding-bottom: rem(20);
+            position: relative;
+
+            &:after {
+                content: "";
+                position: absolute;
+                display: block;
+                width: rem(50);
+                height: rem(5);
+                background: $primary;
+                bottom: 0;
+                left: calc(50% - 1.563rem);
+            }
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+}

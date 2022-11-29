@@ -1,0 +1,46 @@
+.kontakt {
+
+    .info-box {
+        background: $gray-900;
+        text-align: center;
+        padding: rem(20) 0;
+        height: 100%;
+        border-radius: rem(10);
+
+        em, i {
+            font-size: rem(32);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: rem(32);
+            width: rem(56);
+            height: rem(56);
+            border-radius: 50%;
+            padding: rem(8);
+            border: rem(2) dotted $primary;
+        }
+
+        h3 {
+            font-size: rem(20);
+            color: $body-color;
+            font-weight: 700;
+            margin: rem(10) 0;
+        }
+    }
+
+    .php-email-form {
+        padding: rem(30);
+        height: 100%;
+        border-radius: rem(10);
+        background: $gray-900;
+    }
+}
+
+.kontaktPage {
+    .section-title {
+        display: none;
+    }
+    .kontakt {
+        margin-top: rem(-60);
+    }
+}

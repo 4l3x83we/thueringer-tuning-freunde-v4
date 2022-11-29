@@ -1,0 +1,111 @@
+/**------------------------------------------------------------------------
+ * *                           General
+ *------------------------------------------------------------------------**/
+body {
+    font-family: "Nunito", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Gluten', cursive;
+}
+
+a {
+    text-decoration: none;
+}
+
+.primary-link {
+    color: $body-color;
+
+    &:hover {
+        color: $primary !important;
+    }
+}
+
+.grecaptcha-badge {
+    display: none !important;
+}
+
+.trennung {
+    hyphens: auto;
+}
+
+.geburtstagsliste, .telefonliste {
+    .geburtstagslisteTable, .telefonlisteTable {
+        border-radius: rem(10);
+    }
+}
+
+.border-radius-10 {
+    border-radius: rem(10);
+}
+
+.calendar {
+    min-height: calc(100vh - 520px);
+}
+
+.apmh {
+    background: $primary !important;
+    color: $black !important;
+
+    .bi-dash {
+        color: $black !important;
+    }
+}
+
+.apoh {
+    background: $green !important;
+    color: $black !important;
+
+    .bi-dash {
+        color: $black !important;
+    }
+}
+
+.rw {
+    background: $info !important;
+    color: $black !important;
+
+    .bi-dash {
+        color: $black !important;
+    }
+}
+
+.sp {
+    background: $secondary !important;
+}
+
+.ver {
+    background: $red !important;
+    color: $black !important;
+
+    .bi-dash {
+        color: $black !important;
+    }
+}
+
+.links-light {
+    color: $white;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+.links-light-cursor {
+    cursor: pointer;
+    color: $white;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+#alertGeb.hide {
+    display: none;
+}
+
+@import "webkitScrollbar";
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}

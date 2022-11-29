@@ -1,0 +1,41 @@
+/**------------------------------------------------------------------------
+ * *                          Top Bar
+ *------------------------------------------------------------------------**/
+#topbar {
+    background: $gray-800;
+    padding: rem(10) 0;
+    font-size: rem(14);
+
+    .contact-info {
+        em, i {
+            font-style: normal;
+            color: $primary;
+
+            a,
+            span {
+                padding-left: rem(5);
+                color: $body-color;
+            }
+
+            a {
+                line-height: 0;
+                transition: 0.3s;
+
+                &:hover {
+                    color: rgba($body-color, .8);
+                }
+            }
+        }
+    }
+
+    .social-links a {
+        color: $primary;
+        line-height: 0;
+        transition: 0.3s;
+        margin-left: rem(10);
+
+        &:hover {
+            color: rgba($primary, .8);
+        }
+    }
+}

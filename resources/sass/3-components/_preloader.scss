@@ -1,0 +1,27 @@
+/**------------------------------------------------------------------------
+ * *                           Preloader
+ *------------------------------------------------------------------------**/
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: rgba($body-bg, .95);
+
+    &:before {
+        content: "";
+        position: fixed;
+        top: calc(50% - 30px);
+        left: calc(50% - 30px);
+        border: rem(6) solid $primary;
+        border-top-color: transparent;
+        border-radius: 50%;
+        width: rem(60);
+        height: rem(60);
+        -webkit-animation: animate-preloader 1s linear infinite;
+        animation: animate-preloader 1s linear infinite;
+    }
+}
