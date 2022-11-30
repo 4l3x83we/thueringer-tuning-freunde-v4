@@ -13,7 +13,7 @@
 
 @section('content')
     <!-- ======= Über uns ======= -->
-
+    @include('frontend.component.ueber-uns')
     <!-- ======= Team ======= -->
 
     <!-- ======= Fahrzeuge ======= -->
