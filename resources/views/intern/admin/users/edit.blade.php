@@ -13,6 +13,7 @@
                 <div class="col-lg-12 d-flex align-items-stretch">
                     <form action="{{ route('intern.admin.users.update', $user->id) }}" method="POST">
                         @csrf
+                        @method('PATCH')
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input value="{{ old('name') ?: $user->name }}"
@@ -40,19 +41,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="role" class="form-label">Rolle</label>
-                            <select class="form-control"
-                                    name="role" required>
-                                <option value="">Rolle auswählen</option>
                                 @foreach($roles as $role)
-                                    <option value="{{ $role->id }}"
-                                        {{ in_array($role->name, $userRole)
-                                            ? 'selected'
-                                            : '' }}>{{ $role->name }}</option>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="roles[]" id="roles-{{ $role->name }}" value="{{ $role->id }}" {{ in_array($role->id, $user->roles->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="roles-{{ $role->name }}">{{ __($role->name) }}</label>
+                                    </div>
                                 @endforeach
-                            </select>
-                            @if ($errors->has('role'))
-                                <span class="text-danger text-left">{{ $errors->first('role') }}</span>
-                            @endif
+                                @if ($errors->has('role'))
+                                    <span class="text-danger text-left">{{ $errors->first('role') }}</span>
+                                @endif
                         </div>
 
                         <button type="submit" class="btn btn-primary">Benutzer aktualisieren</button>

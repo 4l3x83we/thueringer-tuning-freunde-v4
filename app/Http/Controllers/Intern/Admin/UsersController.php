@@ -15,6 +15,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\Intern\Admin\Users;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
@@ -48,23 +49,30 @@ class UsersController extends Controller
         ]);
     }
 
-    public function edit(Users $user)
+    public function edit($id)
     {
         return view('intern.admin.users.edit', [
-            'user' => $user,
-            'userRole' => $user->roles->pluck('name')->toArray(),
-            'roles' => Role::latest()->get()
+            'user' => User::find($id),
+//            'userRole' => DB::table('roles')->pluck('id')->toArray(),
+            'roles' => Role::all()
         ]);
     }
 
-    public function update(Request $request, Users $user)
+    public function update(Request $request, $id)
     {
-        $user->update($request->validated());
+        $user = User::find($id);
 
-        $user->syncRoles($request->get('role'));
+        if (!$user) {
+            $request->session()->flash('danger', 'Sie können diesen Benutzer nicht bearbeiten.');
+            return redirect()->route('admin.users.index');
+        }
 
-        return redirect()->route('intern.admin.users.index')
-            ->withSuccess(__('User updated successfully.'));
+        $user->update($request->except(['_token', 'roles']));
+        $user->roles()->sync($request->roles);
+
+        $request->session()->flash('success', 'Sie haben den Benutzer bearbeitet.');
+
+        return redirect()->route('intern.admin.users.index');
     }
 
     public function destroy(Users $user)
