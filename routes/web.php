@@ -25,6 +25,10 @@ Route::namespace('App\Http\Controllers')->group(function () {
     // Index Page
     Route::name('frontend.')->namespace('Frontend')->group(function () {
         Route::get('/', [Frontend\IndexController::class, 'index'])->name('index');
+
+        // Impressum
+        Route::get('/impressum', [Frontend\IndexController::class, 'impressum'])->name('impressum');
+        Route::get('/datenschutz', [Frontend\IndexController::class, 'datenschutz'])->name('datenschutz');
     });
 
     // Gäste Route
@@ -33,13 +37,15 @@ Route::namespace('App\Http\Controllers')->group(function () {
     });
 
     // Interne/AdminRoute
-    Route::middleware(['auth', 'permission'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         // Intern
         Route::name('intern.')->prefix('intern')->namespace('Intern')->group(function () {
 
             // Admin
             Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
                 Route::resource('users', Admin\UsersController::class);
+                Route::resource('roles', Admin\RolesController::class);
+                Route::resource('permissions', Admin\PermissionsController::class);
             });
         });
     });

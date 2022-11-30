@@ -15,6 +15,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\Intern\Admin\Users;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -22,12 +23,12 @@ class UsersController extends Controller
     {
         $users = User::latest()->paginate(10);
 
-        return view('users.index', compact('users'));
+        return view('intern.admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        return view('users.create');
+        return view('intern.admin.users.create');
     }
 
     public function store(User $user, StoreUserRequest $request)
@@ -36,21 +37,23 @@ class UsersController extends Controller
             'password' => 'test'
         ]));
 
-        return redirect()->route('users.index')
+        return redirect()->route('intern.admin.users.index')
             ->withSuccess(__('User created successfully.'));
     }
 
     public function show(Users $user)
     {
-        return view('users.show', [
+        return view('intern.admin.users.show', [
             'user' => $user
         ]);
     }
 
     public function edit(Users $user)
     {
-        return view('users.show', [
-            'user' => $user
+        return view('intern.admin.users.edit', [
+            'user' => $user,
+            'userRole' => $user->roles->pluck('name')->toArray(),
+            'roles' => Role::latest()->get()
         ]);
     }
 
@@ -60,7 +63,7 @@ class UsersController extends Controller
 
         $user->syncRoles($request->get('role'));
 
-        return redirect()->route('users.index')
+        return redirect()->route('intern.admin.users.index')
             ->withSuccess(__('User updated successfully.'));
     }
 
@@ -68,7 +71,7 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.index')
+        return redirect()->route('intern.admin.users.index')
             ->withSuccess(__('User deleted successfully.'));
     }
 }
