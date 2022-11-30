@@ -26,6 +26,9 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::name('frontend.')->namespace('Frontend')->group(function () {
         Route::get('/', [Frontend\IndexController::class, 'index'])->name('index');
 
+        // Kontakt
+        Route::resource('/kontakt', Frontend\KontaktsController::class)->only('index', 'store');
+
         // Impressum
         Route::get('/impressum', [Frontend\IndexController::class, 'impressum'])->name('impressum');
         Route::get('/datenschutz', [Frontend\IndexController::class, 'datenschutz'])->name('datenschutz');
