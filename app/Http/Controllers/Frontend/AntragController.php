@@ -33,8 +33,9 @@ class AntragController extends Controller
         $bremsen = !$request->bremsen ? '<p>Serienmäßig keine Änderungen vorgenommen.</p>' : $request->bremsen;
         $innenraum = !$request->innenraum ? '<p>Serienmäßig keine Änderungen vorgenommen.</p>' : $request->innenraum;
         $anlage = !$request->anlage ? '<p>Serienmäßig keine Änderungen vorgenommen.</p>' : $request->anlage;
-        $profilPath = 'images/' . $teamMitglied . '/profil/';
-        dd($request->all(), $teamMitglied);
+        $profilPath = 'images/profil/' . $teamMitglied;
+        $profilImage = Helpers::imageUpload($request, 'profilbild', $profilPath);
+        dd($request->all(), $teamMitglied, $profilImage);
 
     }
 }
