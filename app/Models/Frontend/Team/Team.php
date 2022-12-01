@@ -14,10 +14,22 @@ use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Fahrzeuge\Fahrzeug;
 use App\Models\User;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
+    use Sluggable;
+
+    public function sluggable() : array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
     protected $table = 'teams';
 
     public function users()

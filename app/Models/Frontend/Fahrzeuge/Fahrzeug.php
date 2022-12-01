@@ -13,10 +13,22 @@ namespace App\Models\Frontend\Fahrzeuge;
 use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Team\Team;
 use App\Models\User;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Fahrzeug extends Model
 {
+    use Sluggable;
+
+    public function sluggable() : array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
     protected $table = 'fahrzeuges';
 
     public function users()
