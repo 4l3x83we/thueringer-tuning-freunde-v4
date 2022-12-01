@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Intern\Admin;
-use App\Http\Controllers\Intern;
 use App\Http\Controllers\Frontend;
+use App\Http\Controllers\Intern;
+use App\Http\Controllers\Intern\Admin;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,12 +19,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/test', function () {
+    $teams = \App\Models\Frontend\Album\Photo::find(1);
+    dump($teams->teams, $teams->users);
+    dump($teams, $teams->fahrzeuges, $teams->albums);
+});
 
 Route::namespace('App\Http\Controllers')->group(function () {
-
     // Index Page
     Route::name('frontend.')->namespace('Frontend')->group(function () {
         Route::get('/', [Frontend\IndexController::class, 'index'])->name('index');
+
+        // Antrag
+        Route::get('/antrag', [Frontend\AntragController::class, 'index'])->name('antrag.index');
+        Route::post('/antrag', [Frontend\AntragController::class, 'store'])->name('antrag.store');
 
         // Kontakt
         Route::resource('/kontakt', Frontend\KontaktsController::class)->only('index', 'store');

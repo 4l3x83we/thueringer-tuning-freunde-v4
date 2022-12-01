@@ -3,6 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Frontend\Album\Album;
+use App\Models\Frontend\Album\Photo;
+use App\Models\Frontend\Fahrzeuge\Fahrzeug;
+use App\Models\Frontend\Team\Team;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,4 +49,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
+    public function fahrzeuges()
+    {
+        return $this->hasMany(Fahrzeug::class);
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
+
+    public function teams()
+    {
+        return $this->hasOne(Team::class, 'user_id');
+    }
 }

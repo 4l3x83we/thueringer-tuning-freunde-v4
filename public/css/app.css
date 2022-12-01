@@ -1,0 +1,15 @@
+
+body {
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.4;
+    margin: 1rem;
+    background: #121212;
+    color: #cccccc;
+}
+.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before {
+    color: #a3a3a3;
+}
+
+.tox .tox-edit-area__iframe {
+    background-color: #292929;
+}

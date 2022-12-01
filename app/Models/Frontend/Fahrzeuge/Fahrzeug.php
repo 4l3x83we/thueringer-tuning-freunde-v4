@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright (c) Alexander Guthmann.
+ *
+ * File: Fahrzeug.php
+ * User: ${USER}
+ * Date: 1.${MONTH_NAME_FULL}.2022
+ * Time: 7:58
+ */
+
+namespace App\Models\Frontend\Fahrzeuge;
+
+use App\Models\Frontend\Album\Album;
+use App\Models\Frontend\Team\Team;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
+
+class Fahrzeug extends Model
+{
+    protected $table = 'fahrzeuges';
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function albums()
+    {
+        return $this->belongsTo(Album::class, 'album_id');
+    }
+
+    public function teams()
+    {
+        return $this->belongsTo(Team::class, 'team_id');
+    }
+}
