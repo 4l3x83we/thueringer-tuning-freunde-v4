@@ -21,6 +21,7 @@ use App\Models\Frontend\Team\Team;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Mail;
 use Yoeunes\Toastr\Facades\Toastr;
@@ -34,6 +35,74 @@ class AntragController extends Controller
 
     public function store(Request $request)
     {
+        if (!$request->fahrzeugvorhanden) {
+            $validator = Validator::make($request->all(), [
+                'anrede' => 'required',
+                'vorname' => 'required|max:255',
+                'nachname' => 'required|max:255',
+                'straße' => 'required|max:255',
+                'plz' => 'required|max:5',
+                'ort' => 'required|max:255',
+                'email' => 'required|max:255|email',
+                'geburtsdatum' => 'required|max:255',
+                'fahrzeug' => 'required|max:255',
+                'baujahr' => 'required|max:15',
+                'mobil' => 'required|max:15',
+                'telefon' => 'max:15',
+                'motor' => 'required|max:65535',
+                'besonderheiten' => 'max:65535',
+                'karosserie' => 'max:65535',
+                'felgen' => 'max:65535',
+                'bremsen' => 'max:65535',
+                'innenraum' => 'max:65535',
+                'anlage' => 'max:65535',
+                'beruf' => 'max:255',
+                'facebook' => 'max:255',
+                'tiktok' => 'max:255',
+                'instagram' => 'max:255',
+                'description' => 'required|min:250|max:4294967295',
+                'beschreibungFz' => 'required|min:25|max:4294967295',
+            ], [
+                'description.required' => 'Beschreibung muss ausgefüllt werden mit mindestens 250 Zeichen.',
+                'description.min' => 'Beschreibung muss mindestens 250 Zeichen lang sein.',
+                'plz.required' => 'Postleitzahl muss ausgefüllt werden.',
+                'ort.required' => 'Wohnort muss ausgefüllt werden.',
+                'mobil.required' => 'Mobilfunk muss ausgefüllt werden.',
+                'email.required' => 'E-Mail Adresse muss ausgefüllt werden.',
+                'beschreibungFz.required' => 'Beschreibung muss ausgefüllt werden mit mindestens 25 Zeichen.',
+                'beschreibungFz.min' => 'Beschreibung muss mindestens 25 Zeichen lang sein.',
+            ]);
+        } else {
+            $validator = Validator::make($request->all(), [
+                'anrede' => 'required',
+                'vorname' => 'required|max:255',
+                'nachname' => 'required|max:255',
+                'straße' => 'required|max:255',
+                'plz' => 'required|max:5',
+                'ort' => 'required|max:255',
+                'email' => 'required|max:255|email',
+                'geburtsdatum' => 'required|max:255',
+                'mobil' => 'required|max:15',
+                'telefon' => 'max:15',
+                'beruf' => 'max:255',
+                'facebook' => 'max:255',
+                'tiktok' => 'max:255',
+                'instagram' => 'max:255',
+                'description' => 'required|min:250|max:4294967295',
+            ], [
+                'description.required' => 'Beschreibung muss ausgefüllt werden mit mindestens 250 Zeichen.',
+                'description.min' => 'Beschreibung muss mindestens 250 Zeichen lang sein.',
+                'plz.required' => 'Postleitzahl muss ausgefüllt werden.',
+                'ort.required' => 'Wohnort muss ausgefüllt werden.',
+                'mobil.required' => 'Mobilfunk muss ausgefüllt werden.',
+                'email.required' => 'E-Mail Adresse muss ausgefüllt werden.',
+            ]);
+        }
+
+        if ($validator->fails()) {
+            return redirect(route('frontend.antrag.index'))->withErrors($validator)->withInput();
+        }
+
         $anrede = !$request->anrede ? 'keine Angabe' : $request->anrede;
         $teamMitglied = Helpers::replaceStrToLower($request->vorname .'-'. $request->nachname);
         $beruf = !$request->beruf ? 'Keinen' : $request->beruf;
@@ -116,26 +185,7 @@ class AntragController extends Controller
             $team = new Team();
             $team->user_id = null;
             $team->fahrzeug_id = $fahrzeuge->id;
-            $team->antrag_id = null;
-            $team->slug = SlugService::createSlug(Team::class, 'slug', $teamMitglied);
-            $team->anrede = $anrede;
-            $team->vorname = $request->vorname;
-            $team->nachname = $request->nachname;
-            $team->straße = $request->straße;
-            $team->plz = $request->plz;
-            $team->wohnort = $request->ort;
-            $team->telefon = $request->telefon;
-            $team->mobil = $request->mobil;
-            $team->email = $request->email;
-            $team->geburtsdatum = $request->geburtsdatum;
-            $team->beruf = $beruf;
-            $team->description = $request->description;
-            $team->tiktok = $request->tiktok;
-            $team->instagram = $request->instagram;
-            $team->facebook = $request->facebook;
-            $team->funktion = null;
-            $team->emailIntern = Helpers::replaceStrToLower($request->vorname.'.'.$request->nachname[0]).'@thueringer-tuning-freunde.de';
-            $team->ip_adresse = $request->getClientIp();
+            $this->extracted($team, $teamMitglied, $anrede, $request, $beruf);
             $team->fahrzeug_vorhanden = 0;
             $team->published = 0;
             $team->save();
@@ -172,26 +222,7 @@ class AntragController extends Controller
             $team = new Team();
             $team->user_id = null;
             $team->fahrzeug_id = null;
-            $team->antrag_id = null;
-            $team->slug = SlugService::createSlug(Team::class, 'slug', $teamMitglied);
-            $team->anrede = $anrede;
-            $team->vorname = $request->vorname;
-            $team->nachname = $request->nachname;
-            $team->straße = $request->straße;
-            $team->plz = $request->plz;
-            $team->wohnort = $request->ort;
-            $team->telefon = $request->telefon;
-            $team->mobil = $request->mobil;
-            $team->email = $request->email;
-            $team->geburtsdatum = $request->geburtsdatum;
-            $team->beruf = $beruf;
-            $team->description = $request->description;
-            $team->tiktok = $request->tiktok;
-            $team->instagram = $request->instagram;
-            $team->facebook = $request->facebook;
-            $team->funktion = null;
-            $team->emailIntern = Helpers::replaceStrToLower($request->vorname.'.'.$request->nachname[0]).'@thueringer-tuning-freunde.de';
-            $team->ip_adresse = $request->getClientIp();
+            $this->extracted($team, $teamMitglied, $anrede, $request, $beruf);
             $team->fahrzeug_vorhanden = 1;
             $team->published = 0;
             $team->save();
@@ -223,5 +254,37 @@ class AntragController extends Controller
         Mail::to('info@thueringer-tuning-freunde.de')->send(new AntragEingangAdminMail($team));
         Toastr::success('Dein Antrag wurde erfolgreich versendet.', 'Erfolgreich!');
         return redirect(route('frontend.antrag.index'));
+    }
+
+    /**
+     * @param Team $team
+     * @param string $teamMitglied
+     * @param mixed $anrede
+     * @param Request $request
+     * @param mixed $beruf
+     * @return void
+     */
+    public function extracted(Team $team, string $teamMitglied, mixed $anrede, Request $request, mixed $beruf): void
+    {
+        $team->antrag_id = null;
+        $team->slug = SlugService::createSlug(Team::class, 'slug', $teamMitglied);
+        $team->anrede = $anrede;
+        $team->vorname = $request->vorname;
+        $team->nachname = $request->nachname;
+        $team->straße = $request->straße;
+        $team->plz = $request->plz;
+        $team->wohnort = $request->ort;
+        $team->telefon = $request->telefon;
+        $team->mobil = $request->mobil;
+        $team->email = $request->email;
+        $team->geburtsdatum = $request->geburtsdatum;
+        $team->beruf = $beruf;
+        $team->description = $request->description;
+        $team->tiktok = '@'.$request->tiktok;
+        $team->instagram = $request->instagram;
+        $team->facebook = $request->facebook;
+        $team->funktion = null;
+        $team->emailIntern = Helpers::replaceStrToLower($request->vorname . '.' . $request->nachname[0]) . '@thueringer-tuning-freunde.de';
+        $team->ip_adresse = $request->getClientIp();
     }
 }

@@ -50,12 +50,12 @@
             @enderror
         </div>
         <div class="col-lg-4 mb-3">
-            <label for="twitter" class="form-label">Twitter: </label>
+            <label for="tiktok" class="form-label">TikTok: </label>
             <div class="input-group input-group-sm">
-                <span class="input-group-text" id="twitterLink">https://www.twitter.com/</span>
-                <input type="text" name="twitter" id="twitter" class="form-control form-control-sm @error('twitter') is-invalid @enderror" value="{{ old('twitter') }} @isset($team) {{ $team->twitter }} @endisset" maxlength="255" placeholder="@deinBenutzername" aria-describedby="twitterLink">
+                <span class="input-group-text" id="tiktokLink">https://www.tiktok.com/@</span>
+                <input type="text" name="tiktok" id="tiktok" class="form-control form-control-sm @error('tiktok') is-invalid @enderror" value="{{ old('tiktok') }} @isset($team) {{ $team->tiktok }} @endisset" maxlength="255" placeholder="@deinBenutzername" aria-describedby="tiktokLink">
             </div>
-            @error('twitter')
+            @error('tiktok')
             <span class="form-text text-danger">{{ $message }}</span>
             @enderror
         </div>
