@@ -18,7 +18,7 @@ return new class extends Migration {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')->constrained('users');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('fahrzeug_id')->nullable();
             $table->unsignedBigInteger('antrag_id')->nullable();
             $table->string('title')->nullable();
@@ -42,8 +42,11 @@ return new class extends Migration {
             $table->string('emailIntern')->nullable();
             $table->string('ip_adresse', 45)->nullable();
             $table->tinyInteger('fahrzeug_vorhanden')->default(0);
+            $table->unsignedBigInteger('photo_id')->nullable();
             $table->tinyInteger('published')->default(0);
             $table->timestamp('published_at')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('album_id')->nullable();
             $table->unsignedBigInteger('fahrzeug_id')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
             $table->string('title');
             $table->string('slug');
             $table->string('size')->nullable();
