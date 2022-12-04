@@ -14,12 +14,18 @@ use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Mail\Antrag\AntragEingangAdminMail;
 use App\Mail\Antrag\AntragEingangMail;
+use App\Mail\Antrag\AntragEntferntMail;
+use App\Mail\Antrag\AntragGenehmigtClubMail;
+use App\Mail\Antrag\AntragGenehmigtMail;
 use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Fahrzeuge\Fahrzeug;
 use App\Models\Frontend\Team\Team;
+use App\Models\User;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use File;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -31,6 +37,12 @@ class AntragController extends Controller
     public function index()
     {
         return view('frontend.antrag');
+    }
+
+    public function indexAdmin()
+    {
+        $antrags = Team::orderBy('id', 'DESC')->get();
+        return view('intern.admin.antrag.index', compact('antrags'));
     }
 
     public function store(Request $request)
@@ -254,6 +266,181 @@ class AntragController extends Controller
         Mail::to('info@thueringer-tuning-freunde.de')->send(new AntragEingangAdminMail($team));
         Toastr::success('Dein Antrag wurde erfolgreich versendet.', 'Erfolgreich!');
         return redirect(route('frontend.antrag.index'));
+    }
+
+    public function show($id)
+    {
+        $antrag = Team::findOrFail($id);
+        if (!$antrag->fahrzeug_vorhanden) {
+            foreach ($antrag->fahrzeuges as  $fahrzeuge) {
+                $antrag->fahrzeuge = $fahrzeuge;
+            }
+            $antrag->photos = $antrag->photosFahrzeuge;
+        }
+        $antrag->gebdatum = Carbon::parse($antrag->geburtsdatum)->age;
+
+        return view('intern.admin.antrag.show', compact('antrag'));
+    }
+
+    public function checked(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('intern.admin.antrag.show', $id))->withErrors($validator)->withInput();
+        }
+
+        $antrag = Team::findOrFail($id);
+        if (!$antrag->fahrzeug_vorhanden) {
+            $antrag->fahrzeuge = $antrag->fahrzeuges->first();
+            $antrag->photos = $antrag->photosFahrzeuge;
+            $antrag->photoProfil = $antrag->photosProfil->first();
+        }
+
+        $title = $request->title;
+        $slug = SlugService::createSlug(Team::class, 'slug', $title);
+        $is_checked = $request->is_checked;
+        $published_at = Carbon::parse($request->published_at)->toDateTimeString();
+//        $password = 'passwordttf';
+        $password = Helpers::passwort_generate(10);
+
+        $user = User::create([
+            'name' => $antrag->vorname . ' ' . $antrag->nachname,
+            'email' => $antrag->email,
+            'password' => Hash::make($password),
+//            'is_checked' => $is_checked,
+        ]);
+
+        $user->assignRole([2]);
+
+        Team::where('id', '=', $antrag->id)->update([
+            'published' => 1,
+            'title' => $title,
+            'slug' => $slug,
+            'funktion' => $request->funktion,
+            'user_id' => $user->id,
+            'updated_at' => now(),
+            'published_at' => $published_at,
+        ]);
+
+        if (!$antrag->fahrzeug_vorhanden) {
+            Album::where('id', '=', $antrag->fahrzeuge->album_id)->update([
+                'user_id' => $user->id,
+                'published' => 1,
+                'published_at' => $published_at,
+                'updated_at' => now(),
+            ]);
+
+            Photo::where('album_id', '=', $antrag->fahrzeuge->album_id)->update([
+                'user_id' => $user->id,
+                'published' => 1,
+                'published_at' => $published_at,
+                'updated_at' => now(),
+            ]);
+
+            Fahrzeug::where('id', '=', $antrag->fahrzeug_id)->update([
+                'user_id' => $user->id,
+                'published' => 1,
+                'published_at' => $published_at,
+                'updated_at' => now(),
+            ]);
+        }
+
+        if ($antrag->photo_id) {
+            Photo::where('id', '=', $antrag->photo_id)->update([
+                'user_id' => $user->id,
+                'published' => 1,
+                'published_at' => $published_at,
+                'updated_at' => now(),
+            ]);
+        }
+
+        $antrag->userEmail = $user->email;
+        $antrag->passwort = $password;
+        $antrag->slug = $slug;
+
+        Mail::to($antrag->email)->send(new AntragGenehmigtMail($antrag));
+        Mail::to('club@thueringer-tuning-freunde.de')->send(new AntragGenehmigtClubMail($antrag));
+
+        $expiresAt = now()->addDay();
+        $user->sendWelcomeNotification($expiresAt);
+
+        Toastr::success('Antrag wurde genehmigt', 'Erfolgreich');
+        return redirect()->route('intern.admin.antrag.index');
+    }
+
+    public function revoke(Request $request, $id)
+    {
+        $antrag = Team::findOrFail($id);
+        $antrag->fahrzeuge = Fahrzeug::where('team_id', $id)->first();
+        $antrag->photos = Photo::where('album_id', $antrag->fahrzeuge->album_id)->get();
+        $antrag->photoProfil = Photo::where('id', $antrag->photo_id)->first();
+
+        Team::where('antrag_id', $id)->update([
+            'published' => 0,
+            'title' => null,
+            'slug' => null,
+            'user_id' => null,
+            'updated_at' => now(),
+            'published_at' => null,
+        ]);
+
+        Fahrzeug::where('team_id', $id)->update([
+            'published' => 0,
+            'user_id' => null,
+            'updated_at' => now(),
+            'published_at' => null,
+        ]);
+
+        Album::where('id', $antrag->fahrzeuge->album_id)->update([
+            'published' => 0,
+            'user_id' => null,
+            'updated_at' => now(),
+            'published_at' => null,
+        ]);
+
+        Photo::where('album_id', $antrag->fahrzeuge->album_id)->update([
+            'published' => 0,
+            'user_id' => null,
+            'updated_at' => now(),
+            'published_at' => null,
+        ]);
+
+        Photo::where('id', $antrag->photo_id)->update([
+            'published' => 0,
+            'user_id' => null,
+            'updated_at' => now(),
+            'published_at' => null,
+        ]);
+
+        User::where('id', $antrag->user_id)->delete();
+
+        Mail::to('club@thueringer-tuning-freunde.de')->send(new AntragEntferntMail($antrag));
+        Toastr::success('Antrag wurde zurückgezogen', 'Erfolgreich');
+        return redirect()->route('intern.admin.antrag.index');
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $team = Team::where('antrag_id', $id)->first();
+        $team->fullname = Helpers::replaceStrToLower($team->vorname . ' ' . $team->nachname);
+        Mail::to('club@thueringer-tuning-freunde.de')->send(new AntragEntferntMail($team));
+        $team->path = 'images/'.$team->fullname;
+        $team->fahrzeug = Fahrzeug::where('user_id', $team->user_id)->delete();
+
+        // Delete all Alben
+        $alben = Album::where('user_id', $team->user_id)->delete();
+        if (File::exists($team->path)) {
+            File::deleteDirectory($team->path);
+        }
+        if ($team->user_id) {
+            User::where('id', $team->user_id)->delete();
+        }
+        $team->delete();
+        Toastr::error('Das Mitglied wurde gelöscht!', 'Gelöscht!');
+        return redirect(route('intern.admin.antrag.index'));
     }
 
     /**

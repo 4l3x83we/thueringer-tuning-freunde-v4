@@ -238,4 +238,10 @@ class Helpers
 
         return str_replace($search, $replace, $item);
     }
+
+    public static function passwort_generate($chars)
+    {
+        $data = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*_';
+        return substr(str_shuffle($data), 0, $chars);
+    }
 }

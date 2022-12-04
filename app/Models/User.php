@@ -7,16 +7,19 @@ use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Fahrzeuge\Fahrzeug;
 use App\Models\Frontend\Team\Team;
+use App\Notifications\WillkommenNotification;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\WelcomeNotification\ReceivesWelcomeNotification;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, ReceivesWelcomeNotification;
 
     protected $table = 'users';
 
@@ -68,5 +71,10 @@ class User extends Authenticatable
     public function teams()
     {
         return $this->hasOne(Team::class, 'user_id');
+    }
+
+    public function sendWelcomeNotification(Carbon $validUntil)
+    {
+        $this->notify(new WillkommenNotification($validUntil));
     }
 }

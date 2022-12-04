@@ -81,7 +81,7 @@
                             <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @hasanyrole('super_admin|admin')
                                 <h6 class="dropdown-header">Interner Bereich</h6>
-{{--                                <a href="{{ route('intern.antrag.index') }}" class="dropdown-item">Anträge</a>--}}
+                                <a href="{{ route('intern.admin.antrag.index') }}" class="dropdown-item">Anträge</a>
                                 <a href="{{ route('intern.admin.users.index') }}" class="dropdown-item">Mitglieder</a>
                                 <a href="{{ route('intern.admin.roles.index') }}" class="dropdown-item">Rollen</a>
                                 <hr>

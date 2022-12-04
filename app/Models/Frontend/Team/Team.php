@@ -39,7 +39,7 @@ class Team extends Model
 
     public function fahrzeuges()
     {
-        return $this->hasMany(Fahrzeug::class, 'fahrzeug_id');
+        return $this->hasMany(Fahrzeug::class);
     }
 
     public function albums()
@@ -50,5 +50,15 @@ class Team extends Model
     public function photos()
     {
         return $this->hasMany(Photo::class, 'user_id');
+    }
+
+    public function photosFahrzeuge()
+    {
+        return $this->hasMany(Photo::class, 'fahrzeug_id');
+    }
+
+    public function photosProfil()
+    {
+        return $this->hasMany(Photo::class, 'team_id');
     }
 }

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\MyWelcomeController;
 use App\Http\Controllers\Frontend;
 use App\Http\Controllers\Intern;
 use App\Http\Controllers\Intern\Admin;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Spatie\WelcomeNotification\WelcomesNewUsers;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +59,21 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::resource('users', Admin\UsersController::class);
                 Route::resource('roles', Admin\RolesController::class);
                 Route::resource('permissions', Admin\PermissionsController::class);
+
+                // Antrag
+                Route::get('/antrag', [Frontend\AntragController::class, 'indexAdmin'])->name('antrag.index');
+                Route::get('/antrag/{antrag:id}', [Frontend\AntragController::class, 'show'])->name('antrag.show');
+                Route::match(['PUT', 'PATCH'], '/antrag/checked/{antrag}', [Frontend\AntragController::class, 'checked'])->name('antrag.checked-antrag');
+                Route::match(['PUT', 'PATCH'], '/antrag/revoke/{antrag}', [Frontend\AntragController::class, 'revoke'])->name('antrag.revoke-antrag');
+                Route::delete('/antrag/destroy/{antrag}', [Frontend\AntragController::class, 'destroy'])->name('antrag.destroy');
             });
         });
     });
+});
+
+Route::group(['middleware' => ['web', WelcomesNewUsers::class,]], function () {
+    Route::get('welcome/{user}', [MyWelcomeController::class, 'showWelcomeForm'])->name('welcome');
+    Route::post('welcome/{user}', [MyWelcomeController::class, 'savePassword']);
 });
 
 // Cache & Sitemap Route
