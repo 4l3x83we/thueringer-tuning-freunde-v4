@@ -152,8 +152,8 @@ class Helpers
                 $photo = Image::make($images)->insert($watermark, 'bottom-right', 10, 10)->stream();
                 File::put(public_path($path . '/' . $nameToString), $photo);
 
-                $data[] = $path .'/'. $nameToString;
-                $dataThumbnail[] = $path . '/thumbnails/' . $nameToString;
+                $data[] = $nameToString;
+                $dataThumbnail[] = 'thumbnails/' . $nameToString;
                 $size[] = self::bytesToHuman($images->getSize());
             }
         } else {
@@ -192,7 +192,7 @@ class Helpers
                 $constraint->upsize();
             })->stream();
             File::put(public_path($path . '/' .$nameToString), $photo);
-            return $path . '/' . $nameToString;
+            return $nameToString;
         }
         return null;
     }

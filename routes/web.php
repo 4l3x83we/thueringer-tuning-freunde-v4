@@ -58,6 +58,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::middleware(['auth'])->group(function () {
         // Intern
         Route::name('intern.')->prefix('intern')->namespace('Intern')->group(function () {
+            // Album veröffentlichen
+            Route::match(['PUT', 'PATCH'], '/galerie/published/{galerie}', [Frontend\Album\AlbumsController::class, 'published'])->name('galerie.published-galerie');
 
             // Admin
             Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {

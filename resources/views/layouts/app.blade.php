@@ -51,6 +51,7 @@
         @include('frontend.component.galerie.create');
         <!-- ======= Event Create ======= -->
         <!-- ======= Tinymce ======= -->
+        @include('helpers.component.tinymce');
         <!-- ======= Fileinput ======= -->
         @include('helpers.component.file-input');
     @endhasanyrole

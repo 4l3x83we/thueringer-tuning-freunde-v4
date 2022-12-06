@@ -13,6 +13,7 @@ namespace App\Http\Controllers\Frontend\Album;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
+use File;
 use Illuminate\Http\Request;
 use Yoeunes\Toastr\Facades\Toastr;
 
@@ -29,6 +30,8 @@ class PhotosController extends Controller
 
     public function store(Request $request)
     {
+        // TODO Photo store add
+        dd($request->all());
     }
 
     public function show(Photo $photo)
@@ -54,7 +57,17 @@ class PhotosController extends Controller
         return redirect(route('frontend.galerie.show', $photo->slug));
     }
 
-    public function destroy(Photo $photo)
+    public function destroy(Request $request, Photo $photo)
     {
+        $foto = Photo::where('id', $request->id)->first();
+        if (File::exists($foto->images_thumbnail)) {
+            File::delete($foto->images_thumbnail);
+        }
+        if (File::exists($foto->images)) {
+            File::delete($foto->images);
+        }
+        $foto->delete();
+        Toastr::error('Bild wurde Gelöscht!', 'Gelöscht!');
+        return redirect(route('frontend.galerie.show', $photo->slug));
     }
 }

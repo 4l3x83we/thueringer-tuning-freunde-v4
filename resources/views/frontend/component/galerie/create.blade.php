@@ -21,7 +21,7 @@
                             <label for="selectKategorie" class="form-label fw-bold">Kategorie:</label>
                             <select class="form-select form-select-sm @error('kategorie') is-invalid @enderror" id="selectKategorie" name="kategorie">
                                 <option {{ old('kategorie') === 'Treffen' ? 'selected' : '' }} value="Treffen">Treffen</option>
-                                <option {{ old('kategorie') === 'Club interne Treffen' ? 'selected' : '' }} value="Club interne Treffen">Club interne Treffen</option>
+                                <option {{ old('kategorie') === 'Club-interne-Treffen' ? 'selected' : '' }} value="Club-interne-Treffen">Club interne Treffen</option>
                             </select>
                             @error('kategorie')
                             <span class="form-text text-danger">{{ $message }}</span>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-lg-12">
                             <label for="images" class="form-label fw-bold">Bilder hinzufügen:</label>
-                            <input type="file" class="form-control form-control-sm @error('images') is-invalid @enderror" id="images" name="images[]" data-browse-on-zone-click="true" data-msg-placeholder="Wählen Sie {files} zum Hochladen aus ..." multiple>
+                            <input type="file" class="file form-control form-control-sm @error('images') is-invalid @enderror" id="images" name="images[]" data-browse-on-zone-click="true" data-msg-placeholder="Wählen Sie {files} zum Hochladen aus ..." multiple>
                             @error('images')
                             <span class="form-text text-danger">{{ $message }}</span>
                             @enderror

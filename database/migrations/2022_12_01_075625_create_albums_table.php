@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->string('size')->nullable();
             $table->string('description')->nullable();
             $table->string('kategorie')->nullable();
+            $table->string('path')->nullable();
             $table->unsignedBigInteger('thumbnail_id')->nullable();
             $table->tinyInteger('published')->default(0);
             $table->timestamp('published_at')->nullable();

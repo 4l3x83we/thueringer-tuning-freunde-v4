@@ -29,7 +29,7 @@
                                     <div class="portfolio-img">
                                         @if($album->thumbnail_id)
                                             @foreach($albums->images_thumbnail as $thumbnail)
-                                                <img src="{{ asset('images/default.png') }}" data-src="{{ $thumbnail }}" alt="{{ $album->title }}" class="img-fluid lozad">
+                                                <img src="{{ asset('images/default.png') }}" data-src="{{ $album->path.'/'.$thumbnail }}" alt="{{ $album->title }}" class="img-fluid lozad">
                                             @endforeach
                                         @else
                                             <img src="{{ asset('images/default.png') }}" alt="{{ $album->title }}" class="img-fluid lozad">

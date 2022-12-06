@@ -22,7 +22,7 @@
                                             @if(empty($photo->images))
                                                 <img src="{{ asset('images/default.png') }}" alt="{{ $photo->title . ' ID: #' . $photo->id }}" class="img-fluid lozad">
                                             @else
-                                                <img src="{{ asset('images/default.png') }}" data-src="{{ asset($photo->images_thumbnail) }}" alt="{{ $photo->title . ' ID: #' . $photo->id }}" class="img-fluid lozad">
+                                                <img src="{{ asset('images/default.png') }}" data-src="{{ asset($galerie->path.'/'.$photo->images_thumbnail) }}" alt="{{ $photo->title . ' ID: #' . $photo->id }}" class="img-fluid lozad">
                                             @endif
                                         </div>
                                         @hasanyrole('mitglied|super_admin|admin')
@@ -33,76 +33,46 @@
                                                         <em class="bi bi-arrows-fullscreen"></em>
                                                     </a>
                                                 @else
-                                                    <a href="{{ asset($photo->images) }}" data-thumb="{{ asset($photo->images) }}" class="btn btn-sm btn-primary my-2" data-fancybox="images" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vollbild">
+                                                    <a href="{{ asset($galerie->path.'/'.$photo->images) }}" data-thumb="{{ asset($galerie->path.'/'.$photo->images_thumbnail) }}" class="btn btn-sm btn-primary my-2" data-fancybox="images" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vollbild">
                                                         <em class="bi bi-arrows-fullscreen"></em>
                                                     </a>
                                                 @endif
 
                                                 @if(auth()->user()->id === $photo->user_id)
-                                                    @if($photo->images !== $galerie->images)
+                                                    @if($photo->id !== $galerie->thumbnail_id)
                                                         <form action="{{ route('frontend.albums.update-preview', $photo->id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
-                                                            @csrf
-                                                            @method('PATCH')
-                                                            <button type="submit" class="btn btn-sm btn-secondary my-2">
-                                                                <em class="bi bi-eye fw-bold"></em>
-                                                            </button>
+                                                            @include('frontend.component.galerie.forms.updatePreview')
                                                         </form>
-                                                        <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Löschen" class="d-inline-block">
-                                                            <a class="deletePhoto btn btn-sm btn-danger my-2" data-bs-toggle="modal" data-id="{{ $photo->id }}" data-bs-target="#photoModal">
-                                                                <em class="bi bi-trash fw-bold"></em>
-                                                            </a>
-                                                        </div>
+                                                            @include('frontend.component.galerie.forms.deletePhoto')
                                                     @else
-                                                        <div class="btn btn-sm btn-success my-2">
-                                                            <em class="bi bi-images"></em> Vorschaubild <em class="bi bi-check-circle"></em>
-                                                        </div>
+                                                        @include('frontend.component.galerie.forms.preview')
                                                     @endif
-                                                @elseif($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club interne Treffen')
+                                                @elseif($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen')
                                                     @if(auth()->user()->id === $photo->user_id)
-                                                        @if($photo->images !== $galerie->images)
+                                                        @if($photo->id !== $galerie->thumbnail_id)
                                                             @can('edit')
                                                                 <form action="{{ route('frontend.albums.update-preview', $photo->id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
-                                                                    @csrf
-                                                                    @method('PATCH')
-                                                                    <button type="submit" class="btn btn-sm btn-secondary my-2">
-                                                                        <em class="bi bi-eye fw-bold"></em>
-                                                                    </button>
+                                                                    @include('frontend.component.galerie.forms.updatePreview')
                                                                 </form>
                                                             @endcan
 
                                                             @can('destroy')
-                                                                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Löschen" class="d-inline-block">
-                                                                    <a class="deletePhoto btn btn-sm btn-danger my-2" data-bs-toggle="modal" data-id="{{ $photo->id }}" data-bs-target="#photoModal">
-                                                                        <em class="bi bi-trash fw-bold"></em>
-                                                                    </a>
-                                                                </div>
+                                                                @include('frontend.component.galerie.forms.deletePhoto')
                                                             @endcan
                                                         @else
-                                                            <div class="btn btn-sm btn-success my-2">
-                                                                <em class="bi bi-images"></em> Vorschaubild <em class="bi bi-check-circle"></em>
-                                                            </div>
+                                                            @include('frontend.component.galerie.forms.preview')
                                                         @endif
                                                     @endif
                                                 @endif
                                                 @hasanyrole('super_admin|admin')
                                                     @if(auth()->user()->id !== $photo->user_id)
-                                                        @if($photo->images !== $galerie->images)
+                                                        @if($photo->id !== $galerie->thumbnail_id)
                                                             <form action="{{ route('frontend.albums.update-preview', $photo->id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
-                                                                @csrf
-                                                                @method('PATCH')
-                                                                <button type="submit" class="btn btn-sm btn-outline-secondary my-2">
-                                                                    <em class="bi bi-eye fw-bold"></em>
-                                                                </button>
+                                                                @include('frontend.component.galerie.forms.updatePreview')
                                                             </form>
-                                                            <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Löschen" class="d-inline-block">
-                                                                <a class="deletePhoto btn btn-sm btn-outline-danger my-2" data-bs-toggle="modal" data-id="{{ $photo->id }}" data-bs-target="#photoModal">
-                                                                    <em class="bi bi-trash fw-bold"></em>
-                                                                </a>
-                                                            </div>
+                                                            @include('frontend.component.galerie.forms.deletePhoto')
                                                         @else
-                                                            <div class="btn btn-sm btn-success my-2">
-                                                                <em class="bi bi-images"></em> Vorschaubild <em class="bi bi-check-circle"></em>
-                                                            </div>
+                                                            @include('frontend.component.galerie.forms.preview')
                                                         @endif
                                                     @endif
                                                 @endhasanyrole
@@ -131,7 +101,7 @@
                                 <li><a href="{{ route('frontend.fahrzeuge.show', $galerie->slug) }}" class="links-light"><strong><em class="bi bi-car-front"></em></strong>: zum Fahrzeug</a></li>
                             @endif
                             @hasanyrole('mitglied|super_admin|admin')
-                                @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club interne Treffen')
+                                @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen')
                                     @can('edit')
                                         @if($galerie->user_id === auth()->user()->id)
                                             <li><a data-bs-toggle="modal" data-id="{{ $galerie->id }}" data-bs-target="#galerieEditModal" class="editAlbum links-light-cursor"><strong><em class="bi bi-images"></em></strong>: Bearbeiten</a></li>
@@ -225,36 +195,23 @@
                         </div>
 
                         @hasanyrole('mitglied|super_admin|admin')
-
-                        @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club interne Treffen')
-                            @can('edit')
-                            <div class="imagesDirekt">
-                                <form action="{{ route('frontend.photos.store') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="album_id" value="{{ $galerie->id }}">
-                                    <label for="imagesEdit" class="form-label fw-bold">Bilder hinzufügen:</label>
-                                    <input type="file" class="form-control form-control-sm @error('images') is-invalid @enderror" id="imagesEdit" name="images[]" data-browse-on-zone-click="true" data-msg-placeholder="Wählen Sie {files} zum Hochladen aus ..." multiple>
-                                    @error('images')
-                                        <span class="form-text text-danger">{{ $message }}</span>
-                                    @enderror
-                                </form>
-                            </div>
-                            @endcan
-                        @else
-                            @if(auth()->user()->id === $photo->user_id)
-                            <div class="imagesDirekt" id="imagesDirekt">
-                                <form action="{{ route('frontend.photos.store') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="album_id" value="{{ $galerie->id }}">
-                                    <label for="imagesEdit" class="form-label fw-bold">Bilder hinzufügen:</label>
-                                    <input type="file" class="file form-control form-control-sm @error('images') is-invalid @enderror" id="imagesEdit" name="images[]" data-browse-on-zone-click="true" data-msg-placeholder="Wählen Sie {files} zum Hochladen aus ..." multiple>
-                                    @error('images')
-                                        <span class="form-text text-danger">{{ $message }}</span>
-                                    @enderror
-                                </form>
-                            </div>
+                            @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen')
+                                @can('edit')
+                                <div class="imagesDirekt">
+                                    <form action="{{ route('frontend.photos.store') }}" method="POST" enctype="multipart/form-data">
+                                        @include('frontend.component.galerie.forms.imagesUpload')
+                                    </form>
+                                </div>
+                                @endcan
+                            @else
+                                @if(auth()->user()->id === $photo->user_id)
+                                <div class="imagesDirekt" id="imagesDirekt">
+                                    <form action="{{ route('frontend.photos.store') }}" method="POST" enctype="multipart/form-data">
+                                        @include('frontend.component.galerie.forms.imagesUpload')
+                                    </form>
+                                </div>
+                                @endif
                             @endif
-                        @endif
                         @endhasanyrole
                     </div>
                 </div>
@@ -352,23 +309,5 @@
             let id = $(this).data('id');
             $('#idEdit').val(id);
         });
-
-        $(document).ready(function () {
-            $('#imagesEdit').fileinput({
-                theme: "bs5",
-                language: "de",
-                allowedFileTypes: [
-                    'image'
-                ],
-                allowedFileExtensions: [
-                    'jpg', 'jpeg', 'jpe', 'png', 'gif', 'tif', 'tiff', 'svg', 'svgz', 'webp'
-                ],
-                overwriteInitial: false,
-                maxFileSize: 10240,
-                maxFileNum: 10,
-                inputGroupClass: "input-group-sm",
-            });
-        });
-
     </script>
 @endpush

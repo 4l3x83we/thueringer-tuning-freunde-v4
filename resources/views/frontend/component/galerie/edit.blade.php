@@ -12,7 +12,7 @@
             <option {{ old('kategorie', $galerie->kategorie) === 'Fahrzeuge' ? 'selected' : '' }} value="Fahrzeuge">Fahrzeuge</option>
             <option {{ old('kategorie', $galerie->kategorie) === 'Projekte' ? 'selected' : '' }} value="Projekte">Projekte</option>
             <option {{ old('kategorie', $galerie->kategorie) === 'Treffen' ? 'selected' : '' }} value="Treffen">Treffen</option>
-            <option {{ old('kategorie', $galerie->kategorie) === 'Club interne Treffen' ? 'selected' : '' }} value="Club interne Treffen">Club interne Treffen</option>
+            <option {{ old('kategorie', $galerie->kategorie) === 'Club-interne-Treffen' ? 'selected' : '' }} value="Club-interne-Treffen">Club interne Treffen</option>
         </select>
         @error('kategorie')
             <span class="form-text text-danger">{{ $message }}</span>
@@ -20,7 +20,7 @@
     </div>
     <div class="col-lg-3">
         <label for="published_at" class="form-label fw-bold">Veröffentlicht am: <em class="bi bi-question-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hier kannst du auch ein Datum angeben, ab wann das Album veröffentlicht werden soll."></em></label>
-        <input type="datetime-local" class="form-control form-control-sm @error('published_at') is-invalid @enderror" id="published_at" name="published_at" placeholder="Veröffentlicht" value="{{ old('published_at') ?: $galerie->published_at }}">
+        <input type="datetime-local" class="form-control form-control-sm @error('published_at') is-invalid @enderror" id="published_at" name="published_at" placeholder="Veröffentlicht" value="{{ old('published_at') ?: \Carbon\Carbon::parse($galerie->published_at)->format('Y-m-d\TH:i') }}">
         @error('published_at')
         <span class="form-text text-danger">{{ $message }}</span>
         @enderror
@@ -43,8 +43,8 @@
         @enderror
     </div>
     <div class="col-lg-12">
-        <label for="images" class="form-label fw-bold">Bilder hinzufügen:</label>
-        <input type="file" class="form-control form-control-sm @error('images') is-invalid @enderror" id="images" name="images[]" data-browse-on-zone-click="true" data-msg-placeholder="Wählen Sie {files} zum Hochladen aus ..." multiple>
+        <label for="images1" class="form-label fw-bold">Bilder hinzufügen:</label>
+        <input type="file" class="file form-control form-control-sm @error('images') is-invalid @enderror" id="images1" name="images[]" data-browse-on-zone-click="true" data-msg-placeholder="Wählen Sie {files} zum Hochladen aus ..." multiple>
         @error('images')
         <span class="form-text text-danger">{{ $message }}</span>
         @enderror
