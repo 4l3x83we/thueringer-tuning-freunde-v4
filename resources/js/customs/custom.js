@@ -8,12 +8,12 @@ AOS.init({
 
 import * as fileinput from "bootstrap-fileinput";
 window.fileinput = fileinput;
-import "../../../node_modules/bootstrap-fileinput/themes/bs5/theme.js";
-import "../../../node_modules/bootstrap-fileinput/js/locales/de.js";
-import "../../../node_modules/bootstrap-fileinput/js/plugins/piexif.js";
-import "../../../node_modules/bootstrap-fileinput/js/plugins/sortable.js";
-import "../../../node_modules/bootstrap-fileinput/js/plugins/buffer.js";
-import "../../../node_modules/bootstrap-fileinput/js/plugins/filetype.js";
+import "bootstrap-fileinput/themes/bs5/theme.min";
+import "bootstrap-fileinput/js/locales/de";
+import "bootstrap-fileinput/js/plugins/buffer.min";
+import "bootstrap-fileinput/js/plugins/piexif.min";
+import "bootstrap-fileinput/js/plugins/filetype.min";
+import "bootstrap-fileinput/js/plugins/sortable.min";
 
 import PureCounter from "@srexi/purecounterjs/js/purecounter";
 
