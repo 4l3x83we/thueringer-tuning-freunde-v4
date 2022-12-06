@@ -45,4 +45,9 @@ class Fahrzeug extends Model
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
