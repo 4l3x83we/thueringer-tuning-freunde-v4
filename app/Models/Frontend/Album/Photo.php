@@ -50,4 +50,9 @@ class Photo extends Model
     {
         return $this->belongsTo(Fahrzeug::class, 'fahrzeug_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

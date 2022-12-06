@@ -27,7 +27,7 @@
 {{--                        <a href="{{ route('frontend.fahrzeuge.index') }}" class="nav-link {{ Request::is('fahrzeuge') ? 'active' : '' }}">Fahrzeuge</a>--}}
                     </li>
                     <li class="nav-item">
-{{--                        <a href="{{ route('frontend.galerie.index') }}" class="nav-link {{ Request::is('galerie') ? 'active' : '' }}">Galerie</a>--}}
+                        <a href="{{ route('frontend.galerie.index') }}" class="nav-link {{ Request::is('galerie') ? 'active' : '' }}">Galerie</a>
                     </li>
                     <li class="nav-item">
                         <a href="/#veranstaltungen" class="nav-link {{ Request::is('veranstaltungen') ? 'active' : '' }}">Veranstaltungen</a>
@@ -48,7 +48,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
 {{--                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#fahrzeugeCreateModal"><em class="bi bi-car-front"></em> Neues Fahrzeug anlegen</a></li>--}}
-{{--                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createAlbumModal"><em class="bi bi-file-image"></em> Neues Album anlegen</a></li>--}}
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createAlbumModal"><em class="bi bi-file-image"></em> Neues Album anlegen</a></li>
 {{--                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createVeranstaltungModal"><em class="bi bi-calendar-plus"></em> Neue Veranstaltung anlegen</a></li>--}}
                             <h6 class="dropdown-header">Interner Bereich</h6>
 {{--                            <li><a class="dropdown-item" href="{{ route('intern.geburtstagsliste.index') }}"><em class="fa-solid fa-cake-candles"></em> Geburtstagsliste</a></li>--}}

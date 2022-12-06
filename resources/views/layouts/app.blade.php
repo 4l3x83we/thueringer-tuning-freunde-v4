@@ -45,11 +45,14 @@
     @include('layouts.partials.footer')
 
     @hasanyrole('mitglied|super_admin|admin')
-{{--        // Fahrzeug Create--}}
-{{--        // Galerie Create--}}
-{{--        // Event Create--}}
-{{--        // Tinymce--}}
-{{--        // Fileinput--}}
+        <!-- ======= Fahrzeug Create ======= -->
+
+        <!-- ======= Galerie Create ======= -->
+        @include('frontend.component.galerie.create');
+        <!-- ======= Event Create ======= -->
+        <!-- ======= Tinymce ======= -->
+        <!-- ======= Fileinput ======= -->
+        @include('helpers.component.file-input');
     @endhasanyrole
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><em class="bi bi-arrow-up-short"></em></a>
     <div id="preloader"></div>
