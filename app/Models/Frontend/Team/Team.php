@@ -61,4 +61,9 @@ class Team extends Model
     {
         return $this->hasMany(Photo::class, 'team_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
