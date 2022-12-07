@@ -47,7 +47,7 @@ class AntragController extends Controller
 
     public function store(Request $request)
     {
-        /*if (!$request->fahrzeugvorhanden) {
+        if (!$request->fahrzeugvorhanden) {
             $validator = Validator::make($request->all(), [
                 'anrede' => 'required',
                 'vorname' => 'required|max:255',
@@ -113,7 +113,7 @@ class AntragController extends Controller
 
         if ($validator->fails()) {
             return redirect(route('frontend.antrag.index'))->withErrors($validator)->withInput();
-        }*/
+        }
 
         $anrede = !$request->anrede ? 'keine Angabe' : $request->anrede;
         $teamMitglied = Helpers::replaceStrToLower($request->vorname .'-'. $request->nachname);
