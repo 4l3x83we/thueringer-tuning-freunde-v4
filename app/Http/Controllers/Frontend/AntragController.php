@@ -47,7 +47,7 @@ class AntragController extends Controller
 
     public function store(Request $request)
     {
-        if (!$request->fahrzeugvorhanden) {
+        /*if (!$request->fahrzeugvorhanden) {
             $validator = Validator::make($request->all(), [
                 'anrede' => 'required',
                 'vorname' => 'required|max:255',
@@ -113,7 +113,7 @@ class AntragController extends Controller
 
         if ($validator->fails()) {
             return redirect(route('frontend.antrag.index'))->withErrors($validator)->withInput();
-        }
+        }*/
 
         $anrede = !$request->anrede ? 'keine Angabe' : $request->anrede;
         $teamMitglied = Helpers::replaceStrToLower($request->vorname .'-'. $request->nachname);
@@ -199,12 +199,13 @@ class AntragController extends Controller
             $team->fahrzeug_id = $fahrzeuge->id;
             $this->extracted($team, $teamMitglied, $anrede, $request, $beruf);
             $team->fahrzeug_vorhanden = 0;
+            $team->path = $profilPath;
             $team->published = 0;
             $team->save();
 
             if (!empty($request->file('profilbild'))) {
                 $teamPhoto = [
-                    'album_id' => $album->id,
+                    'album_id' => null,
                     'user_id' => null,
                     'fahrzeug_id' => null,
                     'team_id' => $team->id,
@@ -212,8 +213,6 @@ class AntragController extends Controller
                     'slug'=> SlugService::createSlug(Team::class, 'slug', $teamMitglied),
                     'size' => Helpers::bytesToHuman($request->profilbild->getSize()),
                     'images' => $profilImage,
-                    'images_thumbnail' => $profilImage,
-                    'description' => Str::limit(strip_tags($request->description), 200),
                     'published' => 0,
                     'updated_at' => now(),
                     'created_at' => now(),
@@ -230,12 +229,12 @@ class AntragController extends Controller
             $team->fahrzeuge = Fahrzeug::where('team_id', '=', $team->id)->first();
             $team->photos = Photo::where('album_id', '=', $album->id)->get();
         } else {
-
             $team = new Team();
             $team->user_id = null;
             $team->fahrzeug_id = null;
             $this->extracted($team, $teamMitglied, $anrede, $request, $beruf);
             $team->fahrzeug_vorhanden = 1;
+            $team->path = $profilPath;
             $team->published = 0;
             $team->save();
 
@@ -249,8 +248,6 @@ class AntragController extends Controller
                     'slug'=> SlugService::createSlug(Team::class, 'slug', $teamMitglied),
                     'size' => Helpers::bytesToHuman($request->profilbild->getSize()),
                     'images' => $profilImage,
-                    'images_thumbnail' => $profilImage,
-                    'description' => Str::limit(strip_tags($request->description), 200),
                     'published' => 0,
                     'updated_at' => now(),
                     'created_at' => now(),
@@ -303,7 +300,6 @@ class AntragController extends Controller
         $slug = SlugService::createSlug(Team::class, 'slug', $title);
         $is_checked = $request->is_checked;
         $published_at = Carbon::parse($request->published_at)->toDateTimeString();
-//        $password = 'passwordttf';
         $password = Helpers::passwort_generate(10);
 
         $user = User::create([
