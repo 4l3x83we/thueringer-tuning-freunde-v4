@@ -28,9 +28,7 @@
                                 <div class="portfolio-wrap shadow border-radius-10">
                                     <div class="portfolio-img">
                                         @if($album->thumbnail_id)
-                                            @foreach($albums->images_thumbnail as $thumbnail)
-                                                <img src="{{ asset('images/default.png') }}" data-src="{{ $album->path.'/'.$thumbnail }}" alt="{{ $album->title }}" class="img-fluid lozad">
-                                            @endforeach
+                                            <img src="{{ asset('images/default.png') }}" data-src="{{ $preview[$album->id] }}" alt="{{ $album->title }}" class="img-fluid lozad">
                                         @else
                                             <img src="{{ asset('images/default.png') }}" alt="{{ $album->title }}" class="img-fluid lozad">
                                         @endif

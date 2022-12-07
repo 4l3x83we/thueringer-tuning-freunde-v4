@@ -19,7 +19,7 @@
     <!-- ======= Fahrzeuge ======= -->
 
     <!-- ======= Galerie ======= -->
-
+    @include('frontend.index.galerie')
     <!-- ======= Veranstaltungen ======= -->
 
     <!-- ======= Kontakt ======= -->

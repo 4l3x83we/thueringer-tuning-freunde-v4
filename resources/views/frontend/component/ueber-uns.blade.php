@@ -52,7 +52,7 @@
                     <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-right" data-aos-delay="100">
                         <div class="count-box shadow">
                             <em class="bi bi-people-fill"></em>
-{{--                            <span data-purecounter-start="0" data-purecounter-end="{{ $teamCount }}" data-purecounter-duration="1" class="purecounter">0</span>--}}
+                            <span data-purecounter-start="0" data-purecounter-end="{{ $count['team'] }}" data-purecounter-duration="1" class="purecounter">0</span>
                             <p><strong>Mitglieder</strong> sind aktuell in unserem Club</p>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="col-lg-3 col-md-6 mt-3 mt-lg-0 d-md-flex align-items-md-stretch" data-aos="fade-down-right" data-aos-delay="200">
                         <div class="count-box shadow">
                             <em class="bi bi-car-front"></em>
-{{--                            <span data-purecounter-start="0" data-purecounter-end="{{ $fahrzeugeCount }}" data-purecounter-duration="1" class="purecounter">0</span>--}}
+                            <span data-purecounter-start="0" data-purecounter-end="{{ $count['fahrzeuge']  }}" data-purecounter-duration="1" class="purecounter">0</span>
                             <p><strong>Fahrzeuge</strong> haben wir aktuell in unserem Club</p>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                     <div class="col-lg-3 col-md-6 mt-3 mt-lg-0 d-md-flex align-items-md-stretch" data-aos="fade-down-left" data-aos-delay="300">
                         <div class="count-box shadow">
                             <em class="bi bi-calendar-week"></em>
-{{--                            <span data-purecounter-start="0" data-purecounter-end="{{ $treffenCount }}" data-purecounter-duration="1" class="purecounter">0</span>--}}
+                            <span data-purecounter-start="0" data-purecounter-end="{{ $count['treffen']  }}" data-purecounter-duration="1" class="purecounter">0</span>
                             <p><strong>Treffen</strong> die wir Besuchen werden</p>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                     <div class="col-lg-3 col-md-6 mt-3 mt-lg-0 d-md-flex align-items-md-stretch" data-aos="fade-left" data-aos-delay="400">
                         <div class="count-box shadow">
                             <em class="bi bi-cone-striped"></em>
-{{--                            <span data-purecounter-start="0" data-purecounter-end="{{ $projekteCount }}" data-purecounter-duration="1" class="purecounter">0</span>--}}
+                            <span data-purecounter-start="0" data-purecounter-end="{{ $count['projekte']  }}" data-purecounter-duration="1" class="purecounter">0</span>
                             <p><strong>Projekte</strong> unserer Mitglieder</p>
                         </div>
                     </div>

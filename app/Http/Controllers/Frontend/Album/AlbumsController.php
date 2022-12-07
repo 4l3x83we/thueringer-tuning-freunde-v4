@@ -41,10 +41,10 @@ class AlbumsController extends Controller
         $albums->photos = Photo::where('published', true)->count();
         foreach ($albums as $album) {
             foreach(Photo::where('id', $album->thumbnail_id)->get() as $thumbnail) {
-                $albums->images_thumbnail[] = $thumbnail->images_thumbnail;
+                $preview[$album->id] = $album->path.'/'.$thumbnail->images_thumbnail;
             }
         }
-        return view('frontend.component.galerie', compact('albums'));
+        return view('frontend.component.galerie', compact('albums', 'preview'));
     }
 
     public function create()
@@ -171,7 +171,7 @@ class AlbumsController extends Controller
         $fahrzeugID = ($galerie->kategorie === 'Fahrzeuge' or $galerie->kategorie === 'Projekte') ? $galerie->fahrzeug_id : NULL;
 
         // Images Upload
-        /*if ($request->hasFile('images')) {
+        if ($request->hasFile('images')) {
             if (count($request->images) > 0) {
                 foreach ($request->images as $item => $v) {
                     Photo::insert([
@@ -209,7 +209,7 @@ class AlbumsController extends Controller
                 ]);
                 Toastr::info('Das Fotos wurden dem Album ' . $request->title . ' erfolgreich hinzugefügt.', 'Erfolgreich!');
             }
-        }*/
+        }
 
         // Category Change
         if ($galerie->kategorie !== $request->kategorie) {
@@ -288,7 +288,9 @@ class AlbumsController extends Controller
             }
         }
 
-        $galerie->size = ($galerie->size === $fileSize) ? $galerie->size : $fileSize;
+        if ($galerie->size === $fileSize) { $size = $galerie->size; } else { $size = $fileSize; }
+
+        $galerie->size = $size;
         $galerie->published = $request->published ? true : false;
         $galerie->published_at = $galerie->published_at === null ? $galerie->created_at : $galerie->published_at;
         $galerie->description = Str::limit(strip_tags($request->description), 255);

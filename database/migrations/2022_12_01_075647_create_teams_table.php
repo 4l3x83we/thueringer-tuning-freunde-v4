@@ -43,6 +43,7 @@ return new class extends Migration {
             $table->string('ip_adresse', 45)->nullable();
             $table->tinyInteger('fahrzeug_vorhanden')->default(0);
             $table->unsignedBigInteger('photo_id')->nullable();
+            $table->string('path')->nullable();
             $table->tinyInteger('published')->default(0);
             $table->timestamp('published_at')->nullable();
 
