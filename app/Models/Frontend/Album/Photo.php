@@ -29,6 +29,22 @@ class Photo extends Model
         ];
     }
 
+    protected $fillable = [
+        'user_id',
+        'album_id',
+        'fahrzeug_id',
+        'team_id',
+        'title',
+        'slug',
+        'size',
+        'images',
+        'images_thumbnail',
+        'description',
+        'thumbnail',
+        'published',
+        'published_at',
+    ];
+
     protected $table = 'photos';
 
     public function users()

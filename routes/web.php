@@ -32,6 +32,10 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::name('frontend.')->namespace('Frontend')->group(function () {
         Route::get('/', [Frontend\IndexController::class, 'index'])->name('index');
 
+        // Team
+        Route::resource('team', Frontend\Team\TeamsController::class);
+        Route::match(['PUT', 'PATCH'], 'team/memberDelete/{team}', [Frontend\Team\TeamsController::class, 'updateMember'])->name('team.update-member');
+
         // Antrag
         Route::get('/antrag', [Frontend\AntragController::class, 'index'])->name('antrag.index');
         Route::post('/antrag', [Frontend\AntragController::class, 'store'])->name('antrag.store');

@@ -21,7 +21,7 @@
                         <a href="/#ueber-uns" class="nav-link {{ Request::is('ueber-uns') ? 'active' : '' }}">Über uns</a>
                     </li>
                     <li class="nav-item">
-{{--                        <a href="{{ route('frontend.team.index') }}" class="nav-link {{ Request::is('team') ? 'active' : '' }}">Team</a>--}}
+                        <a href="{{ route('frontend.team.index') }}" class="nav-link {{ Request::is('team') ? 'active' : '' }}">Team</a>
                     </li>
                     <li class="nav-item">
 {{--                        <a href="{{ route('frontend.fahrzeuge.index') }}" class="nav-link {{ Request::is('fahrzeuge') ? 'active' : '' }}">Fahrzeuge</a>--}}
@@ -30,7 +30,7 @@
                         <a href="{{ route('frontend.galerie.index') }}" class="nav-link {{ Request::is('galerie') ? 'active' : '' }}">Galerie</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/#veranstaltungen" class="nav-link {{ Request::is('veranstaltungen') ? 'active' : '' }}">Veranstaltungen</a>
+{{--                        <a href="/#veranstaltungen" class="nav-link {{ Request::is('veranstaltungen') ? 'active' : '' }}">Veranstaltungen</a>--}}
                     </li>
                     <li class="nav-item">
 {{--                        <a href="{{ route('frontend.kontakt.index') }}" class="nav-link {{ Request::is('kontakt') ? 'active' : '' }}">Kontakt</a>--}}
@@ -74,7 +74,7 @@
                         @endif
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->vorname .' '. Auth::user()->nachname }}
                             </a>
 
@@ -94,7 +94,7 @@
                         </li>
                     @endguest
                 </ul>
-
+            </div>
         </div>
     </nav>
 </header>

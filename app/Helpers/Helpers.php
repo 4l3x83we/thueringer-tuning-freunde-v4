@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use Carbon\Carbon;
 use DateTime;
+use DB;
 use File;
 use Intervention\Image\Facades\Image;
 
@@ -243,5 +244,15 @@ class Helpers
     {
         $data = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*_';
         return substr(str_shuffle($data), 0, $chars);
+    }
+
+    public static function previous($table, $where, $status = 'published')
+    {
+        return DB::table($table)->where('id', '<', $where)->where($status, true)->orderBy('id', 'DESC')->first();
+    }
+
+    public static function next($table, $where, $status = 'published')
+    {
+        return DB::table($table)->where('id', '>', $where)->where($status, true)->orderBy('id')->first();
     }
 }

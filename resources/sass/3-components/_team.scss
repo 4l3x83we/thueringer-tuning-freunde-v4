@@ -175,11 +175,13 @@
                 font-weight: bold;
                 text-align: center;
                 line-height: rem(40);
+                object-fit: cover;
+                object-position: 50% 50%;
             }
         }
     }
 
-    #teamEditModal, #fahrzeugeEditModal {
+    #teamEditModal, #fahrzeugeEditModal, #teamEdit {
         .teamEdit, .fahrzeugeEdit {
             padding: 0;
             border-radius: rem(10);

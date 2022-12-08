@@ -34,7 +34,7 @@ return new class extends Migration {
             $table->string('email');
             $table->string('geburtsdatum');
             $table->string('beruf');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();

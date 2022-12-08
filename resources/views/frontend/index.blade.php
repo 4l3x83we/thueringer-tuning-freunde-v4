@@ -15,7 +15,7 @@
     <!-- ======= Über uns ======= -->
     @include('frontend.component.ueber-uns')
     <!-- ======= Team ======= -->
-
+    @include('frontend.index.team')
     <!-- ======= Fahrzeuge ======= -->
 
     <!-- ======= Galerie ======= -->
