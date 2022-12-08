@@ -27,7 +27,8 @@
             'media',
             'table',
             'emoticons',
-            'wordcount'
+            'wordcount',
+            'autoresize'
         ],
         toolbar: 'undo redo | ' +
             'alignleft aligncenter alignright alignjustify alignnone | ' +
@@ -44,6 +45,8 @@
         link_default_target: '_blank',
         link_assume_external_targets: true,
         insertdatetime_formats: [ '%H:%M:%S', '%d.%m.%Y', '%d.%m.%Y %H:%M' ],
+        autoresize_overflow_padding: 5,
+        autoresize_bottom_margin: 25,
         language: 'de',
         // placeholder: 'Hier kannst du uns einen Gästebucheintrag hinterlassen!',
         // skin: 'oxide-dark',
