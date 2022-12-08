@@ -12,7 +12,6 @@
 
                     @if(count($teams) > 0)
                         @foreach($teams as $team)
-                            {{ $team }}
                             @if($team->published)
                                 @if(\Carbon\Carbon::parse($team->published_at) <= \Carbon\Carbon::now())
                                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch swiper-slide">
