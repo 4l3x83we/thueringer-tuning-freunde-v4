@@ -49,7 +49,7 @@
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <a href="{{ route('frontend.team.show', $team->slug) }}" id="member-link"><em class="bi bi-link-45deg"></em> Über mich</a>
                                                     @can('edit')
-                                                        @hasanyrole('super admin|admin')
+                                                        @hasanyrole('super_admin|admin')
                                                         @if(auth()->user()->id !== $team->user_id)
                                                             <a href="{{ route('frontend.team.edit', $team->slug) }}" id="member-link"><em class="bi bi-pen"></em> Bearbeiten</a>
                                                         @endif
