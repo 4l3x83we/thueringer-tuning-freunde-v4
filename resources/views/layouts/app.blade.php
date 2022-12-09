@@ -50,6 +50,7 @@
         <!-- ======= Galerie Create ======= -->
         @include('frontend.component.galerie.create')
         <!-- ======= Event Create ======= -->
+        @include('frontend.component.events.create')
         <!-- ======= Tinymce ======= -->
         @include('helpers.component.tinymce')
         <!-- ======= Fileinput ======= -->

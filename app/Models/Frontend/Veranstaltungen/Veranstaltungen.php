@@ -10,8 +10,26 @@
 
 namespace App\Models\Frontend\Veranstaltungen;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Veranstaltungen extends Model
 {
+    use Sluggable;
+
+    public function sluggable() : array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+    protected $table = 'veranstaltungens';
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

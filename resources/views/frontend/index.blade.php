@@ -21,7 +21,7 @@
     <!-- ======= Galerie ======= -->
     @include('frontend.index.galerie')
     <!-- ======= Veranstaltungen ======= -->
-
+    @include('frontend.index.veranstaltungen')
     <!-- ======= Kontakt ======= -->
     @include('frontend.component.kontakt')
 @endsection

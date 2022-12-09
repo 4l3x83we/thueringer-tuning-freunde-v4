@@ -15,6 +15,7 @@ use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Fahrzeuge\Fahrzeug;
 use App\Models\Frontend\Team\Team;
+use App\Models\Frontend\Veranstaltungen\Veranstaltungen;
 
 class IndexController extends Controller
 {
@@ -23,6 +24,7 @@ class IndexController extends Controller
         $teams = Team::where('published', true)->orderBy('title', 'ASC')->get();
         $fahrzeuges = Fahrzeug::where('published', true)->orderBy('updated_at', 'DESC')->get();
         $albums = Album::where('published', true)->inRandomOrder()->get();
+        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->orderBy('datum_von', 'DESC')->limit(6)->get();
         foreach ($albums as $album) {
             if ($album->thumbnail_id) {
                 $preview[$album->id] = $album->path.'/'.Photo::where('id', $album->thumbnail_id)->first()->images_thumbnail;
@@ -35,7 +37,7 @@ class IndexController extends Controller
             'treffen' => 0,
             'projekte' => Album::where('kategorie', 'Projekte')->count(),
         ];
-        return view('frontend.index', compact('teams', 'albums', 'fahrzeuges', 'preview', 'count'));
+        return view('frontend.index', compact('teams', 'albums', 'fahrzeuges', 'preview', 'count', 'veranstaltungens'));
     }
 
     public function impressum()

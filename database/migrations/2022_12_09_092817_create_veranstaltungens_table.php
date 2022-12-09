@@ -18,7 +18,18 @@ return new class extends Migration {
         Schema::create('veranstaltungens', function (Blueprint $table) {
             $table->id();
 
-
+            $table->timestamp('datum_von')->nullable();
+            $table->timestamp('datum_bis')->nullable();
+            $table->string('veranstaltung')->nullable();
+            $table->string('veranstaltungsort')->nullable();
+            $table->string('veranstalter')->nullable();
+            $table->mediumText('description')->nullable();
+            $table->string('quelle')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('eintritt')->nullable();
+            $table->tinyInteger('published')->default(0);
+            $table->timestamp('published_at')->nullable();
+            $table->tinyInteger('anwesend')->default(0);
 
             $table->timestamps();
         });

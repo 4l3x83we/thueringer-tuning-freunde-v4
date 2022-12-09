@@ -172,6 +172,7 @@ class Helpers
             'size' => $size
         ];
     }
+
     public static function imageUpload($request, $file, $path)
     {
         $images = $request->file($file);

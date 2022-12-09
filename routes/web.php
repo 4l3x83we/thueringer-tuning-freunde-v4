@@ -46,6 +46,10 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::get('/antrag', [Frontend\AntragController::class, 'index'])->name('antrag.index');
         Route::post('/antrag', [Frontend\AntragController::class, 'store'])->name('antrag.store');
 
+        // Veranstaltungen
+        Route::resource('/veranstaltungen', Frontend\Veranstaltungen\VeranstaltungensController::class);
+        Route::match(['PUT', 'PATCH'], '/veranstaltungen/published/{veranstaltungen}', [Frontend\Veranstaltungen\VeranstaltungensController::class, 'published'])->name('veranstaltungen.published');
+
         // Gallery
         Route::resource('galerie', Frontend\Album\AlbumsController::class);
         Route::resource('galerie/photos', Frontend\Album\PhotosController::class);
