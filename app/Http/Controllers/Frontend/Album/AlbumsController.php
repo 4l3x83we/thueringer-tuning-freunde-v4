@@ -156,7 +156,7 @@ class AlbumsController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'kategorie' => 'required',
-            'description' => 'required|max:255'
+//            'description' => 'required|max:255'
         ]);
 
         if ($validator->fails()) {
@@ -167,7 +167,11 @@ class AlbumsController extends Controller
         $photos = Photo::where('album_id', $galerie->id)->get();
         $user = Team::where('user_id', $galerie->user_id)->first();
         $fullName = Helpers::replaceStrToLower($user->vorname . ' ' . $user->nachname);
-        $pathAlbumOld = $galerie->path;
+        if (empty($galerie->path)) {
+            $pathAlbumOld = 'images/' . $fullName . '/' . $request->kategorie . '/' . $slug;
+        } else {
+            $pathAlbumOld = $galerie->path;
+        }
         $photosUpload = Helpers::imageUploadWithThumbnailMultiple($request, 'images', $pathAlbumOld);
         $fahrzeugID = ($galerie->kategorie === 'Fahrzeuge' or $galerie->kategorie === 'Projekte') ? $galerie->fahrzeug_id : NULL;
 
@@ -296,6 +300,14 @@ class AlbumsController extends Controller
         $galerie->published_at = $galerie->published_at === null ? $galerie->created_at : $galerie->published_at;
         $galerie->description = Str::limit(strip_tags($request->description), 255);
         $galerie->save();
+
+        if (empty($galerie->path)) {
+            $photoPreview = Photo::where('album_id', $galerie->id)->inRandomOrder()->first();
+            Album::where('id', '=', $galerie->id)->update([
+                'path' => 'images/' . $fullName . '/' . $request->kategorie . '/' . $slug,
+                'thumbnail_id' => $photoPreview->id,
+            ]);
+        }
 
         Toastr::success('Album wurde geändert!', 'Geändert!');
         return redirect(route('frontend.galerie.show', $galerie->slug));

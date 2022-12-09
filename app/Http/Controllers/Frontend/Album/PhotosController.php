@@ -10,11 +10,15 @@
 
 namespace App\Http\Controllers\Frontend\Album;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
+use App\Models\Frontend\Team\Team;
+use App\Models\User;
 use File;
 use Illuminate\Http\Request;
+use Str;
 use Yoeunes\Toastr\Facades\Toastr;
 
 class PhotosController extends Controller
@@ -30,8 +34,59 @@ class PhotosController extends Controller
 
     public function store(Request $request)
     {
-        // TODO Photo store add
-        dd($request->all());
+        $album = Album::where('id', $request->album_id)->first();
+        $user = Helpers::replaceStrToLower(User::where('id', $album->user_id)->first()->name);
+        $userRole = auth()->user()->hasAnyRole(['super_admin', 'admin']);
+        $path = 'images/' . $user . '/' . $album->kategorie . '/' . $album->slug;
+        $published = (bool)$userRole;
+        $published_at = $userRole ? now() : null;
+        $photosUpload = Helpers::imageUploadWithThumbnailMultiple($request, 'images', $path);
+
+        // Images Upload
+        if ($request->hasFile('images')) {
+            if (count($request->images) > 0) {
+                foreach ($request->images as $item => $v) {
+                    Photo::insert([
+                        'album_id' => $album->id,
+                        'user_id' => auth()->user()->id,
+                        'title' => $album->title,
+                        'slug' => $album->slug,
+                        'size' => $photosUpload['size'][$item],
+                        'images' => $photosUpload['data'][$item],
+                        'images_thumbnail' => $photosUpload['dataThumbnail'][$item],
+                        'description' => Str::limit(strip_tags($album->description), 200),
+                        'published' => $published,
+                        'published_at' => $published_at,
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]);
+                }
+                Toastr::info('Die Fotos wurden dem Album ' . $album->title . ' erfolgreich hinzugefügt.', 'Erfolgreich!');
+            } else {
+                Photo::insert([
+                    'album_id' => $album->id,
+                    'user_id' => auth()->user()->id,
+                    'title' => $album->title,
+                    'slug' => $album->slug,
+                    'size' => $photosUpload['size'],
+                    'images' => $photosUpload['data'],
+                    'images_thumbnail' => $photosUpload['dataThumbnail'],
+                    'description' => Str::limit(strip_tags($album->description), 200),
+                    'published' => $published,
+                    'published_at' => $published_at,
+                    'updated_at' => now(),
+                    'created_at' => now(),
+                ]);
+                Toastr::info('Das Fotos wurden dem Album ' . $album->title . ' erfolgreich hinzugefügt.', 'Erfolgreich!');
+            }
+        }
+
+        Album::where('id', $request->album_id)->update([
+            'path' => $path,
+            'thumbnail_id' => Photo::where('album_id', $album->id)->inRandomOrder()->first()->id,
+        ]);
+
+        return redirect(route('frontend.galerie.show', $album->slug));
     }
 
     public function show(Photo $photo)
