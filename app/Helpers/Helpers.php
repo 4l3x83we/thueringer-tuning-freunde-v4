@@ -142,15 +142,15 @@ class Helpers
                 }
 
                 // Thumbnails
-                $watermark = public_path('images/watermark.png');
+//                $watermark = public_path('images/watermark.png');
                 $thumbnails = Image::make($images)->resize(624, 612, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
-                })->insert($watermark, 'bottom-right', 10, 10)->stream();
+                })->stream();
                 File::put(public_path($path. '/thumbnails/' .$nameToString), $thumbnails);
 
                 // Images Original
-                $photo = Image::make($images)->insert($watermark, 'bottom-right', 10, 10)->stream();
+                $photo = Image::make($images)->stream();
                 File::put(public_path($path . '/' . $nameToString), $photo);
 
                 $data[] = $nameToString;

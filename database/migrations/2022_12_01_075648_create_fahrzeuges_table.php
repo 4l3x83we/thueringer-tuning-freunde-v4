@@ -33,6 +33,7 @@ return new class extends Migration {
             $table->text('innenraum')->nullable();
             $table->text('anlage')->nullable();
             $table->longText('description')->nullable();
+            $table->text('path')->nullable();
             $table->tinyInteger('published')->default(0)->nullable();
             $table->timestamp('published_at')->nullable();
 

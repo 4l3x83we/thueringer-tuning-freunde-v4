@@ -46,14 +46,14 @@
 
     @hasanyrole('mitglied|super_admin|admin')
         <!-- ======= Fahrzeug Create ======= -->
-
+        @include('frontend.component.fahrzeuge.create')
         <!-- ======= Galerie Create ======= -->
-        @include('frontend.component.galerie.create');
+        @include('frontend.component.galerie.create')
         <!-- ======= Event Create ======= -->
         <!-- ======= Tinymce ======= -->
-        @include('helpers.component.tinymce');
+        @include('helpers.component.tinymce')
         <!-- ======= Fileinput ======= -->
-        @include('helpers.component.file-input');
+        @include('helpers.component.file-input')
     @endhasanyrole
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><em class="bi bi-arrow-up-short"></em></a>
     <div id="preloader"></div>

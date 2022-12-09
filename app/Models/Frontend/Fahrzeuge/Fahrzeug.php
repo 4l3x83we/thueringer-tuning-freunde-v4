@@ -11,6 +11,7 @@
 namespace App\Models\Frontend\Fahrzeuge;
 
 use App\Models\Frontend\Album\Album;
+use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Team\Team;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -39,6 +40,11 @@ class Fahrzeug extends Model
     public function albums()
     {
         return $this->belongsTo(Album::class, 'album_id');
+    }
+
+    public function photos()
+    {
+        return $this->belongsTo(Photo::class);
     }
 
     public function teams()

@@ -36,6 +36,12 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::resource('team', Frontend\Team\TeamsController::class);
         Route::match(['PUT', 'PATCH'], 'team/memberDelete/{team}', [Frontend\Team\TeamsController::class, 'updateMember'])->name('team.update-member');
 
+        // Fahrzeuge
+        Route::resource('fahrzeuge', Frontend\Fahrzeuge\FahrzeugsController::class);
+        Route::match(['PUT', 'PATCH'], 'fahrzeuge/unpublished/{fahrzeuge}', [Frontend\Fahrzeuge\FahrzeugsController::class, 'unpublished'])->name('fahrzeuge.unpublished');
+        Route::match(['PUT', 'PATCH'], 'fahrzeuge/published/{fahrzeuge}', [Frontend\Fahrzeuge\FahrzeugsController::class, 'published'])->name('fahrzeuge.published');
+        Route::match(['PUT', 'PATCH'], 'fahrzeuge/photoPublished/{fahrzeuge}', [Frontend\Fahrzeuge\FahrzeugsController::class, 'photoPublished'])->name('fahrzeuge.photoPublished');
+
         // Antrag
         Route::get('/antrag', [Frontend\AntragController::class, 'index'])->name('antrag.index');
         Route::post('/antrag', [Frontend\AntragController::class, 'store'])->name('antrag.store');

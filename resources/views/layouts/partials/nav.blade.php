@@ -24,7 +24,7 @@
                         <a href="{{ route('frontend.team.index') }}" class="nav-link {{ Request::is('team') ? 'active' : '' }}">Team</a>
                     </li>
                     <li class="nav-item">
-{{--                        <a href="{{ route('frontend.fahrzeuge.index') }}" class="nav-link {{ Request::is('fahrzeuge') ? 'active' : '' }}">Fahrzeuge</a>--}}
+                        <a href="{{ route('frontend.fahrzeuge.index') }}" class="nav-link {{ Request::is('fahrzeuge') ? 'active' : '' }}">Fahrzeuge</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('frontend.galerie.index') }}" class="nav-link {{ Request::is('galerie') ? 'active' : '' }}">Galerie</a>
@@ -47,7 +47,7 @@
                             Mitglieder Bereich
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-{{--                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#fahrzeugeCreateModal"><em class="bi bi-car-front"></em> Neues Fahrzeug anlegen</a></li>--}}
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#fahrzeugeCreateModal"><em class="bi bi-car-front"></em> Neues Fahrzeug anlegen</a></li>
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createAlbumModal"><em class="bi bi-file-image"></em> Neues Album anlegen</a></li>
 {{--                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createVeranstaltungModal"><em class="bi bi-calendar-plus"></em> Neue Veranstaltung anlegen</a></li>--}}
                             <h6 class="dropdown-header">Interner Bereich</h6>
@@ -75,7 +75,7 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->vorname .' '. Auth::user()->nachname }}
+                                {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">

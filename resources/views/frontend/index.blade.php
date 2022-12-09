@@ -17,7 +17,7 @@
     <!-- ======= Team ======= -->
     @include('frontend.index.team')
     <!-- ======= Fahrzeuge ======= -->
-
+    @include('frontend.index.fahrzeuge')
     <!-- ======= Galerie ======= -->
     @include('frontend.index.galerie')
     <!-- ======= Veranstaltungen ======= -->
