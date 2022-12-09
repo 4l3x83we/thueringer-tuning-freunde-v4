@@ -16,14 +16,14 @@
                                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch swiper-slide">
                                     <div class="member shadow-sm" data-aos="zoom-in" data-aos-delay="100">
                                         <div class="member-img">
-                                            @if($fahrzeuge->images == null)
+                                            @if(empty($fahrzeuge->albums->thumbnail_id))
                                                 <a href="{{ route('frontend.fahrzeuge.show', $fahrzeuge->slug) }}">
-                                                    <img data-src="{{ asset('images/default.png') }}" alt="{{ $fahrzeuge->title }}" class="img-fluid swiper-lazy">
+                                                    <img src="{{ asset('images/default.png') }}" data-src="{{ asset('images/default.png') }}" alt="{{ $fahrzeuge->title }}" class="img-fluid swiper-lazy lozad">
                                                 </a>
                                                 <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                             @else
                                                 <a href="{{ route('frontend.fahrzeuge.show', $fahrzeuge->slug) }}">
-                                                    <img data-src="{{ $fahrzeuge->images_thumbnails }}" alt="{{ $fahrzeuge->title }}" class="img-fluid swiper-lazy">
+                                                    <img src="{{ asset('images/default.png') }}" data-src="{{ $albums->preview[$fahrzeuge->album_id] }}" alt="{{ $fahrzeuge->title }}" class="img-fluid swiper-lazy lozad">
                                                 </a>
                                                 <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                             @endif
