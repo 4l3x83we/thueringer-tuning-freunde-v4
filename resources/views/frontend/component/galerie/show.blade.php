@@ -101,7 +101,7 @@
                                 <li><a href="{{ route('frontend.fahrzeuge.show', $galerie->slug) }}" class="links-light"><strong><em class="bi bi-car-front"></em></strong>: zum Fahrzeug</a></li>
                             @endif
                             @hasanyrole('mitglied|super_admin|admin')
-                                @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen')
+                                @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or empty($galerie->fahrzeug_id))
                                     @can('edit')
                                         @if($galerie->user_id === auth()->user()->id)
                                             <li><a data-bs-toggle="modal" data-id="{{ $galerie->id }}" data-bs-target="#galerieEditModal" class="editAlbum links-light-cursor"><strong><em class="bi bi-images"></em></strong>: Bearbeiten</a></li>
@@ -160,7 +160,7 @@
                                 <span> = Vollbild</span>
                             </div>
                             @hasanyrole('mitglied|super_admin|admin')
-                                @if(auth()->user()->id === $photo->user_id)
+                                @if(auth()->user()->id === $galerie->user_id)
                                     <div>
                                         <div class="btn btn-sm btn-secondary my-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
                                             <em class="bi bi-eye"></em>
@@ -175,7 +175,7 @@
                                     </div>
                                 @endif
                                 @hasanyrole('super_admin|admin')
-                                    @if(auth()->user()->id !== $photo->user_id)
+                                    @if(auth()->user()->id !== $galerie->user_id)
                                         <div class="fw-bold">Admin Icons: </div>
                                         <div class="ms-3">
                                             <div class="btn btn-sm btn-outline-secondary my-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
@@ -204,7 +204,7 @@
                                 </div>
                                 @endcan
                             @else
-                                @if(auth()->user()->id === $photo->user_id)
+                                @if(auth()->user()->id === $galerie->user_id)
                                 <div class="imagesDirekt" id="imagesDirekt">
                                     <form action="{{ route('frontend.photos.store') }}" method="POST" enctype="multipart/form-data">
                                         @include('frontend.component.galerie.forms.imagesUpload')

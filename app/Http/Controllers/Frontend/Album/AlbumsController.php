@@ -39,6 +39,7 @@ class AlbumsController extends Controller
         $albums = Album::where('published', true)->orderBy('published_at', 'DESC')->paginate(21);
         $albums->kategorie = Album::where('published', true)->select('kategorie')->groupBy('kategorie')->get();
         $albums->photos = Photo::where('published', true)->count();
+        $preview = null;
         foreach ($albums as $album) {
             foreach(Photo::where('id', $album->thumbnail_id)->get() as $thumbnail) {
                 $preview[$album->id] = $album->path.'/'.$thumbnail->images_thumbnail;

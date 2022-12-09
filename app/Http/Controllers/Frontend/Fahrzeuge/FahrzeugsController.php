@@ -39,6 +39,7 @@ class FahrzeugsController extends Controller
     public function index()
     {
         $fahrzeuges = Fahrzeug::where('published', true)->orderBy('updated_at', 'DESC')->paginate(12);
+        $previewImages = null;
         foreach ($fahrzeuges as $fahrzeuge) {
             $thumbnail_ID = Album::where('id', $fahrzeuge->album_id)->get();
             foreach ($thumbnail_ID as $thumbnailID) {
@@ -184,7 +185,7 @@ class FahrzeugsController extends Controller
         $published = Photo::where('fahrzeug_id', $fahrzeuge->id)->where('published', false)->count();
         $team = Team::where('user_id', $fahrzeuge->user_id)->first();
 
-        $preview = '';
+        $preview = null;
         foreach ($photos as $photo) {
             $preview = Photo::where('id', $album->thumbnail_id)->first();
         }
@@ -198,7 +199,7 @@ class FahrzeugsController extends Controller
     public function edit(Fahrzeug $fahrzeuge)
     {
         $photos = Photo::where('fahrzeug_id', $fahrzeuge->id)->get();
-        $preview = '';
+        $preview = null;
         foreach ($photos as $photo) {
             $preview = Photo::where('id', $fahrzeuge->albums->thumbnail_id)->first()->images;
         }
@@ -229,10 +230,15 @@ class FahrzeugsController extends Controller
 
         $user = User::where('id', $fahrzeuge->user_id)->first();
         $userName = Helpers::replaceStrToLower($user->name);
+        $user_id = auth()->user()->hasAnyRole('super_admin', 'admin') ? $user->id : auth()->user()->id;
         $album = $fahrzeuge->albums;
         $photos = $fahrzeuge->albums->photos;
         $slug = $fahrzeuge->title === $request->fahrzeug ? $fahrzeuge->slug : SlugService::createSlug(Fahrzeug::class, 'slug', $request->fahrzeug);
         $imagesDelete = $request->imagesDelete;
+
+        if (empty($fahrzeuge->path)) {
+            $fahrzeuge->path = 'images/' . $userName . '/' . 'Fahrzeuge' . '/' . $slug;
+        }
 
         // Fahrzeugfotos Löschen
         if (isset($imagesDelete)) {
@@ -256,7 +262,7 @@ class FahrzeugsController extends Controller
                     Photo::insert([
                         'album_id' => $fahrzeuge->album_id,
                         'fahrzeug_id' => $fahrzeuge->id,
-                        'user_id' => auth()->user()->id,
+                        'user_id' => $user_id,
                         'title' => $request->fahrzeug,
                         'slug' => $slug,
                         'size' => $photos['size'][$item],
@@ -319,6 +325,14 @@ class FahrzeugsController extends Controller
         $this->updateFahrzeug($request, $fahrzeuge);
         $fahrzeuge->description = $request->beschreibungFz;
         $fahrzeuge->save();
+
+        if (empty($album->path)) {
+            $photoPreview = Photo::where('album_id', $album->id)->inRandomOrder()->first();
+            Album::where('id', '=', $album->id)->update([
+                'path' => $fahrzeuge->path,
+                'thumbnail_id' => $photoPreview->id,
+            ]);
+        }
 
         Toastr::success('Änderungen wurden erfolgreich übernommen.', 'Erfolgreich!');
         return redirect(route('frontend.fahrzeuge.index'));

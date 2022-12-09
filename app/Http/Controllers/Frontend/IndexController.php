@@ -25,6 +25,7 @@ class IndexController extends Controller
         $fahrzeuges = Fahrzeug::where('published', true)->orderBy('updated_at', 'DESC')->get();
         $albums = Album::where('published', true)->inRandomOrder()->get();
         $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->orderBy('datum_von', 'DESC')->limit(6)->get();
+        $preview = null;
         foreach ($albums as $album) {
             if ($album->thumbnail_id) {
                 $preview[$album->id] = $album->path.'/'.Photo::where('id', $album->thumbnail_id)->first()->images_thumbnail;
