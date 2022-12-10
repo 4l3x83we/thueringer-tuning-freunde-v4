@@ -19,7 +19,7 @@
                         <div class="col-lg-12 mb-3">
                             <div class="text-center header @if($antrag->published) text-bg-success @else text-bg-danger @endif py-2 fw-bold shadow">Mitgliedsantrag #{{ $antrag->id }}</div>
                         </div>
-                        <div class="@if(!$antrag->fahrzeugvorhanden) col-lg-6 @else col-lg-12 @endif mb-3">
+                        <div class="@if(!$antrag->fahrzeug_vorhanden) col-lg-6 @else col-lg-12 @endif mb-3">
                             <div class="container p-3 shadow body h-100">
                                 <div class="d-flex h4 align-items-center justify-content-center mb-3">Persönliche Daten:</div>
                                 <div class="d-flex flex-column flex-md-row">
@@ -78,14 +78,14 @@
                                 @endif
                             </div>
                         </div>
-                        @if(!$antrag->fahrzeugvorhanden)
+                        @if(!$antrag->fahrzeug_vorhanden)
                             <div class="col-lg-6 mb-3">
                                 <div class="container p-3 shadow body h-100">
                                     <div class="d-flex h4 align-items-center justify-content-center mb-3">Fahrzeugdaten:</div>
-                                    @if($antrag->fahrzeuge->fahrzeug)
+                                    @if($antrag->fahrzeuge->title)
                                         <div class="d-flex flex-column flex-md-row">
                                             <strong style="width: 33%;">Fahrzeug:</strong>
-                                            <p>{{ $antrag->fahrzeuge->fahrzeug }}</p>
+                                            <p>{{ $antrag->fahrzeuge->title }}</p>
                                         </div>
                                     @endif
                                     @if($antrag->fahrzeuge->baujahr)
@@ -211,7 +211,7 @@
                                                 <div class="d-flex flex-column align-items-end h-100">
                                                     <div class="mt-auto">
                                                         <input type="hidden" name="is_checked" value="1">
-                                                        @if(!$antrag->fahrzeugvorhanden)
+                                                        @if(!$antrag->fahrzeug_vorhanden)
                                                             <input type="hidden" name="album_id" value="{{ $antrag->fahrzeuge->album_id }}">
                                                             <input type="hidden" name="fahrzeug_id" value="{{ $antrag->fahrzeug_id }}">
                                                             <input type="hidden" name="titleFz" value="{{ $antrag->fahrzeuge->title }}">
@@ -234,7 +234,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 text-end">
                                             <input type="hidden" name="is_checked" value="0">
-                                            @if(!$antrag->fahrzeugvorhanden)
+                                            @if(!$antrag->fahrzeug_vorhanden)
                                                 <input type="hidden" name="antrag_id" value="{{ $antrag->id }}">
                                                 <input type="hidden" name="album_id" value="{{ $antrag->fahrzeuge->album_id }}">
                                                 <input type="hidden" name="slugFz" value="{{ $antrag->fahrzeuge->slug }}">
