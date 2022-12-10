@@ -16,7 +16,7 @@
                     <article>
                         @foreach($galerie->photos as $photo)
                             @if($photo->published_at <= now() and $photo->published)
-                                <div class="figure shadow" data-aos="fade">
+                                <div class="figure shadow">
                                     <div class="inner" @if($photo->images === $galerie->images) style="border: 1px solid green;" @endif>
                                         <div class="thumbnails">
                                             @if(empty($photo->images))

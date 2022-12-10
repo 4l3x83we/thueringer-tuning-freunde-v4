@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Team\Team;
 use Carbon\Carbon;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yoeunes\Toastr\Facades\Toastr;
@@ -46,7 +47,10 @@ class TeamsController extends Controller
     public function show(Team $team)
     {
         $team->gebdatum = Carbon::parse($team->geburtsdatum)->age;
-        $team->images = $team->path.'/'.\App\Models\Frontend\Album\Photo::where('team_id', $team->id)->first()->images;
+        $team->images = null;
+        if (!empty($team->path)) {
+            $team->images = $team->path . '/' . Photo::where('team_id', $team->id)->first()->images;
+        }
 
         $team->previous = Helpers::previous('teams', $team->id);
         $team->next = Helpers::next('teams', $team->id);
@@ -90,6 +94,7 @@ class TeamsController extends Controller
         }
 
         $path = 'images/' . Helpers::replaceStrToLower($team->vorname . ' ' . $team->nachname) . '/profil';
+        File::makeDirectory($path, 0777, true, true);
         $photoTeamID = Photo::where('team_id', $team->id)->first();
 
         if ($request->hasFile('profilbild')) {

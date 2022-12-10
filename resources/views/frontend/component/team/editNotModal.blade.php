@@ -15,6 +15,10 @@
             </div>
 
             <form action="{{ route('frontend.team.update', $team->slug) }}" method="POST" enctype="multipart/form-data" class="row" id="teamEdit">
+                @include('helpers.component.recaptcha')
+                @csrf
+                @method('PATCH')
+                <input type="hidden" name="user_id" value="{{ $team->user_id }}">
                 <div class="col-lg-12 shadow text-bg-dark teamEdit" data-aos="fade-up" data-aos-delay="100">
                     <div class="header">
                         <h5>Antragsteller</h5>
