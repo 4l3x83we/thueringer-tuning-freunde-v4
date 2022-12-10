@@ -17,8 +17,8 @@
                                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch swiper-slide">
                                         <div class="member shadow-sm" data-aos="zoom-in" data-aos-delay="100">
                                             <div class="member-img">
-                                                @if($team->image == true)
-                                                    <a href="{{ route('frontend.team.show', $team->slug) }}"><img src="{{ asset('images/default.png') }}" data-src="{{ $team->image }}" alt="{{ $team->vorname .' '. $team->nachname }}" class="img-fluid swiper-lazy lozad"></a>
+                                                @if(!empty($team->photo_id))
+                                                    <a href="{{ route('frontend.team.show', $team->slug) }}"><img src="{{ asset('images/default.png') }}" data-src="{{ $previewTeam[$team->id] }}" alt="{{ $team->vorname .' '. $team->nachname }}" class="img-fluid swiper-lazy lozad"></a>
                                                     <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                                 @else
                                                     <div class="member-img-background">

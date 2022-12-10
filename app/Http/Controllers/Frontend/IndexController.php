@@ -27,8 +27,14 @@ class IndexController extends Controller
         $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->orderBy('datum_von', 'DESC')->limit(6)->get();
         $preview = null;
         foreach ($albums as $album) {
-            if ($album->thumbnail_id) {
+            if (!empty($album->thumbnail_id)) {
                 $preview[$album->id] = $album->path.'/'.Photo::where('id', $album->thumbnail_id)->first()->images_thumbnail;
+            }
+        }
+        $previewTeam = null;
+        foreach ($teams as $team) {
+            if (!empty($team->path)) {
+                $previewTeam[$team->id] = $team->path . '/' . Photo::where('team_id', $team->id)->first()->images;
             }
         }
         $albums->preview = $preview;
@@ -38,7 +44,7 @@ class IndexController extends Controller
             'treffen' => 0,
             'projekte' => Album::where('kategorie', 'Projekte')->count(),
         ];
-        return view('frontend.index', compact('teams', 'albums', 'fahrzeuges', 'preview', 'count', 'veranstaltungens'));
+        return view('frontend.index', compact('teams', 'albums', 'fahrzeuges', 'preview', 'count', 'previewTeam', 'veranstaltungens'));
     }
 
     public function impressum()

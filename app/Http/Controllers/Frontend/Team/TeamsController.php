@@ -33,7 +33,14 @@ class TeamsController extends Controller
     public function index()
     {
         $teams = Team::where('published', true)->orderBy('title', 'ASC')->paginate(21);
-        return view('frontend.component.team.index', compact('teams'));
+        $preview = null;
+        foreach ($teams as $team) {
+            $preview[$team->id] = null;
+            if (!empty($team->path)) {
+                $preview[$team->id] = $team->path . '/' . Photo::where('team_id', $team->id)->first()->images;
+            }
+        }
+        return view('frontend.component.team.index', compact('teams', 'preview'));
     }
 
     public function create()

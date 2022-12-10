@@ -16,8 +16,8 @@
                         <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                             <div class="member shadow-sm" data-aos="zoom-in" data-aos-delay="100">
                                 <div class="member-img">
-                                    @if($team->image == true)
-                                        <a href="{{ route('frontend.team.show', $team->slug) }}"><img src="{{ asset('images/default.png') }}" data-src="{{ $team->image }}" alt="{{ $team->vorname .' '. $team->nachname }}" class="img-fluid lozad"></a>
+                                    @if(!empty($team->photo_id))
+                                        <a href="{{ route('frontend.team.show', $team->slug) }}"><img src="{{ asset('images/default.png') }}" data-src="{{ $preview[$team->id] }}" alt="{{ $team->vorname .' '. $team->nachname }}" class="img-fluid lozad"></a>
                                     @else
                                         <div class="member-img-background">
                                             <a href="{{ route('frontend.team.show', $team->slug) }}"><div class="member-img-abbreviation">{!! \App\Helpers\Helpers::teamInitials($teams)[$team->id] !!}</div></a>
