@@ -36,12 +36,10 @@ class AppServiceProvider extends ServiceProvider
             'create' => 'erstellen'
         ]);
         view()->composer('*', function ($view) {
-            $count = [
-                'kontakt' => Kontakt::where('read', false)->select('read')->count(),
-            ];
+            $count = Kontakt::where('read', false)->select('read')->count();
             $kontakteNotification = Kontakt::where('read', false)->limit(3)->get();
             $geb = Team::where('published', true)->orderBy('title', 'ASC')->get();
-            $view->with('count', $count);
+            $view->with('countKontakt', $count);
             $view->with('kontakteNotification', $kontakteNotification);
             $view->with('geb', $geb);
         });
