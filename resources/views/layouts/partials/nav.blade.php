@@ -39,7 +39,7 @@
                         <a href="{{ route('frontend.antrag.index') }}" class="nav-link {{ Request::is('antrag') ? 'active' : '' }}">Antrag</a>
                     </li>
                     <li class="nav-item">
-{{--                        <a href="{{ route('frontend.gaestebuch.index') }}" class="nav-link {{ Request::is('gaestebuch') ? 'active' : '' }}">Gästebuch</a>--}}
+                        <a href="{{ route('frontend.gaestebuch.index') }}" class="nav-link {{ Request::is('gaestebuch') ? 'active' : '' }}">Gästebuch</a>
                     </li>
                     @hasanyrole('super_admin|admin|mitglied')
                     <li class="nav-item dropdown">
@@ -51,10 +51,10 @@
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createAlbumModal"><em class="bi bi-file-image"></em> Neues Album anlegen</a></li>
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createVeranstaltungModal"><em class="bi bi-calendar-plus"></em> Neue Veranstaltung anlegen</a></li>
                             <h6 class="dropdown-header">Interner Bereich</h6>
-{{--                            <li><a class="dropdown-item" href="{{ route('intern.geburtstagsliste.index') }}"><em class="fa-solid fa-cake-candles"></em> Geburtstagsliste</a></li>--}}
-{{--                            <li><a class="dropdown-item" href="{{ route('intern.telefonliste.index') }}"><em class="bi bi-telephone"></em> Telefonliste</a></li>--}}
+                            <li><a class="dropdown-item" href="{{ route('intern.pdf.geburtstagsliste') }}"><em class="fa-solid fa-cake-candles"></em> Geburtstagsliste</a></li>
+                            <li><a class="dropdown-item" href="{{ route('intern.pdf.telefonliste') }}"><em class="bi bi-telephone"></em> Telefonliste</a></li>
 {{--                            <li><a class="dropdown-item" href="{{ route('intern.kalender.index') }}"><em class="bi bi-calendar-event"></em> Kalender</a></li>--}}
-{{--                            <li><a class="dropdown-item" href="{{ route('intern.satzung.index') }}"><em class="fa-solid fa-scale-unbalanced"></em> Satzung</a></li>--}}
+                            <li><a class="dropdown-item" href="{{ route('intern.pdf.satzung') }}"><em class="fa-solid fa-scale-unbalanced"></em> Satzung</a></li>
                             {{--                            <li><a class="dropdown-item" href="#"><em class="bi bi-shop"></em> Bestellung Textilien</a></li>--}}
                             <hr>
 {{--                            <li><a class="dropdown-item" href="{{ route('intern.dashboard.index') }}"><em class="bi bi-gear"></em> Einstellungen</a></li>--}}

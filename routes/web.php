@@ -58,6 +58,9 @@ Route::namespace('App\Http\Controllers')->group(function () {
         // Kontakt
         Route::resource('/kontakt', Frontend\KontaktsController::class)->only('index', 'store');
 
+        // Gästebuch
+        Route::resource('/gaestebuch', Frontend\Gaestebuch\GaestebuchesController::class)->only('index', 'store', 'update', 'destroy');
+
         // Impressum
         Route::get('/impressum', [Frontend\IndexController::class, 'impressum'])->name('impressum');
         Route::get('/datenschutz', [Frontend\IndexController::class, 'datenschutz'])->name('datenschutz');
@@ -74,6 +77,15 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::name('intern.')->prefix('intern')->namespace('Intern')->group(function () {
             // Album veröffentlichen
             Route::match(['PUT', 'PATCH'], '/galerie/published/{galerie}', [Frontend\Album\AlbumsController::class, 'published'])->name('galerie.published-galerie');
+
+            // Geburtstagsliste
+            Route::get('geburtstagsliste', [Intern\PDFController::class, 'geburtstagsliste'])->name('pdf.geburtstagsliste');
+
+            // Telefonliste
+            Route::get('telefonliste', [Intern\PDFController::class, 'telefonliste'])->name('pdf.telefonliste');
+
+            // Satzung
+            Route::get('satzung', [Intern\PDFController::class, 'satzung'])->name('pdf.satzung');
 
             // Admin
             Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
