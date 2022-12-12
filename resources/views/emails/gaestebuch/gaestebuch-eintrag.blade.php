@@ -19,18 +19,18 @@
                 <td>{{ $gästebuch->website }}</td>
             </tr>
         @endif
-        @if($gästebuch->facebook == true or $gästebuch->twitter == true or $gästebuch->instagram == true)
+        @if($gästebuch->facebook == true or $gästebuch->tiktok == true or $gästebuch->instagram == true)
             <tr style="margin-bottom: 20px;">
                 <td style="width: 200px;">Social Media:</td>
                 <td>
                     @if($gästebuch->facebook == true)
                         <a href="https://www.facebook.com/{{ $gästebuch->facebook }}"><i class="icofont-facebook"></i> Facebook</a> |
                     @endif
-                    @if($gästebuch->twitter == true)
-                        <a href="https://twitter.com/{{ $gästebuch->twitter }}"><i class="icofont-twitter"></i> Twitter</a> |
+                    @if($gästebuch->tiktok == true)
+                        <a href="https://tiktok.com/{{ $gästebuch->tiktok }}"><i class="icofont-tiktok"></i> TikTok</a> |
                     @endif
                     @if($gästebuch->instagram == true)
-                        <a href="https://www.instagram.com/{{ $gästebuch->instagram }}/"><i class="icofont-twitter"></i> Instagram</a>
+                        <a href="https://www.instagram.com/{{ $gästebuch->instagram }}/"><i class="icofont-instagram"></i> Instagram</a>
                     @endif
                 </td>
             </tr>
