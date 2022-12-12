@@ -92,6 +92,49 @@
                                 </form>
                             </div>
                         </li>
+                        {{--@hasanyrole('super_admin|admin')
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link icon-badge-container" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <em class="bi bi-envelope-at icon-badge-icon">
+                                    @if($countKontakt > 0 and $countKontakt <= 98)
+                                        <span class="icon-badge">{{ $countKontakt }}</span>
+                                    @elseif($countKontakt >= 99)
+                                        <span class="icon-badge plus">99+</span>
+                                    @endif
+                                </em>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-custom shadow" aria-labelledby="navbarDropdown">
+                                <li class="head text-bg-dark">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-12 col-12">
+                                            <span>Benachrichtigungen ({{ $countKontakt }})</span>
+                                            <form action="{{ route('intern.admin.kontakt.mark-as-read-kontakt') }}" method="post" class="d-inline">
+                                                @csrf
+                                                <button class="btn links-light float-end text-white p-0 m-0" id="mark-all">Alle als gelesen markieren</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                                @foreach($kontakteNotification as $kontakt)
+                                <li class="notification-box">
+                                    <a href="{{ route('intern.admin.kontakt.show', $kontakt->id) }}" class="mark-as-read">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-sm-12 col-12">
+                                                <strong class="text-info">{{ $kontakt->name }}</strong>
+                                                <div class="message">{!! \Illuminate\Support\Str::limit($kontakt->message, 50) !!}</div>
+                                                <small class="text-warning">{{ \Carbon\Carbon::parse($kontakt->created_at)->isoFormat('DD.MM.YYYY HH:mm') }}</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @endforeach
+                                <li class="footer text-bg-dark text-center">
+                                    <a href="{{ route('intern.admin.kontakt.index') }}">Alle ansehen</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endhasanyrole--}}
                     @endguest
                 </ul>
             </div>

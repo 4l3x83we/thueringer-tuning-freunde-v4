@@ -15,4 +15,12 @@ use Illuminate\Database\Eloquent\Model;
 class Kontakt extends Model
 {
     protected $table = 'kontakts';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'message',
+        'subject',
+        'read'
+    ];
 }

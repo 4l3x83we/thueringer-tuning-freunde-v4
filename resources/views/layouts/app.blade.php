@@ -34,9 +34,6 @@
 <body>
     @guest
     @else
-        <?php
-        $geb = \App\Models\Frontend\Team\Team::where('published', true)->orderBy('title', 'ASC')->get();
-        ?>
         @foreach($geb as $team)
             @if(\Carbon\Carbon::parse($team->geburtsdatum)->format('d.m') == date('d.m'))
                 <div id="alertGeb" class="alert alert-success rounded-0 text-center m-0 p-1 fw-bold" style="font-size: 14px;" role="alert">Alles Gute {{ $team->title }} zum {{ \Carbon\Carbon::parse($team->geburtsdatum)->age . '. Geburtstag' }}</div>
