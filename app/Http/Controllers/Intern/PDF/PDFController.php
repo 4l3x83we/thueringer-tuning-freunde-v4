@@ -8,7 +8,7 @@
  * Time: 6:12
  */
 
-namespace App\Http\Controllers\Intern;
+namespace App\Http\Controllers\Intern\PDF;
 
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\Team\Team;
