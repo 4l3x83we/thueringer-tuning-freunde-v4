@@ -53,7 +53,7 @@
                             <h6 class="dropdown-header">Interner Bereich</h6>
                             <li><a class="dropdown-item" href="{{ route('intern.pdf.geburtstagsliste') }}"><em class="fa-solid fa-cake-candles"></em> Geburtstagsliste</a></li>
                             <li><a class="dropdown-item" href="{{ route('intern.pdf.telefonliste') }}"><em class="bi bi-telephone"></em> Telefonliste</a></li>
-{{--                            <li><a class="dropdown-item" href="{{ route('intern.kalender.index') }}"><em class="bi bi-calendar-event"></em> Kalender</a></li>--}}
+                            <li><a class="dropdown-item" href="{{ route('intern.kalender.index') }}"><em class="bi bi-calendar-event"></em> Kalender</a></li>
                             <li><a class="dropdown-item" href="{{ route('intern.pdf.satzung') }}"><em class="fa-solid fa-scale-unbalanced"></em> Satzung</a></li>
                             {{--                            <li><a class="dropdown-item" href="#"><em class="bi bi-shop"></em> Bestellung Textilien</a></li>--}}
                             <hr>

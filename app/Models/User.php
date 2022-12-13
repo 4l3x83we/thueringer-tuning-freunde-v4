@@ -7,6 +7,7 @@ use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Fahrzeuge\Fahrzeug;
 use App\Models\Frontend\Team\Team;
+use App\Models\Intern\Kalender\Kalender;
 use App\Notifications\WillkommenNotification;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

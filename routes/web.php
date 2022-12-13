@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\WelcomeNotification\WelcomesNewUsers;
+use Spatie\GoogleCalendar\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,11 +22,23 @@ use Spatie\WelcomeNotification\WelcomesNewUsers;
 */
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/test', function () {
+/*Route::get('/test', function () {
     $teams = \App\Models\Frontend\Album\Photo::find(1);
     dump($teams->teams, $teams->users);
     dump($teams, $teams->fahrzeuges, $teams->albums);
-});
+});*/
+
+
+/*Route::get('/testen', function () {
+    $event = new Event;
+
+    $event->name = 'Test';
+    $event->startDateTime = Carbon\Carbon::parse('2022-12-12 10:31:57');
+    $event->endDateTime = Carbon\Carbon::parse('2022-12-14 00:31:57');
+
+    $event->save();
+    dd($event);
+});*/
 
 Route::namespace('App\Http\Controllers')->group(function () {
     // Index Page
@@ -86,6 +99,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
             // Satzung
             Route::get('satzung', [Intern\PDFController::class, 'satzung'])->name('pdf.satzung');
+
+            // Kalender
+            Route::resource('kalender', Intern\Kalender\KalendersController::class);
+            Route::post('kalender/versammlung', [Intern\Kalender\KalendersController::class, 'storeEvent'])->name('kalender.versammlung');
+            Route::match(['PUT', 'PATCH'], 'kalender/versammlung/{kalender}', [Intern\Kalender\KalendersController::class, 'updateEvent'])->name('kalender.versammlungUpdate');
 
             // Admin
             Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
