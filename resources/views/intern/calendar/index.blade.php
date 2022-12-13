@@ -110,15 +110,23 @@
                                             <div class="event-box-time">
                                                 <time datetime="{{ $veranstaltungen->datum_von }}">
                                                     <span class="day">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD') }}</span>
+                                                    @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('MM') != \Carbon\Carbon::now()->isoFormat('MM'))
+                                                        <span class="month">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->shortMonthName }}</span>
+                                                    @endif
+                                                    @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') != \Carbon\Carbon::now()->isoFormat('YYYY'))
+                                                        <span class="year">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') }}</span>
+                                                    @endif
                                                     @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD.MM.YYYY') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD.MM.YYYY'))
                                                         <em class="bi bi-dash"></em>
                                                     @endif
                                                     @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD'))
-                                                        <span class="day">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD') }}</span>
+                                                        <span class="day">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD') }}</span>
                                                     @endif
-                                                    <span class="month">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->shortMonthName }}</span>
-                                                    @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') != \Carbon\Carbon::now()->isoFormat('YYYY'))
-                                                        <span class="year">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') }}</span>
+                                                    @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('MM') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('MM'))
+                                                        <span class="month">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->shortMonthName }}</span>
+                                                    @endif
+                                                    @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('YYYY'))
+                                                        <span class="year">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('YYYY') }}</span>
                                                     @endif
                                                 </time>
                                             </div>
@@ -149,8 +157,8 @@
                                                 <div class="event-box-content-items-icons">
                                                     <em class="bi bi-stopwatch"></em></div>
                                                 <div class="event-box-content-items-content">
-                                                    Laufzeit: {{ \App\Models\Helpers\DaysRate::getDaysRate($veranstaltungen->datum_von, $veranstaltungen->datum_bis) + 1 }}
-                                                    @if(\App\Models\Helpers\DaysRate::getDaysRate($veranstaltungen->datum_von, $veranstaltungen->datum_bis) != 0)
+                                                    Laufzeit: {{ \App\Helpers\Helpers::getDaysRate($veranstaltungen->datum_von, $veranstaltungen->datum_bis) + 1 }}
+                                                    @if(\App\Helpers\Helpers::getDaysRate($veranstaltungen->datum_von, $veranstaltungen->datum_bis) != 0)
                                                         Tage
                                                     @else
                                                         Tag
@@ -162,9 +170,9 @@
                                                     <a href="https://maps.google.com/maps?saddr=&daddr={{ $veranstaltungen->veranstaltungsort }}" target="_blank">{{ $veranstaltungen->veranstaltungsort }}</a>
                                                 </div>
                                             </div>
-                                            @if($veranstaltungen->webseite)
+                                            @if($veranstaltungen->quelle)
                                                 <div class="event-box-webseite">
-                                                    <a href="{{ $veranstaltungen->webseite }}" target="_blank">
+                                                    <a href="{{ $veranstaltungen->quelle }}" target="_blank">
                                                         <em class="bi bi-link-45deg"> Weitere Information</em>
                                                     </a>
                                                 </div>

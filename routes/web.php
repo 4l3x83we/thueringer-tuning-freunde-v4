@@ -28,18 +28,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
     dump($teams, $teams->fahrzeuges, $teams->albums);
 });*/
 
-
-/*Route::get('/testen', function () {
-    $event = new Event;
-
-    $event->name = 'Test';
-    $event->startDateTime = Carbon\Carbon::parse('2022-12-12 10:31:57');
-    $event->endDateTime = Carbon\Carbon::parse('2022-12-14 00:31:57');
-
-    $event->save();
-    dd($event);
-});*/
-
 Route::namespace('App\Http\Controllers')->group(function () {
     // Index Page
     Route::name('frontend.')->namespace('Frontend')->group(function () {

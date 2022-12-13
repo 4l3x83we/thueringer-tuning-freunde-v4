@@ -28,8 +28,10 @@
                                             @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD'))
                                                 <span class="day">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD') }}</span>
                                             @endif
+                                            @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('MM') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('MM'))
                                             <span class="month">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->shortMonthName }}</span>
-                                            @if(\Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('YYYY') != \Carbon\Carbon::now()->isoFormat('YYYY'))
+                                            @endif
+                                            @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('YYYY'))
                                                 <span class="year">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('YYYY') }}</span>
                                             @endif
                                         </time>
