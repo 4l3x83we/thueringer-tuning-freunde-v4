@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\WelcomeNotification\WelcomesNewUsers;
 use Illuminate\Http\Request;
+use Yoeunes\Toastr\Facades\Toastr;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,31 +139,37 @@ Route::middleware(['auth'])->group(function () {
 // Clear route cache
     Route::get('/sitemap-generate', function () {
         Artisan::call('generate:sitemap');
-        return redirect('sitemap.xml');
+        Toastr::success('Sitemap wurde erfolgreich erstellt', 'Erfolgreich');
+        return redirect(route('frontend.index'));
     });
 
     Route::get('/route-cache', function () {
         Artisan::call('route:clear');
-        return 'Routes cache cleared';
+        Toastr::success('Routes cache cleared', 'Erfolgreich');
+        return redirect(route('frontend.index'));
     });
 // Clear config cache
     Route::get('/config-cache', function () {
         Artisan::call('config:clear');
-        return 'Config cache cleared';
+        Toastr::success('Config cache cleared', 'Erfolgreich');
+        return redirect(route('frontend.index'));
     });
 // Clear application cache
     Route::get('/cache-clear', function () {
         Artisan::call('cache:clear');
-        return 'Application cache cleared';
+        Toastr::success('Application cache cleared', 'Erfolgreich');
+        return redirect(route('frontend.index'));
     });
 // Clear view cache
     Route::get('/view-clear', function () {
         Artisan::call('view:clear');
-        return 'View cache cleared';
+        Toastr::success('View cache cleared', 'Erfolgreich');
+        return redirect(route('frontend.index'));
     });
 // Clear cache using reoptimized class
     Route::get('/optimize-clear', function () {
         Artisan::call('optimize:clear');
-        return 'View cache cleared';
+        Toastr::success('View cache cleared', 'Erfolgreich');
+        return redirect(route('frontend.index'));
     });
 });
