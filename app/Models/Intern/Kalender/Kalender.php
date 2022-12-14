@@ -13,9 +13,13 @@ namespace App\Models\Intern\Kalender;
 use App\Models\Frontend\Team\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Kalender extends Model
 {
+    use LogsActivity;
+
     protected $table = 'kalenders';
 
     protected $guarded = [];
@@ -28,5 +32,15 @@ class Kalender extends Model
     public function kalendertype()
     {
         return $this->belongsToMany(KalenderType::class, 'kalenders_kalendertype');
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
+            ->useLogName('Kalender')
+            ->dontSubmitEmptyLogs();
     }
 }

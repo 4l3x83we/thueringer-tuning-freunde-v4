@@ -7,7 +7,9 @@ use App\Http\Controllers\Intern\Admin;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\WelcomeNotification\WelcomesNewUsers;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +22,29 @@ use Spatie\WelcomeNotification\WelcomesNewUsers;
 |
 */
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 /*Route::get('/test', function () {
     $teams = \App\Models\Frontend\Album\Photo::find(1);
     dump($teams->teams, $teams->users);
     dump($teams, $teams->fahrzeuges, $teams->albums);
 });*/
 
+Route::get('/testen', function (\Illuminate\Http\Request $request) {
+    if (auth()->check()) {
+        $activity = activity()
+            ->causedBy(auth()->user())
+            ->useLog('Besucher')
+            ->log("Benutzer besucht {$request->fullUrl()}");
+    } else {
+        $activity = activity()
+            ->useLog('Besucher')
+            ->log("Ein Gast besucht {$request->fullUrl()}");
+    }
+    return $activity;
+});
+
 Route::namespace('App\Http\Controllers')->group(function () {
+    Auth::routes(['register' => false]);
     // Index Page
     Route::name('frontend.')->namespace('Frontend')->group(function () {
         Route::get('/', [Frontend\IndexController::class, 'index'])->name('index');
@@ -64,11 +81,6 @@ Route::namespace('App\Http\Controllers')->group(function () {
         // Impressum
         Route::get('/impressum', [Frontend\IndexController::class, 'impressum'])->name('impressum');
         Route::get('/datenschutz', [Frontend\IndexController::class, 'datenschutz'])->name('datenschutz');
-    });
-
-    // Gäste Route
-    Route::middleware('guest')->group(function () {
-        Auth::routes(['register' => false]);
     });
 
     // Interne/AdminRoute

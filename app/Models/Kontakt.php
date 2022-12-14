@@ -11,9 +11,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Kontakt extends Model
 {
+    use LogsActivity;
+
     protected $table = 'kontakts';
 
     protected $fillable = [
@@ -23,4 +27,14 @@ class Kontakt extends Model
         'subject',
         'read'
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
+            ->useLogName('Kontakt')
+            ->dontSubmitEmptyLogs();
+    }
 }

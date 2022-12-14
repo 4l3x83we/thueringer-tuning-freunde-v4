@@ -14,15 +14,32 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\WelcomeNotification\ReceivesWelcomeNotification;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, ReceivesWelcomeNotification;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, ReceivesWelcomeNotification, LogsActivity;
 
     protected $table = 'users';
+
+    protected static $logAttributes = ['name', 'email'];
+
+    protected static $ignoreChangedAttributes = ['password', 'updated_at'];
+
+    protected static $recordEvents = ['created', 'updated', 'deleted'];
+
+    protected static $logOnlyDirty = true;
+
+    protected static $logName = 'user';
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "Sie haben {$eventName} Benutzer";
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -77,5 +94,15 @@ class User extends Authenticatable
     public function sendWelcomeNotification(Carbon $validUntil)
     {
         $this->notify(new WillkommenNotification($validUntil));
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name', 'email'])
+            ->logOnlyDirty()
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
+            ->useLogName('User')
+            ->dontSubmitEmptyLogs();
     }
 }

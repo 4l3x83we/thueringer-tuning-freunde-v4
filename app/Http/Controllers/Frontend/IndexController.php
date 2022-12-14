@@ -10,6 +10,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
@@ -44,6 +45,7 @@ class IndexController extends Controller
             'treffen' => 0,
             'projekte' => Album::where('kategorie', 'Projekte')->count(),
         ];
+        Helpers::activityLogBesucher();
         return view('frontend.index', compact('teams', 'albums', 'fahrzeuges', 'preview', 'count', 'previewTeam', 'veranstaltungens'));
     }
 

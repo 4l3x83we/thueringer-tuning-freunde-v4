@@ -15,10 +15,12 @@ use App\Models\Frontend\Team\Team;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Album extends Model
 {
-    use Sluggable;
+    use Sluggable, LogsActivity;
 
     public function sluggable() : array
     {
@@ -54,5 +56,15 @@ class Album extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*'])
+            ->logOnlyDirty()
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
+            ->useLogName('Album')
+            ->dontSubmitEmptyLogs();
     }
 }

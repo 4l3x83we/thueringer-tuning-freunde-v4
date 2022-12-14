@@ -17,10 +17,14 @@ use App\Models\Intern\Kalender\Kalender;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Team extends Model
 {
-    use Sluggable;
+    use Sluggable, LogsActivity;
+
+    protected static $logAttributes = ['vorname', 'nachname'];
 
     public function sluggable() : array
     {
@@ -71,5 +75,15 @@ class Team extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*', 'users.name', 'users.email'])
+            ->logOnlyDirty()
+            ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
+            ->useLogName('Team')
+            ->dontSubmitEmptyLogs();
     }
 }

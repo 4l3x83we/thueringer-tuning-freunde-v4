@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Frontend\Team\Team;
-use App\Models\Kontakt;
 use Illuminate\Foundation\Vite;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;

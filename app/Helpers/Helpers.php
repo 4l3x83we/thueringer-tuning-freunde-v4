@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use DB;
 use File;
+use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
 class Helpers
@@ -255,5 +256,14 @@ class Helpers
     public static function next($table, $where, $status = 'published')
     {
         return DB::table($table)->where('id', '>', $where)->where($status, true)->orderBy('id')->first();
+    }
+
+    public static function activityLogBesucher($title = '')
+    {
+        if (auth()->check()) {
+            activity('Besucher')->causedBy(auth()->user())->log(auth()->user()->name." besucht {$title}".\request()->fullUrl());
+        } else {
+            activity('Besucher')->log("Ein Gast besucht ".\request()->fullUrl());
+        }
     }
 }
