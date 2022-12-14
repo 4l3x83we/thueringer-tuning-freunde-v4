@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Activitylog\Models\Activity;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\WelcomeNotification\WelcomesNewUsers;
 use Illuminate\Http\Request;
 use Yoeunes\Toastr\Facades\Toastr;
@@ -31,21 +33,12 @@ use Yoeunes\Toastr\Facades\Toastr;
 });*/
 
 Route::get('/testen', function (\Illuminate\Http\Request $request) {
-    if (auth()->check()) {
-        $activity = activity()
-            ->causedBy(auth()->user())
-            ->useLog('Besucher')
-            ->log("Benutzer besucht {$request->fullUrl()}");
-    } else {
-        $activity = activity()
-            ->useLog('Besucher')
-            ->log("Ein Gast besucht {$request->fullUrl()}");
-    }
-    return $activity;
+
 });
 
 Route::namespace('App\Http\Controllers')->group(function () {
     Auth::routes(['register' => false]);
+
     // Index Page
     Route::name('frontend.')->namespace('Frontend')->group(function () {
         Route::get('/', [Frontend\IndexController::class, 'index'])->name('index');
