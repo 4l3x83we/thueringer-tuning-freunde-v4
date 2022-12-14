@@ -2,11 +2,17 @@
 
 namespace App\Console;
 
+use App\Console\Commands\EmailInactiveUsers;
+use App\Console\Commands\GenerateSitemap;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        EmailInactiveUsers::class,
+        GenerateSitemap::class,
+    ];
     /**
      * Define the application's command schedule.
      *
@@ -18,6 +24,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->command('activitylog:clean')->daily();
         $schedule->command('generate:sitemap')->hourly();
+        $schedule->command('email:inactive-users')->daily();
 //        $schedule->command('generate:sitemap')->everyMinute();
     }
 
