@@ -1,10 +1,9 @@
-@include('helpers.component.recaptcha')
-@csrf
-@method('PATCH')
-<input type="hidden" name="user_id" value="{{ $team->user_id }}">
-<div class="row mx-3">
-    <div class="col-lg-12 shadow teamEdit" data-aos="fade-up" data-aos-delay="100">
-        <div class="header">
+<div class="tab-pane fade show active" id="profil" role="tabpanel" aria-labelledby="pd-tab">
+    <form action="{{ route('frontend.team.update', $team->slug) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PATCH')
+        <input type="hidden" name="user_id" value="{{ $team->user_id }}">
+        <div class="header" style="border-radius: 0 10px 0 0;">
             <h5>Persönliche Daten</h5>
             <small>* Pflichtfeld</small>
         </div>
@@ -13,10 +12,10 @@
                 <div class="col-lg-4 mb-3">
                     <label for="anrede" class="form-label fw-bold" data-bs-toggle="tooltip" data-bs-placement="right" title="Muss ausgefüllt werden.">Anrede:<small class="position-relative">*</small></label>
                     <select name="anrede" id="anrede" class="form-select form-select-sm @error('anrede') is-invalid @enderror">
-                        <option value="Herr" @if($team->anrede === 'Herr') {{ 'selected=selected' }} @endif>Herr</option>
-                        <option value="Frau" @if($team->anrede === 'Frau') {{ 'selected=selected' }} @endif>Frau</option>
-                        <option value="Divers" @if($team->anrede === 'Divers') {{ 'selected=selected' }} @endif>Divers</option>
-                        <option value="keine Angabe" @if($team->anrede === 'keine Angabe') {{ 'selected=selected' }} @endif>keine Angabe</option>
+                        <option value="Herr" @if($team->anrede == 'Herr') {{ 'selected=selected' }} @endif>Herr</option>
+                        <option value="Frau" @if($team->anrede == 'Frau') {{ 'selected=selected' }} @endif>Frau</option>
+                        <option value="Divers" @if($team->anrede == 'Divers') {{ 'selected=selected' }} @endif>Divers</option>
+                        <option value="keine Angabe" @if($team->anrede == 'keine Angabe') {{ 'selected=selected' }} @endif>keine Angabe</option>
                     </select>
                     @error('anrede')
                     <span class="form-text text-danger">{{ $message }}</span>
@@ -59,9 +58,7 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-12 shadow mt-4 teamEdit" data-aos="fade-up" data-aos-delay="100">
         <div class="header">
             <h5>Kontaktdaten</h5>
         </div>
@@ -104,30 +101,30 @@
                 </div>
                 <div class="col-lg-4 mb-3"></div>
                 <div class="col-lg-4 mb-3">
-                    <label for="facebook" class="form-label">Facebook: <a href="https://www.facebook.com/settings?tab=account" target="_blank"><em class="bi bi-question"></em><small>Hilfe</small></a></label>
+                    <label for="facebookPD" class="form-label">Facebook: <a href="https://www.facebook.com/settings?tab=account" target="_blank"><em class="bi bi-question"></em><small>Hilfe</small></a></label>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" id="facebookLink">https://www.facebook.com/</span>
-                        <input type="text" name="facebook" id="facebook" class="form-control form-control-sm @error('facebook') is-invalid @enderror" value="{{ $team->facebook }}" maxlength="255" aria-describedby="facebookLink">
+                        <input type="text" name="facebook" id="facebookPD" class="form-control form-control-sm @error('facebook') is-invalid @enderror" value="{{ $team->facebook }}" maxlength="255" aria-describedby="facebookLink">
                     </div>
                     @error('facebook')
                     <span class="form-text text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-lg-4 mb-3">
-                    <label for="tiktok" class="form-label">TikTok: </label>
+                    <label for="tiktokPD" class="form-label">TikTok: </label>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" id="tiktokLink">https://www.tiktok.com/</span>
-                        <input type="text" name="tiktok" id="tiktok" class="form-control form-control-sm @error('tiktok') is-invalid @enderror" value="{{ $team->tiktok }}" maxlength="255" placeholder="@deinBenutzername" aria-describedby="tiktokLink">
+                        <input type="text" name="tiktok" id="tiktokPD" class="form-control form-control-sm @error('tiktok') is-invalid @enderror" value="{{ $team->tiktok }}" maxlength="255" placeholder="@deinBenutzername" aria-describedby="tiktokLink">
                     </div>
                     @error('tiktok')
                     <span class="form-text text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-lg-4 mb-3">
-                    <label for="instagram" class="form-label">Instagram: <a href="https://www.instagram.com/accounts/edit/" target="_blank"><em class="bi bi-question"></em><small>Hilfe</small></a></label>
+                    <label for="instagramPD" class="form-label">Instagram: <a href="https://www.instagram.com/accounts/edit/" target="_blank"><em class="bi bi-question"></em><small>Hilfe</small></a></label>
                     <div class="input-group input-group-sm">
                         <span class="input-group-text" id="instagramLink">https://www.instagram.com/</span>
-                        <input type="text" name="instagram" id="instagram" class="form-control form-control-sm @error('instagram') is-invalid @enderror" value="{{ $team->instagram }}" maxlength="255" aria-describedby="instagramLink">
+                        <input type="text" name="instagram" id="instagramPD" class="form-control form-control-sm @error('instagram') is-invalid @enderror" value="{{ $team->instagram }}" maxlength="255" aria-describedby="instagramLink">
                         <span class="input-group-text" id="instagramLink">/</span>
                     </div>
                     @error('instagram')
@@ -136,9 +133,7 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-12 shadow mt-4 teamEdit" data-aos="fade-up" data-aos-delay="100">
         <div class="header">
             <h5>Über mich</h5>
         </div>
@@ -146,7 +141,7 @@
             <div class="row">
                 @if($team->photo_id)
                     <div class="col-lg-12 mb-3">
-                        <img src="{{ asset('images/default.png') }}" data-src="{{ URL::asset($team->path.'/'.\App\Models\Frontend\Album\Photo::where('team_id', $team->id)->first()->images) }}" alt="{{ $team->title }}" class="img-fluid img-thumbnail lozad" style="width: 306px; object-fit: cover; object-position: 50% 50%;">
+                        <img src="{{ asset('images/default.png') }}" data-src="{{ asset($previewTeam[$team->id]) }}" alt="{{ $team->title }}" class="img-fluid img-thumbnail lozad" style="width: 306px; object-fit: cover; object-position: 50% 50%;">
                     </div>
                 @else
                     <div class="col-lg-12 mb-3">
@@ -154,18 +149,29 @@
                     </div>
                 @endif
                 <div class="col-lg-12 mb-3">
-                    <label for="profilbild" class="form-label">Profilbild:@error('profilbild') <span class="form-text text-danger">{{ $message }}</span> @enderror</label>
+                    <label for="profilbild" class="form-label">Profilbild: @error('profilbild') <span class="form-text text-danger">{{ $message }}</span> @enderror</label>
                     <input type="file" name="profilbild" id="profilbild" class="form-control form-control-sm @error('profilbild') is-invalid @enderror" accept="image/gif, image/jpg, image/jpeg, image/png, image/tif, image/tiff, image/svg">
                 </div>
                 <div class="col-lg-12 mb-3">
                     @error('description')
-                        <label for="description" class="form-label fw-bold text-danger" data-bs-toggle="tooltip" data-bs-placement="right" title="Muss ausgefüllt werden.">Beschreibung:<small class="position-relative">*</small> @error('description') <span class="form-text text-danger">{{ $message }}</span> @enderror</label>
+                    <label for="descriptionPD" class="form-label fw-bold text-danger" data-bs-toggle="tooltip" data-bs-placement="right" title="Muss ausgefüllt werden.">Beschreibung:<small class="position-relative">*</small> @error('description') <span class="form-text text-danger">{{ $message }}</span> @enderror</label>
                     @else
-                        <label for="description" class="form-label fw-bold" data-bs-toggle="tooltip" data-bs-placement="right" title="Muss ausgefüllt werden.">Beschreibung:<small class="position-relative">*</small> <span>(mindestens 250 Zeichen)</span></label>
-                    @enderror
-                        <textarea name="description" id="description" class="form-control form-control-sm @error('description') is-invalid @enderror">{!! old('description') ?: $team->description !!}</textarea>
+                        <label for="descriptionPD" class="form-label fw-bold" data-bs-toggle="tooltip" data-bs-placement="right" title="Muss ausgefüllt werden.">Beschreibung:<small class="position-relative">*</small> <span>(mindestens 250 Zeichen)</span></label>
+                        @enderror
+                        <textarea name="description" id="descriptionPD" class="form-control form-control-sm @error('description') is-invalid @enderror">{!! old('description') ?: $team->description !!}</textarea>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="body">
+            <div class="row">
+                <div class="col-lg-12 mb-3">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <button type="submit" class="btn btn-primary">Änderungen speichern</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
 </div>

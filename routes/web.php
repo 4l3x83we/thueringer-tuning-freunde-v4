@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\WelcomeNotification\WelcomesNewUsers;
-use Spatie\GoogleCalendar\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,17 +75,24 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::middleware(['auth'])->group(function () {
         // Intern
         Route::name('intern.')->prefix('intern')->namespace('Intern')->group(function () {
+            // Dashboard
+            Route::get('/dashboard', [Intern\Dashboard\DashboardController::class, 'index'])->name('dashboard.index');
+            Route::match(['PUT', 'PATCH'], 'change-password', [Intern\Dashboard\DashboardController::class, 'updatePassword'])->name('dashboard.update-password');
+
             // Album veröffentlichen
             Route::match(['PUT', 'PATCH'], '/galerie/published/{galerie}', [Frontend\Album\AlbumsController::class, 'published'])->name('galerie.published-galerie');
 
+            // Fotos löschen
+            Route::delete('/galerie/photos/destroy/{galerie}', [Frontend\Album\PhotosController::class, 'destroyPhoto'])->name('galerie.photos.destroy-photo');
+
             // Geburtstagsliste
-            Route::get('geburtstagsliste', [Intern\PDFController::class, 'geburtstagsliste'])->name('pdf.geburtstagsliste');
+            Route::get('geburtstagsliste', [Intern\PDF\PDFController::class, 'geburtstagsliste'])->name('pdf.geburtstagsliste');
 
             // Telefonliste
-            Route::get('telefonliste', [Intern\PDFController::class, 'telefonliste'])->name('pdf.telefonliste');
+            Route::get('telefonliste', [Intern\PDF\PDFController::class, 'telefonliste'])->name('pdf.telefonliste');
 
             // Satzung
-            Route::get('satzung', [Intern\PDFController::class, 'satzung'])->name('pdf.satzung');
+            Route::get('satzung', [Intern\PDF\PDFController::class, 'satzung'])->name('pdf.satzung');
 
             // Kalender
             Route::resource('kalender', Intern\Kalender\KalendersController::class);

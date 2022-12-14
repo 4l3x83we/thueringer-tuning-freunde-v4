@@ -57,7 +57,7 @@
                             <li><a class="dropdown-item" href="{{ route('intern.pdf.satzung') }}"><em class="fa-solid fa-scale-unbalanced"></em> Satzung</a></li>
                             {{--                            <li><a class="dropdown-item" href="#"><em class="bi bi-shop"></em> Bestellung Textilien</a></li>--}}
                             <hr>
-{{--                            <li><a class="dropdown-item" href="{{ route('intern.dashboard.index') }}"><em class="bi bi-gear"></em> Einstellungen</a></li>--}}
+                            <li><a class="dropdown-item" href="{{ route('intern.dashboard.index') }}"><em class="bi bi-gear"></em> Einstellungen</a></li>
                         </ul>
                     </li>
                     @endhasanyrole

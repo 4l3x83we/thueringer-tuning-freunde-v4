@@ -125,4 +125,9 @@ class PhotosController extends Controller
         Toastr::error('Bild wurde Gelöscht!', 'Gelöscht!');
         return redirect(route('frontend.galerie.show', $photo->slug));
     }
+
+    public function destroyPhoto(Request $request, Album $galerie)
+    {
+        dd($request->all());
+    }
 }
