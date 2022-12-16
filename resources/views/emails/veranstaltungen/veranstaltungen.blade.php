@@ -15,21 +15,12 @@
                 {{ $veranstaltungen->veranstalter }}<br>
             </td>
         </tr>
-        @if($veranstaltungen->webseite == true or $veranstaltungen->social_fb == true  or $veranstaltungen->social_ig == true or $veranstaltungen->social_tw == true)
+        @if($veranstaltungen->quelle == true)
             <tr>
                 <td style="width: 200px; vertical-align: top;">Kontakt:</td>
                 <td>
-                    @if($veranstaltungen->webseite)
-                        <a href="{{ $veranstaltungen->webseite }}">{{ $veranstaltungen->webseite }}</a><br>
-                    @endif
-                    @if($veranstaltungen->social_fb)
-                        <a href="{{ $veranstaltungen->social_fb }}">{{ $veranstaltungen->social_fb }}</a><br>
-                    @endif
-                    @if($veranstaltungen->social_ig)
-                        <a href="{{ $veranstaltungen->social_ig }}">{{ $veranstaltungen->social_ig }}</a><br>
-                    @endif
-                    @if($veranstaltungen->social_tw)
-                        <a href="{{ $veranstaltungen->social_tw }}">{{ $veranstaltungen->social_tw }}</a><br>
+                    @if($veranstaltungen->quelle)
+                        <a href="{{ $veranstaltungen->quelle }}">{{ $veranstaltungen->quelle }}</a><br>
                     @endif
                 </td>
             </tr>
