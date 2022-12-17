@@ -13,7 +13,6 @@ namespace App\Console\Commands;
 use App\Mail\EmailInactiveUsersMail;
 use App\Models\Frontend\Team\Team;
 use App\Models\User;
-use App\Notifications\NotifyInactiveUser;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Mail;
