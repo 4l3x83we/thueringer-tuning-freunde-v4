@@ -124,7 +124,7 @@ class KalendersController extends Controller
         $kalender->bis = $request->bis;
         $kalender->description = $request->description;
         $kalender->eigenesFZ = $verOrt;
-        $kalender->google_id = $newEvent;
+        $kalender->google_id = $newEvent->id;
         $kalender->published = 1;
         $kalender->published_at = now();
         $kalender->save();
@@ -205,5 +205,10 @@ class KalendersController extends Controller
 
         Toastr::error('Der Kalendereintrag wurde gelöscht.', 'Gelöscht!');
         return redirect(route('intern.kalender.index'));
+    }
+
+    public function assumed_meeting(Request $request, Kalender $kalender)
+    {
+        dd($request->all(), $kalender);
     }
 }

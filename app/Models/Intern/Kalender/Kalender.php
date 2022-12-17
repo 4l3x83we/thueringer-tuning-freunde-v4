@@ -34,6 +34,11 @@ class Kalender extends Model
         return $this->belongsToMany(KalenderType::class, 'kalenders_kalendertype');
     }
 
+    public function assumed_meeting()
+    {
+        return $this->hasMany(Assumed_Meeting::class);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

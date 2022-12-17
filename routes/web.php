@@ -33,7 +33,56 @@ use Yoeunes\Toastr\Facades\Toastr;
 });*/
 
 Route::get('/testen', function (\Illuminate\Http\Request $request) {
+    $kalender = \App\Models\Intern\Kalender\Kalender::where('von', '>', now())->get();
+    foreach ($kalender as $kalenderID) {
+        $assumed = \App\Models\Intern\Kalender\Assumed_Meeting::where('kalender_id', '=', $kalenderID->id)
+            ->join('kalenders', 'kalenders.id', '=', 'assumed_meeting.kalender_id')
+            ->select('kalenders.*', 'assumed_meeting.team_id', 'assumed_meeting.*', 'kalenders.created_at', 'kalenders.updated_at')
+            ->get();
+    }
+    foreach ($assumed as $value) {
+        $teams = \App\Models\Frontend\Team\Team::where('id', $value->team_id)->first();
+        $dateVon = Carbon\Carbon::parse($value->von)->format('Y-m-d');
+        $dateBis = Carbon\Carbon::parse($value->bis)->format('Y-m-d');
+        $limit = Carbon\Carbon::parse($dateVon)->subDay($value->memory);
+        $delete = Carbon\Carbon::parse($dateBis)->subDay($value->memory - 1);
+        $dateTrue = Carbon\Carbon::parse($limit) == Carbon\Carbon::parse(today());
+        $deleteTrue = Carbon\Carbon::parse($delete) == Carbon\Carbon::parse(today());
+        $kalenders = $value;
+        $kalenders->teams = $teams;
+        $kalenders->vorname = $teams->vorname;
+        $kalenders->adresse = explode(', ', $kalenders->eigenesFZ)[1] . ',' . explode(',', $kalenders->eigenesFZ)[2];
+        if ($dateTrue) {
+            Mail::to($kalenders->email)->send(new \App\Mail\Kalender\VersammlungsErinnerungsMail($kalenders));
+        }
+        if ($deleteTrue) {
+            $value->delete();
+        }
+    }
+//        dd($value, $team, $limit, $kalenders);
+//    $kalenders = DB::table('dev_ttf.kalenders')
+////        ->join('kalender_team', 'kalender_team.kalender_id', '=', 'kalenders.id')
+//        ->join('kalenders_kalendertype', 'kalenders_kalendertype.kalender_id', '=', 'kalenders.id')
+//        ->join('kalendertype', 'kalenders_kalendertype.kalender_type_id', '=', 'kalendertype.id')
+//        ->where('kalenders.von', '>', $limit)
+//        ->where('kalenders.published', true)
+//        ->where('kalendertype.typeColor', '=', 'ver')
+//        ->first();
+//    $kalenders->cpUserTeam = App\Models\Frontend\Team\Team::where('id', $kalenders->cp_user_id)->select('vorname', 'nachname', 'email')->first();
+//    $kalenders->userTeam = App\Models\Frontend\Team\Team::where('published', true)->select('id', 'vorname', 'nachname', 'email')->get();
 
+//    dd($kalenders);
+/*    foreach ($kalenders->userTeam as $userTeam) {
+        $kalenders->vorname = $userTeam->vorname;
+        $kalenders->nachname = $userTeam->nachname;
+        $kalenders->email = $userTeam->email;
+        $kalenders->team_id = $userTeam->id;
+        $assumed_meeting = \App\Models\Intern\Kalender\Assumed_Meeting::where('kalender_id', '=', $kalenders->kalender_id)->where('team_id', '=', $userTeam->id)->get();
+        $kalenders->assumed_meeting = $assumed_meeting;
+//        Mail::to($userTeam->email)->send(new \App\Mail\Kalender\VersammlungsErinnerungsMail($kalenders));
+    }*/
+//    dd($kalenders);
+    return view('emails.kalender.versammlungsErinnerungs', compact( 'kalenders'));
 });
 
 Route::namespace('App\Http\Controllers')->group(function () {
@@ -104,6 +153,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::resource('kalender', Intern\Kalender\KalendersController::class);
             Route::post('kalender/versammlung', [Intern\Kalender\KalendersController::class, 'storeEvent'])->name('kalender.versammlung');
             Route::match(['PUT', 'PATCH'], 'kalender/versammlung/{kalender}', [Intern\Kalender\KalendersController::class, 'updateEvent'])->name('kalender.versammlungUpdate');
+            Route::match(['PUT', 'PATCH'], 'kalender/angenommen/{kalender}', [Intern\Kalender\KalendersController::class, 'assumed_meeting'])->name('kalenders.assumed_meeting');
 
             // Admin
             Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {

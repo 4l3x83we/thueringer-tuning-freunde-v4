@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=gluten:100,200,300,400,500,600,700,800,900|nunito:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|racing-sans-one:400" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" rel="stylesheet">
+    @stack('css')
     <style>
         body, html {
             font-family: "Nunito", sans-serif;
@@ -56,6 +57,40 @@
             font-family: inherit !important;
             font-weight: inherit !important;
             line-height: inherit !important;
+        }
+        .btn {
+            border-radius: 4px;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family: "Arial", sans-serif;
+            font-size:14px;
+            padding:4px 8px;
+            text-decoration:none;
+        }
+        .btn-primary {
+            background: #0d6dfd;
+            border:1px solid #0d6dfd;
+        }
+        .btn-primary:hover {
+            background: #0b5ed7;
+            border:1px solid #0a58ca;
+        }
+        .btn-primary:active {
+            position:relative;
+            top:1px;
+        }
+        .btn-danger {
+            background: #dc3545;
+            border:1px solid #dc3545;
+        }
+        .btn-danger:hover {
+            background: #bb2d3b;
+            border:1px solid #b02a37;
+        }
+        .btn-danger:active {
+            position:relative;
+            top:1px;
         }
         @media screen and (max-width: 600px) {
             h1 {
@@ -135,5 +170,6 @@
 
 </table>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.bundle.min.js"></script>
+@stack('js')
 </body>
 </html>
