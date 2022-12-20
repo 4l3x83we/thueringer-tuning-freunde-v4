@@ -114,7 +114,7 @@
                 <div class="flex-item">
                     <a href="{{ route('intern.kalender.index') }}" target="_blank">Hier geht es zum internen Kalender.</a><br>
                     <a href="https://calendar.google.com/calendar/embed?src=277c810422ca9f6f51822f462cd9a3fb801afaeeafceb963bf06a693f4f3b917%40group.calendar.google.com&ctz=Europe%2FBerlin" target="_blank">Hier geht es zum Google Kalender.</a> <br>
-                    Denn kannst du auch zu deinem bestehenden Kalender hinzufügen, dafür einfach unten rechts auf das + klicken.
+                    Denn Google Kalender kannst du auch zu deinem bestehenden Kalender hinzufügen, dafür einfach unten rechts auf das + klicken.
                 </div>
             </div>
             <div class="borderHR"></div>
