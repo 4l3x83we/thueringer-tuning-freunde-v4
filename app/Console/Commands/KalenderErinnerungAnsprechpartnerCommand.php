@@ -37,6 +37,7 @@ class KalenderErinnerungAnsprechpartnerCommand extends Command
                 ->join('teams as CpUserID', 'kalendertype.cp_user_id', '=', 'CpUserID.id')
                 ->where('kalendertype.cp_user_id', '=', $id)
                 ->where('kalendertype.typeColor', '!=', 'ver')
+                ->where('kalenders.published', '=', true)
                 ->where('kalenders.von', '>=', today())
                 ->orderBy('von', 'ASC')
                 ->get();
