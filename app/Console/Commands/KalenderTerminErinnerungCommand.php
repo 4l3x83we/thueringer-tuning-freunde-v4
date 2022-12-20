@@ -25,7 +25,7 @@ class KalenderTerminErinnerungCommand extends Command
 
     public function handle()
     {
-        $kalenderDelete = \App\Models\Intern\Kalender\Kalender::where('bis', '<', Carbon::parse(today())->addDay(1))
+        $kalenderDelete = \App\Models\Intern\Kalender\Kalender::where('bis', '<', Carbon::parse(today())->subDay(1))
             ->join('kalenders_kalendertype', 'kalenders_kalendertype.kalender_id', '=', 'kalenders.id')
             ->join('kalender_team', 'kalender_team.kalender_id', '=', 'kalenders.id')
             ->get();
