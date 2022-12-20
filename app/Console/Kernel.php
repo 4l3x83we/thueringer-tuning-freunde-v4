@@ -5,13 +5,14 @@ namespace App\Console;
 use App\Console\Commands\EmailInactiveUsers;
 use App\Console\Commands\GenerateSitemap;
 use App\Console\Commands\KalenderErinnerungAnsprechpartnerCommand;
+use App\Console\Commands\KalenderTerminErinnerungCommand;
 use App\Console\Commands\KalenderVersammlungErinnerungCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    protected $commands = [EmailInactiveUsers::class, GenerateSitemap::class, KalenderVersammlungErinnerungCommand::class, KalenderErinnerungAnsprechpartnerCommand::class,];
+    protected $commands = [EmailInactiveUsers::class, GenerateSitemap::class, KalenderVersammlungErinnerungCommand::class, KalenderErinnerungAnsprechpartnerCommand::class, KalenderTerminErinnerungCommand::class,];
     /**
      * Define the application's command schedule.
      *
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('email:inactive-users')->weekly()->sundays();
         $schedule->command('kalender:versammlung-erinnerung')->daily();
         $schedule->command('kalender:erinnerung-ansprechpartner')->weekly()->sundays();
+        $schedule->command('kalender:termin-erinnerung')->daily();
     }
 
     /**

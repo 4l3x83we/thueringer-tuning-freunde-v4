@@ -33,38 +33,22 @@ use Yoeunes\Toastr\Facades\Toastr;
 });*/
 
 Route::get('/testen', function (\Illuminate\Http\Request $request) {
-    $sunday = Carbon\Carbon::parse(today())->next('Sunday');
-    $kalenderTypes = \App\Models\Intern\Kalender\KalenderType::join('kalenders_kalendertype', 'kalendertype.id', '=', 'kalenders_kalendertype.kalender_type_id')
+    $kalenderEntry = \App\Models\Intern\Kalender\Kalender::select('kalenders.*', 'kalenders.id as kalender_id', 'kalendertype.*', 'CpUserID.vorname as team_vorname', 'CpUserID.nachname as team_nachname', 'CpUserID.email as team_email', 'CpUserID.mobil as team_mobil', 'teams.vorname', 'teams.nachname', 'teams.email', 'CpUserID.title as team_title')
+        ->join('kalenders_kalendertype', 'kalenders_kalendertype.kalender_id', '=', 'kalenders.id')
+        ->join('kalender_team', 'kalender_team.kalender_id', '=', 'kalenders.id')
+        ->join('teams', 'kalender_team.team_id', '=', 'teams.id')
+        ->join('kalendertype', 'kalendertype.id', '=', 'kalenders_kalendertype.kalender_type_id')
+        ->join('teams as CpUserID', 'kalendertype.cp_user_id', '=', 'CpUserID.id')
+        ->where('kalendertype.typeColor', '!=', 'ver')
+        ->where('kalenders.von', '>=', Carbon\Carbon::parse(today())->addDay(1))
+        ->where('kalenders.von', '<=', Carbon\Carbon::parse(today())->addDay(2))
+        ->where('kalenders.published', '=', true)
         ->get();
-    foreach ($kalenderTypes as $item => $kalenderType) {
-        $cpUserID[$item] = $kalenderType->cp_user_id;
-    }
-    foreach (array_unique($cpUserID) as $item => $id) {
-        $kalenderEntry[$item] = \App\Models\Intern\Kalender\Kalender::select('kalenders.*', 'kalenders.id as kalender_id', 'kalendertype.*', 'CpUserID.vorname', 'CpUserID.nachname', 'CpUserID.email', 'teams.vorname as team_vorname', 'teams.nachname as team_nachname', 'teams.email as team_email', 'teams.title as team_title')
-            ->join('kalenders_kalendertype', 'kalenders_kalendertype.kalender_id', '=', 'kalenders.id')
-            ->join('kalender_team', 'kalender_team.kalender_id', '=', 'kalenders.id')
-            ->join('teams', 'kalender_team.team_id', '=', 'teams.id')
-            ->join('kalendertype', 'kalendertype.id', '=', 'kalenders_kalendertype.kalender_type_id')
-            ->join('teams as CpUserID', 'kalendertype.cp_user_id', '=', 'CpUserID.id')
-            ->where('kalendertype.cp_user_id', '=', $id)
-            ->where('kalendertype.typeColor', '!=', 'ver')
-            ->where('kalenders.von', '>=', today())
-            ->orderBy('von', 'ASC')
-            ->get();
-    }
     foreach ($kalenderEntry as $item => $kalender) {
         $kalenders = $kalender;
-        foreach ($kalenders as $kalender) {
-            $email[$item] = $kalender->email;
-            $kalenders->vorname = $kalender->vorname;
-        }
-        foreach (array_unique($email) as $mail) {
-            if($kalender->email === $mail) {
-                Mail::to($mail)->send(new \App\Mail\Kalender\ErinnerungTerminKontaktpersonMail($kalenders));
-            }
-        }
+        Mail::to($kalender->email)->send(new \App\Mail\Kalender\ErinnerungTerminMail($kalenders));
     }
-    return view('emails.kalender.erinnerung-termin-kontaktperson', compact( 'kalenders'));
+    return view('emails.kalender.erinnerung-termin', compact( 'kalenders'));
 });
 
 Route::namespace('App\Http\Controllers')->group(function () {
