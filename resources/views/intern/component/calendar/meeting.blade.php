@@ -39,13 +39,13 @@
 <div class="event-box-content-items-content">{{ $calender->eigenesFZ }}</div>
 
 <!-- ======= Versammlung bestätigt ======= -->
-@if($calender->assumed)
+@if($calender->assumed or $calender->true)
     <div class="event-box-content-items-icons text-success"><em class="bi bi-calendar-check"></em></div>
     <div class="event-box-content-items-content text-success">{{ 'Termin bestätigt' }}</div>
 @else
     <div class="event-box-content-items-icons text-danger"><em class="bi bi-calendar-minus"></em></div>
     <div class="event-box-content-items-content text-danger d-inline-flex justify-content-between">{{ 'Termin noch nicht bestätigt' }}
-        @if($calender->contact_person_user_id === auth()->user()->id)
+        @if($calender->cp->user_id === auth()->user()->id)
             <form action="{{ route('intern.kalender.versammlungUpdate', $calender->id) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -53,6 +53,31 @@
                 <button type="submit" class="btn btn-link p-0 m-0 text-success"><em class="bi bi-check-circle"></em></button>
             </form>
         @endif
+    </div>
+@endif
+
+<!-- ======= Teilnehmer ======= -->
+@if($calender->assumed_meeting)
+    <div class="event-box-content-items-icons text-success"></div>
+    <div class="event-box-content-items-content text-success">
+        Zugesagt von:<br>
+        <div class="d-flex flex-wrap">
+        @foreach($calender->assumed_meeting as $assumed)
+            @php
+                {{ $team = App\Models\Frontend\Team\Team::where('id', $assumed->team_id)->first(); }}
+            @endphp
+                <div class="pe-5">{{ $team->vorname . ' ' . $team->nachname[0] . '. am: ' . \Carbon\Carbon::parse($assumed->created_at)->format('d.m.Y H:i') }}
+                    @if($assumed->memory > 0 and $assumed->team_id === auth()->user()->id)
+                        <span class="text-info">
+                            <em class="bi bi-bell p-0"></em>
+                            {{ $assumed->memory }} @if($assumed->memory >= 2) Tage @else Tag @endif
+                        </span>
+                    @elseif($assumed->memory === 0 and $assumed->team_id === auth()->user()->id)
+                        <span class="text-info"><em class="bi bi-bell-slash p-0"></em></span>
+                    @endif
+                </div>
+        @endforeach
+        </div>
     </div>
 @endif
 

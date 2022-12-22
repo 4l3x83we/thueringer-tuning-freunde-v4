@@ -45,7 +45,7 @@ class KalenderVersammlungErinnerungCommand extends Command
             $kalenders->teams = $teams;
             $kalenders->vorname = $teams->vorname;
             $kalenders->adresse = explode(', ', $kalenders->eigenesFZ)[1] . ' ' . explode(',', $kalenders->eigenesFZ)[2];
-            if ($dateTrue) {
+            if ($dateTrue and $value->memory > 0) {
                 Mail::to($kalenders->email)->send(new \App\Mail\Kalender\VersammlungsErinnerungsMail($kalenders));
             }
             if ($deleteTrue) {

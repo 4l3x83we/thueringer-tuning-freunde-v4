@@ -4,15 +4,16 @@ use App\Http\Controllers\Auth\MyWelcomeController;
 use App\Http\Controllers\Frontend;
 use App\Http\Controllers\Intern;
 use App\Http\Controllers\Intern\Admin;
+use App\Models\Frontend\Team\Team;
+use App\Models\Intern\Kalender\Assumed_Meeting;
+use App\Models\Intern\Kalender\Kalender;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Spatie\Activitylog\Models\Activity;
-use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
 use Spatie\WelcomeNotification\WelcomesNewUsers;
-use Illuminate\Http\Request;
 use Yoeunes\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,23 +33,8 @@ use Yoeunes\Toastr\Facades\Toastr;
     dump($teams, $teams->fahrzeuges, $teams->albums);
 });*/
 
-Route::get('/testen', function (\Illuminate\Http\Request $request) {
-    $kalenderEntry = \App\Models\Intern\Kalender\Kalender::select('kalenders.*', 'kalenders.id as kalender_id', 'kalendertype.*', 'CpUserID.vorname as team_vorname', 'CpUserID.nachname as team_nachname', 'CpUserID.email as team_email', 'CpUserID.mobil as team_mobil', 'teams.vorname', 'teams.nachname', 'teams.email', 'CpUserID.title as team_title')
-        ->join('kalenders_kalendertype', 'kalenders_kalendertype.kalender_id', '=', 'kalenders.id')
-        ->join('kalender_team', 'kalender_team.kalender_id', '=', 'kalenders.id')
-        ->join('teams', 'kalender_team.team_id', '=', 'teams.id')
-        ->join('kalendertype', 'kalendertype.id', '=', 'kalenders_kalendertype.kalender_type_id')
-        ->join('teams as CpUserID', 'kalendertype.cp_user_id', '=', 'CpUserID.id')
-        ->where('kalendertype.typeColor', '!=', 'ver')
-        ->where('kalenders.von', '>=', Carbon\Carbon::parse(today())->addDay(1))
-        ->where('kalenders.von', '<=', Carbon\Carbon::parse(today())->addDay(2))
-        ->where('kalenders.published', '=', true)
-        ->get();
-    foreach ($kalenderEntry as $item => $kalender) {
-        $kalenders = $kalender;
-        Mail::to($kalender->email)->send(new \App\Mail\Kalender\ErinnerungTerminMail($kalenders));
-    }
-    return view('emails.kalender.erinnerung-termin', compact( 'kalenders'));
+Route::get('/testen', function () {
+
 });
 
 Route::namespace('App\Http\Controllers')->group(function () {
@@ -120,6 +106,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::post('kalender/versammlung', [Intern\Kalender\KalendersController::class, 'storeEvent'])->name('kalender.versammlung');
             Route::match(['PUT', 'PATCH'], 'kalender/versammlung/{kalender}', [Intern\Kalender\KalendersController::class, 'updateEvent'])->name('kalender.versammlungUpdate');
             Route::match(['PUT', 'PATCH'], 'kalender/angenommen/{kalender}', [Intern\Kalender\KalendersController::class, 'assumed_meeting'])->name('kalenders.assumed_meeting');
+            Route::match(['PUT', 'PATCH'], 'kalender/termin/{kalender}', [Intern\Kalender\KalendersController::class, 'updateTermin'])->name('kalender.update-termin');
 
             // Admin
             Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
