@@ -30,6 +30,7 @@ class KalenderVersammlungErinnerungCommand extends Command
             $assumed = Assumed_Meeting::where('kalender_id', '=', $kalenderID->id)
                 ->join('kalenders', 'kalenders.id', '=', 'assumed_meeting.kalender_id')
                 ->select('kalenders.*', 'assumed_meeting.team_id', 'assumed_meeting.*', 'kalenders.created_at', 'kalenders.updated_at')
+                ->where('present', '=', 1)
                 ->get();
         }
         foreach ($assumed as $value) {
