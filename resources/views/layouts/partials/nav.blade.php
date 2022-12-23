@@ -82,8 +82,10 @@
                                 @hasanyrole('super_admin|admin')
                                 <h6 class="dropdown-header">Interner Bereich</h6>
                                 <a href="{{ route('intern.admin.antrag.index') }}" class="dropdown-item">Anträge</a>
-                                <a href="{{ route('intern.admin.users.index') }}" class="dropdown-item">Mitglieder</a>
-                                <a href="{{ route('intern.admin.roles.index') }}" class="dropdown-item">Rollen</a>
+                                @hasrole('super_admin')
+                                    <a href="{{ route('intern.admin.users.index') }}" class="dropdown-item">Mitglieder</a>
+                                    <a href="{{ route('intern.admin.roles.index') }}" class="dropdown-item">Rollen</a>
+                                @endhasrole
                                 <hr>
                                 @endhasanyrole
                                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
