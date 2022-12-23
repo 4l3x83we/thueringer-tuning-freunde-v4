@@ -1,4 +1,5 @@
-<div class="tab-pane fade show active" id="kalender" role="tabpanel" aria-labelledby="kalender-tab">
+@if(count($team->kalender) > 0)
+<div class="tab-pane fade" id="kalender" role="tabpanel" aria-labelledby="kalender-tab">
     <div class="header" style="border-radius: 0 10px 0 0;">
         <h5>Kalendereinträge von {{ $team->vorname . ' ' . $team->nachname }}</h5>
     </div>
@@ -40,3 +41,4 @@
         </div>
     </div>
 </div>
+@endif

@@ -24,7 +24,7 @@
                         <h4 class="text-center">{{ $team->vorname . ' ' . $team->nachname }}</h4>
                     </div>
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a href="#profil" class="nav-link " id="pd-tab" data-bs-toggle="pill" role="tab" aria-controls="pd" aria-selected="true">
+                        <a href="#profil" class="nav-link active" id="pd-tab" data-bs-toggle="pill" role="tab" aria-controls="pd" aria-selected="true">
                             <em class="bi bi-house"></em> Profil Details
                         </a>
                         <a href="#password" class="nav-link" id="pw-tab" data-bs-toggle="pill" role="tab" aria-controls="pw" aria-selected="true">
@@ -40,9 +40,11 @@
                             <em class="bi bi-car-front"></em> Fahrzeuge
                         </a>
                         @endif
-                        <a href="#kalender" class="nav-link active" id="kalender-tab" data-bs-toggle="pill" role="tab" aria-controls="kalender" aria-selected="true">
+                        @if(count($team->kalender) > 0)
+                        <a href="#kalender" class="nav-link" id="kalender-tab" data-bs-toggle="pill" role="tab" aria-controls="kalender" aria-selected="true">
                             <em class="bi bi-calendar-event"></em> Kalender
                         </a>
+                        @endif
                     </div>
                 </div>
                 <div class="tab-content" id="v-pills-tabContent">

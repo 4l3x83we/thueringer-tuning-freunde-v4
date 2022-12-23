@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="profil" role="tabpanel" aria-labelledby="pd-tab">
+<div class="tab-pane fade show active" id="profil" role="tabpanel" aria-labelledby="pd-tab">
     <form action="{{ route('frontend.team.update', $team->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
