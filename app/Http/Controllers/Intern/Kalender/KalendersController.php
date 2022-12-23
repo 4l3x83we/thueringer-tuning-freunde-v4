@@ -42,11 +42,13 @@ class KalendersController extends Controller
             $calender_workshop[$item]['cp'] = Team::where('id', Kalender::find($calender->id)->kalendertype[0]->cp_user_id)->first();
             $calender_workshop[$item]['assumed_meeting'] = Assumed_Meeting::where('kalender_id', $calender->id)->get();
         }
-        $teamCount = count(Team::where('published', true)->get());
-        $assumed_meeting = count($calender->assumed_meeting);
-        $summe = $teamCount - $assumed_meeting;
-        $durchschnitt = $teamCount / 2;
-        $calender->true = $durchschnitt >= $summe;
+        if (!empty($calender->assumed_meeting)) {
+            $teamCount = count(Team::where('published', true)->get());
+            $assumed_meeting = count($calender->assumed_meeting);
+            $summe = $teamCount - $assumed_meeting;
+            $durchschnitt = $teamCount / 2;
+            $calender->true = $durchschnitt >= $summe;
+        }
         return view('intern.calendar.index', compact('veranstaltungens', 'calender_workshop'));
     }
 

@@ -4,16 +4,11 @@ use App\Http\Controllers\Auth\MyWelcomeController;
 use App\Http\Controllers\Frontend;
 use App\Http\Controllers\Intern;
 use App\Http\Controllers\Intern\Admin;
-use App\Models\Frontend\Team\Team;
-use App\Models\Intern\Kalender\Assumed_Meeting;
-use App\Models\Intern\Kalender\Kalender;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\WelcomeNotification\WelcomesNewUsers;
 use Yoeunes\Toastr\Facades\Toastr;
-use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
