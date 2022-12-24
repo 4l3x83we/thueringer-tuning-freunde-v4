@@ -1,6 +1,5 @@
 #hero {
-    padding: rem(70) 0;
-    overflow: hidden;
+
 
     img {
         width: 100%;
@@ -14,5 +13,12 @@
         span {
             color: $primary;
         }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    #hero {
+        padding: rem(70) 0;
+        overflow: hidden;
     }
 }
