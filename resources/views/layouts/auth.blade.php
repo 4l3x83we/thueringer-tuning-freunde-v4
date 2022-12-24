@@ -6,10 +6,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta http-equiv="content-Type" content="text/html; utf-8" />
     <meta http-equiv="Pragma" content="cache" />
-    <meta name="robots" content="@yield('robots', 'INDEX,NOFOLLOW')" />
+    <meta name="robots" content="@yield('robots', 'NOINDEX,NOFOLLOW')" />
     <meta http-equiv="content-Language" content="de" />
     <meta name="description" content="@yield('description', 'Marken offener Tuningclub Keine Markenbindung alle Fahrzeugtypen sind willkommen bei uns. Auch du musst nicht der Jugendliche sein Tuning macht auch im Alter Spaß.')" />
-    <meta name="keywords" content="@yield('keywords', 'Thüringen, Tuning, Freunde, Marken, offener, Club, Marken offener, Autos, PS, KW, Pimpen, Team, Treffen, Halle, Werkstatt, Mitglieder, Roßleben, Selbsthilfe, KFZ Werkstatt, Reparatur, Audi, VW, Alfa Romeo, Honda, Opel, Ford, Mercedes, Volkswagen, Golf, 155, 156, 147, v6, 2.5, T5, Motor, Schrauberhalle, Mietwerkstatt, Hebebühne')" />
     <meta name="author" content="Alexander Guthmann" />
     <meta name="publisher" content="Thüringer Tuning Freunde" />
     <meta name="copyright" content="Alexander Guthmann" />

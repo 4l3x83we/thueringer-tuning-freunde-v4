@@ -8,7 +8,7 @@
     <!-- ======= Team Details Page ======= -->
     <section class="team" id="team">
         <div class="container" data-aos="fade-up">
-
+            <h1 class="d-none">@yield('description')</h1>
             <div class="row">
             @if(count($teams) > 0)
                 @foreach($teams as $team)

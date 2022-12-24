@@ -16,5 +16,6 @@ Disallow: /*.svg
 Disallow: /*.js
 Disallow: /*.css
 Disallow: /*.webp
+Allow: /build/assets/*
 
 Sitemap: https://www.thuringer-tuning-freunde.de/sitemap.xml

@@ -8,7 +8,7 @@
     <!-- ======= Gallery Page ======= -->
     <section class="galerie" id="galerie">
         <div class="container" data-aos="fade-up">
-
+            <h1 class="d-none">@yield('description')</h1>
             @if(count($albums) > 0)
                 <div class="row ">
                     <div class="col-lg-12 d-flex justify-content-center" data-aos="fade-up">

@@ -11,6 +11,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
+                <h1 class="d-none">@yield('description')</h1>
                 <h2>@yield('title')</h2>
                 <p>Mitglied seit: {{ \Carbon\Carbon::parse($team->published_at)->format('d.m.Y') }}</p>
             </div>

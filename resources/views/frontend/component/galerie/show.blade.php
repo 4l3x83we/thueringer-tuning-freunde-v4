@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') {{ $galerie->title . ' | ' . $galerie->photoCount . ' Fotos im Album ' }} @endsection
+@section('title'){{ $galerie->title . ' | ' . $galerie->photoCount . ' Fotos im Album' }}@endsection
 @section('description'){!! strip_tags(Str::limit($galerie->description, 155)) !!}@endsection
 @section('robots', 'INDEX,FOLLOW')
 @section('images'){{ asset($galerie->images) }}@endsection
@@ -9,7 +9,7 @@
     <!-- ======= Gallery Details Page ======= -->
     <section class="galerie-details" id="galerie-details">
         <div class="container" data-aos="fade">
-
+            <h1 class="d-none">@yield('description')</h1>
             <div class="row gy-4">
 
                 <div class="col-lg-8 galerie-details-list">

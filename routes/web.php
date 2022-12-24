@@ -135,6 +135,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('/route-cache', function () {
+        Artisan::call('route:cache');
+        Toastr::success('Routes cache', 'Erfolgreich');
+        return redirect(route('frontend.index'));
+    });
+
+    Route::get('/route-clear', function () {
         Artisan::call('route:clear');
         Toastr::success('Routes cache cleared', 'Erfolgreich');
         return redirect(route('frontend.index'));

@@ -12,6 +12,7 @@
 
             <div class="section-title">
                 <h2>@yield('title')</h2>
+                <h1 class="d-none">@yield('description')</h1>
             </div>
 
             <div class="d-flex justify-content-between align-content-center">
