@@ -1,6 +1,6 @@
 @include('helpers.component.recaptcha')
 
-<section class="kontakt" id="kontakt">
+<section class="kontakt pb-0" id="kontakt">
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="section-title">
