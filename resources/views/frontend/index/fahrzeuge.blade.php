@@ -13,7 +13,7 @@
                     @if(count($fahrzeuges) > 0)
                         @foreach($fahrzeuges as $fahrzeuge)
                             @if($fahrzeuge->published)
-                                <div class="col-lg-3 col-md-6 d-flex align-items-stretch swiper-slide">
+                                <div class="col-lg-3 col-md-6 d-flex align-items-stretch swiper-slide px-3 px-md-0">
                                     <div class="member shadow-sm" data-aos="zoom-in" data-aos-delay="100">
                                         <div class="member-img">
                                             @if(empty($fahrzeuge->albums->thumbnail_id))
