@@ -1079,16 +1079,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.279.0",
+            "version": "v0.280.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "2105f08f4ee00c5847f980b5b4491346f4ceb60d"
+                "reference": "ce774773c6e11510145ce1db4c333017298599c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/2105f08f4ee00c5847f980b5b4491346f4ceb60d",
-                "reference": "2105f08f4ee00c5847f980b5b4491346f4ceb60d",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/ce774773c6e11510145ce1db4c333017298599c5",
+                "reference": "ce774773c6e11510145ce1db4c333017298599c5",
                 "shasum": ""
             },
             "require": {
@@ -1117,9 +1117,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.279.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.280.0"
             },
-            "time": "2022-12-18T01:18:15+00:00"
+            "time": "2022-12-24T01:38:12+00:00"
         },
         {
             "name": "google/auth",
@@ -3379,16 +3379,16 @@
         },
         {
             "name": "php-flasher/flasher",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher.git",
-                "reference": "5679cc063212396791a8633b6c41116482d300ad"
+                "reference": "2101712f19318c97180f2527bfa6243e59823924"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/5679cc063212396791a8633b6c41116482d300ad",
-                "reference": "5679cc063212396791a8633b6c41116482d300ad",
+                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/2101712f19318c97180f2527bfa6243e59823924",
+                "reference": "2101712f19318c97180f2527bfa6243e59823924",
                 "shasum": ""
             },
             "require": {
@@ -3396,6 +3396,9 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "flasher.php"
+                ],
                 "psr-4": {
                     "Flasher\\Prime\\": ""
                 }
@@ -3432,34 +3435,50 @@
                 "toastr"
             ],
             "support": {
-                "source": "https://github.com/php-flasher/flasher/tree/v1.9.0"
+                "source": "https://github.com/php-flasher/flasher/tree/v1.10.0"
             },
             "funding": [
                 {
+                    "url": "https://www.paypal.com/paypalme/yoeunes",
+                    "type": "custom"
+                },
+                {
                     "url": "https://github.com/yoeunes",
                     "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/yoeunes",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://opencollective.com/php-flasher",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/yoeunes",
+                    "type": "patreon"
                 }
             ],
-            "time": "2022-12-24T15:36:11+00:00"
+            "time": "2022-12-25T22:10:39+00:00"
         },
         {
             "name": "php-flasher/flasher-laravel",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher-laravel.git",
-                "reference": "19377eea1da3368aecd5e1361a0012d632ea4105"
+                "reference": "7e6edd823825951c0ef3f9689f32ad83573068c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-laravel/zipball/19377eea1da3368aecd5e1361a0012d632ea4105",
-                "reference": "19377eea1da3368aecd5e1361a0012d632ea4105",
+                "url": "https://api.github.com/repos/php-flasher/flasher-laravel/zipball/7e6edd823825951c0ef3f9689f32ad83573068c3",
+                "reference": "7e6edd823825951c0ef3f9689f32ad83573068c3",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
                 "php": ">=5.3",
-                "php-flasher/flasher": "^1.9"
+                "php-flasher/flasher": "^1.10"
             },
             "type": "library",
             "extra": {
@@ -3473,9 +3492,6 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "flasher.php"
-                ],
                 "psr-4": {
                     "Flasher\\Laravel\\": ""
                 }
@@ -3511,36 +3527,55 @@
                 "yoeunes"
             ],
             "support": {
-                "source": "https://github.com/php-flasher/flasher-laravel/tree/v1.9.0"
+                "source": "https://github.com/php-flasher/flasher-laravel/tree/v1.10.0"
             },
             "funding": [
                 {
+                    "url": "https://www.paypal.com/paypalme/yoeunes",
+                    "type": "custom"
+                },
+                {
                     "url": "https://github.com/yoeunes",
                     "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/yoeunes",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://opencollective.com/php-flasher",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/yoeunes",
+                    "type": "patreon"
                 }
             ],
-            "time": "2022-12-24T15:36:11+00:00"
+            "time": "2022-12-25T22:21:10+00:00"
         },
         {
             "name": "php-flasher/flasher-toastr",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher-toastr.git",
-                "reference": "0d8611443f53f875b375fa2e5eff2b083d71bbe9"
+                "reference": "485581392fce8b8cb06b8ca3fbf6c3b3461ecbd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-toastr/zipball/0d8611443f53f875b375fa2e5eff2b083d71bbe9",
-                "reference": "0d8611443f53f875b375fa2e5eff2b083d71bbe9",
+                "url": "https://api.github.com/repos/php-flasher/flasher-toastr/zipball/485581392fce8b8cb06b8ca3fbf6c3b3461ecbd2",
+                "reference": "485581392fce8b8cb06b8ca3fbf6c3b3461ecbd2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3",
-                "php-flasher/flasher": "^1.9"
+                "php-flasher/flasher": "^1.10"
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "toastr.php"
+                ],
                 "psr-4": {
                     "Flasher\\Toastr\\Prime\\": ""
                 }
@@ -3572,15 +3607,31 @@
                 "toastr"
             ],
             "support": {
-                "source": "https://github.com/php-flasher/flasher-toastr/tree/v1.9.0"
+                "source": "https://github.com/php-flasher/flasher-toastr/tree/v1.10.0"
             },
             "funding": [
                 {
+                    "url": "https://www.paypal.com/paypalme/yoeunes",
+                    "type": "custom"
+                },
+                {
                     "url": "https://github.com/yoeunes",
                     "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/yoeunes",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://opencollective.com/php-flasher",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/yoeunes",
+                    "type": "patreon"
                 }
             ],
-            "time": "2022-12-24T15:36:11+00:00"
+            "time": "2022-12-25T22:21:10+00:00"
         },
         {
             "name": "phpoption/phpoption",
