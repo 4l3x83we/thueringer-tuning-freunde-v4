@@ -360,7 +360,7 @@ class AntragController extends Controller
         Mail::to($antrag->email)->send(new AntragGenehmigtMail($antrag));
         Mail::to('club@thueringer-tuning-freunde.de')->send(new AntragGenehmigtClubMail($antrag));
 
-        $expiresAt = now()->addDay();
+        $expiresAt = now()->addDays(7);
         $user->sendWelcomeNotification($expiresAt);
 
         Toastr::success('Antrag wurde genehmigt', 'Erfolgreich');
