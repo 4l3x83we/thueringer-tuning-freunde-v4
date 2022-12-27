@@ -7,6 +7,7 @@ use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Fahrzeuge\Fahrzeug;
 use App\Models\Frontend\Team\Team;
+use App\Models\Intern\Admin\LoginHistories;
 use App\Models\Intern\Kalender\Kalender;
 use App\Notifications\WillkommenNotification;
 use Carbon\Carbon;
@@ -50,6 +51,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_login_ip',
+        'last_login_at'
     ];
 
     /**
@@ -94,6 +97,11 @@ class User extends Authenticatable
     public function sendWelcomeNotification(Carbon $validUntil)
     {
         $this->notify(new WillkommenNotification($validUntil));
+    }
+
+    public function login_histories()
+    {
+        return $this->hasMany(LoginHistories::class);
     }
 
     public function getActivitylogOptions(): LogOptions
