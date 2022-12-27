@@ -30,6 +30,14 @@ use Yoeunes\Toastr\Facades\Toastr;
 
 class KalendersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:write|edit|destroy')->only(['store']);
+        $this->middleware('permission:write')->only(['create','store']);
+        $this->middleware('permission:edit')->only(['edit','update']);
+        $this->middleware('permission:destroy')->only('destroy');
+    }
+
     public function index()
     {
         $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->where('anwesend', true)->get();
