@@ -30,34 +30,22 @@ use Yoeunes\Toastr\Facades\Toastr;
 
 class KalendersController extends Controller
 {
-    public function __construct()
+    protected $kalender;
+
+    public function __construct(Kalender $kalender)
     {
         $this->middleware('permission:write|edit|destroy')->only(['store']);
         $this->middleware('permission:write')->only(['create','store']);
         $this->middleware('permission:edit')->only(['edit','update']);
         $this->middleware('permission:destroy')->only('destroy');
+        $this->kalender = $kalender;
     }
 
     public function index()
     {
+        $kalenders = $this->kalender->showIndex();
         $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->where('anwesend', true)->get();
-        $calender_workshop = Kalender::where('bis', '>=', now())->orderBy('published', 'ASC')->get();
-        $calender_workshop->type = KalenderType::get();
-        $calender = null;
-        foreach ($calender_workshop as $item => $calender) {
-            $calender_workshop[$item]['team'] = Kalender::find($calender->id)->teams[0];
-            $calender_workshop[$item]['kalendertype'] = Kalender::find($calender->id)->kalendertype[0];
-            $calender_workshop[$item]['cp'] = Team::where('id', Kalender::find($calender->id)->kalendertype[0]->cp_user_id)->first();
-            $calender_workshop[$item]['assumed_meeting'] = Assumed_Meeting::where('kalender_id', $calender->id)->get();
-        }
-        if (!empty($calender->assumed_meeting)) {
-            $teamCount = count(Team::where('published', true)->get());
-            $assumed_meeting = count($calender->assumed_meeting);
-            $summe = $teamCount - $assumed_meeting;
-            $durchschnitt = $teamCount / 2;
-            $calender->true = $durchschnitt >= $summe;
-        }
-        return view('intern.calendar.index', compact('veranstaltungens', 'calender_workshop'));
+        return view('intern.calendar.index', compact('veranstaltungens', 'kalenders'));
     }
 
     public function create()

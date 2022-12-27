@@ -16,7 +16,7 @@
             </div>
 
             <div class="row">
-                @if(count($calender_workshop) > 0)
+                @if(count($kalenders) > 0)
                 <div class="col-lg-12 mt-4">
                     <div class="d-flex justify-content-end">
                         <a href="#" class="btn btn-success text-black btn-sm shadow" data-bs-toggle="modal" data-bs-target="#calendarCreate"><em class="bi bi-pencil text-black"></em> Termin eintragen</a>
@@ -26,10 +26,10 @@
                     </div>
                 </div>
                 @endif
-                @if(count($calender_workshop) > 0)
+                @if(count($kalenders) > 0)
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                         <div class="row">
-                            @foreach($calender_workshop as $calender)
+                            @foreach($kalenders as $calender)
                                 @if($calender->published)
                                     @if($calender->von <= now())
                                         @include('intern.component.calendar.index')
@@ -223,12 +223,12 @@
                                     </div>
                                     <div class="col-md-12">
                                         <legend class="col-form-label">Was willst du tun?:</legend>
-                                        @foreach($calender_workshop->type as $type)
+                                        @foreach($kalenders->type as $type)
                                             @if($type->type !== 'Versammlung')
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="type" id="{{ $type->id }}" value="{{ $type->id }}"
                                             @if(old('type', $type->type))
-                                                {{ old('type', $type->id) === $calender_workshop->type[1]->id ? 'checked' : '' }}
+                                                {{ old('type', $type->id) === $kalenders->type[1]->id ? 'checked' : '' }}
                                             @else
                                                 {{ 'checked' }}
                                             @endif>
