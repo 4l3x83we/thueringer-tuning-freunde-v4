@@ -41,7 +41,13 @@
                                     @endif
                                 </div>
                                 <div class="member-info">
+                                    @php $user = DB::table('users')->where('id', $team->user_id)->first() @endphp
                                     <h4>{{ $team->vorname .' '. $team->nachname }}</h4>
+                                    @if(Cache::has('user-is-online-' . $user->id))
+                                        <span class="text-success">Online</span>
+                                    @else
+                                        <span class="text-secondary">Offline</span>
+                                    @endif
                                     <span class="text-muted">{{ $team->funktion }}</span>
                                     <p>{!! strip_tags(Str::limit($team->description, 120)) !!}</p>
                                     <div class="d-flex flex-column justify-content-center">
