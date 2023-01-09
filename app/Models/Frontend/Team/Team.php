@@ -13,6 +13,7 @@ namespace App\Models\Frontend\Team;
 use App\Models\Frontend\Album\Album;
 use App\Models\Frontend\Album\Photo;
 use App\Models\Frontend\Fahrzeuge\Fahrzeug;
+use App\Models\Intern\Admin\PaymentOpenPaid;
 use App\Models\Intern\Kalender\Kalender;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -70,6 +71,11 @@ class Team extends Model
     public function kalenders()
     {
         return $this->belongsToMany(Kalender::class, 'kalender_team');
+    }
+
+    public function payment_open_paids()
+    {
+        $this->hasMany(PaymentOpenPaid::class);
     }
 
     public function getRouteKeyName()

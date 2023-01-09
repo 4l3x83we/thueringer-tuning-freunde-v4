@@ -29,7 +29,22 @@ use Yoeunes\Toastr\Facades\Toastr;
 });*/
 
 Route::get('/testen', function () {
+    $paids = App\Models\Frontend\Team\Team::select('vorname', 'nachname', 'zahlung', 'zahlungsArt')->where('published', true)->get();
+    $dateNow = Carbon\Carbon::parse(now())->format('d.m.Y');
+    $bezahlt = \App\Models\Intern\Admin\PaymentOpenPaid::all();
+    $test = null;
+    if ($dateNow >= '01.01.2023' and $dateNow) {
+        $test = $dateNow;
+    }
+    $zahlung = new \App\Models\Intern\Admin\PaymentOpenPaid();
 
+    return [
+        'dateNow' => $dateNow,
+        'test' => $test,
+        'paid' => $paids,
+        'bezahlt' => $bezahlt,
+        'zahlung' => $zahlung,
+    ];
 });
 
 Route::namespace('App\Http\Controllers')->group(function () {
@@ -103,6 +118,9 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::match(['PUT', 'PATCH'], 'kalender/angenommen/{kalender}', [Intern\Kalender\KalendersController::class, 'assumed_meeting'])->name('kalenders.assumed_meeting');
             Route::match(['PUT', 'PATCH'], 'kalender/termin/{kalender}', [Intern\Kalender\KalendersController::class, 'updateTermin'])->name('kalender.update-termin');
 
+            // User Online
+            Route::get('status', [Intern\UserController::class, 'userOnlineStatus']);
+
             // Admin
             Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function () {
                 Route::resource('users', Admin\UsersController::class);
@@ -115,6 +133,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::match(['PUT', 'PATCH'], '/antrag/checked/{antrag}', [Frontend\AntragController::class, 'checked'])->name('antrag.checked-antrag');
                 Route::match(['PUT', 'PATCH'], '/antrag/revoke/{antrag}', [Frontend\AntragController::class, 'revoke'])->name('antrag.revoke-antrag');
                 Route::delete('/antrag/destroy/{antrag}', [Frontend\AntragController::class, 'destroy'])->name('antrag.destroy');
+
+                // Zahlungszuweisung
+                Route::resource('/zahlungen', Admin\Team\TeamController::class);
+                Route::get('/zahlungen/bezahlt/{zahlung}/bearbeitung', [Admin\Team\TeamController::class, 'editEuro'])->name('zahlungen.edit-euro');
+                Route::match(['PUT', 'PATCH'], '/zahlungen/bezahlt/{zahlung}', [Admin\Team\TeamController::class, 'updateEuro'])->name('zahlungen.euro-update');
             });
         });
     });

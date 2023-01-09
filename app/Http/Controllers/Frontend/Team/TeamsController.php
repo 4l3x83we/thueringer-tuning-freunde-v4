@@ -167,4 +167,19 @@ class TeamsController extends Controller
     public function destroy(Team $team)
     {
     }
+
+    public function teamZahlung(Request $request, Team $team)
+    {
+        return view('intern.admin.team.team-zahlung', compact('team'));
+    }
+
+    public function createZuweissen(Request $request, Team $team)
+    {
+
+    }
+
+    public function updateZuweissen(Request $request, Team $zuweisen)
+    {
+
+    }
 }
