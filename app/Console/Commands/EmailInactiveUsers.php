@@ -26,7 +26,7 @@ class EmailInactiveUsers extends Command
     public function handle()
     {
         $limit = Carbon::now()->subDay(7);
-        $inactive_users = User::where('last_seen', '<', $limit)->orWhere('created_at', '<', $limit)->get();
+        $inactive_users = User::where('last_seen', '<', $limit)->get();
 
         foreach ($inactive_users as $user) {
             $team = Team::where('user_id', $user->id)->first();
