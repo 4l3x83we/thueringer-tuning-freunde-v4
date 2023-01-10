@@ -275,11 +275,7 @@ class AntragController extends Controller
                 $antrag->fahrzeuge = $fahrzeuge;
             }
             $album = Album::where('fahrzeug_id', $fahrzeuge->id)->first();
-//            dd($album);
-//            foreach ($album as $photo) {
-//                dd($photo);
-                $antrag->photos = Photo::where('album_id', $album->id)->get();
-//            }
+            $antrag->photos = Photo::where('album_id', $album->id)->get();
             $antrag->fzPath = $album->path;
         }
         $antrag->gebdatum = Carbon::parse($antrag->geburtsdatum)->age;
