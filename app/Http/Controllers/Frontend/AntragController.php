@@ -268,7 +268,6 @@ class AntragController extends Controller
     public function show($id)
     {
         $fahrzeuge = null;
-        $preview = null;
         $antrag = Team::findOrFail($id);
         if (!$antrag->fahrzeug_vorhanden) {
             foreach ($antrag->fahrzeuges as  $fahrzeuge) {
