@@ -156,7 +156,7 @@
                                         <div class="d-flex h4 align-items-center justify-content-center mb-3">Fahrzeugbilder:</div>
                                         <div class="d-flex flex-wrap">
                                             @foreach($antrag->photos as $photo)
-                                                <img src="{{ asset($photo->images) }}" class="img-thumbnail img-fluid carImage" alt="Fahrzeugbild: {{ $photo->images }}">
+                                                <img src="{{ asset($antrag->fzPath.'/'.$photo->images) }}" class="img-thumbnail img-fluid carImage" alt="Fahrzeugbild: {{ $photo->images }}">
                                             @endforeach
                                         </div>
                                     </div>

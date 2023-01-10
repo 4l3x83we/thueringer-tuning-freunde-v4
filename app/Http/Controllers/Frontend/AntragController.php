@@ -267,14 +267,25 @@ class AntragController extends Controller
 
     public function show($id)
     {
+        $fahrzeuge = null;
+        $preview = null;
         $antrag = Team::findOrFail($id);
         if (!$antrag->fahrzeug_vorhanden) {
             foreach ($antrag->fahrzeuges as  $fahrzeuge) {
                 $antrag->fahrzeuge = $fahrzeuge;
             }
-            $antrag->photos = $antrag->photosFahrzeuge;
+            $album = Album::where('fahrzeug_id', $fahrzeuge->id)->first();
+//            dd($album);
+//            foreach ($album as $photo) {
+//                dd($photo);
+                $antrag->photos = Photo::where('album_id', $album->id)->get();
+//            }
+            $antrag->fzPath = $album->path;
         }
         $antrag->gebdatum = Carbon::parse($antrag->geburtsdatum)->age;
+        if (!empty($antrag->path)) {
+            $antrag->image = $antrag->path . '/' . Photo::where('team_id', $antrag->id)->first()->images;
+        }
 
         return view('intern.admin.antrag.show', compact('antrag'));
     }
