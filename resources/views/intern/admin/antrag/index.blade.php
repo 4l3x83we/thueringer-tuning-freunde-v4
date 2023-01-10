@@ -36,7 +36,7 @@
                                         <td id="antrag" href="{{ route('intern.admin.antrag.show', $antrag->id) }}">{{ $antrag->anrede .' '. $antrag->vorname . ' ' . $antrag->nachname }}</td>
                                         <td id="antrag" href="{{ route('intern.admin.antrag.show', $antrag->id) }}">
                                             Anrede, Vorname, Nachname, Straße, PLZ, Ort, Telefon, Mobil, eMail, Geburtsdatum, Beruf, Facebook, Twitter, Instagram, Beschreibung, Profilbild
-                                            @if(!$antrag->fahrzeugvorhanden)
+                                            @if(!$antrag->fahrzeug_vorhanden)
                                                 <br><strong>Fahrzeugdaten:</strong> Fahrzeug, Baujahr, Besonderheiten, Motor, Karosserie, Felgen, Fahrwerk, Bremsen, Innenraum, Anlage, Beschreibung, Fahrzeugbilder
                                             @endif
                                         </td>
@@ -65,8 +65,9 @@
 
 @push('js')
     <script type="module">
-        $("#dataTable #antrag").css("cursor", "pointer");
-        $("#dataTable #antrag").click(function () {
+        let $dataTable_Antrag = $("#dataTable #antrag")
+        $dataTable_Antrag.css("cursor", "pointer");
+        $dataTable_Antrag.click(function () {
             let link = $(this).attr("href");
             open(link, '_self');
         });

@@ -27,6 +27,7 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 use File;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Mail;
@@ -41,7 +42,7 @@ class AntragController extends Controller
 
     public function indexAdmin()
     {
-        $antrags = Team::orderBy('id', 'DESC')->get();
+        $antrags = DB::table('teams')->orderBy('id', 'DESC')->get();
         return view('intern.admin.antrag.index', compact('antrags'));
     }
 
