@@ -35,7 +35,7 @@ import "../../../node_modules/datatables.net/js/jquery.dataTables";
 import "../../../node_modules/datatables.net-bs5/js/dataTables.bootstrap5";
 
 // Fancybox
-import { Fancybox } from "@fancyapps/ui/src/Fancybox/Fancybox";
+import { Fancybox } from "@fancyapps/ui/dist/fancybox/fancybox.esm";
 window.Fancybox = Fancybox;
 
 import Isotope from "isotope-layout";
