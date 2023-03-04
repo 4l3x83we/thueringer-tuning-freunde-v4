@@ -27,8 +27,8 @@
                                     <li>Der Club führt den Namen „Thüringer Tuning Freunde“</li>
                                     <li>Der Club ist ein „nicht eingetragener Verein“</li>
                                     <li>Der Club hat seinen Sitz unter folgender Adresse:<br>
-                                        Rosenstraße 2a<br>
-                                        06571 Roßleben</li>
+                                        {{ env('TTF_STRASSE') }}<br>
+                                        {{ env('TTF_ORT') }}</li>
                                 </ol>
 
                                 <!-- $2 -->

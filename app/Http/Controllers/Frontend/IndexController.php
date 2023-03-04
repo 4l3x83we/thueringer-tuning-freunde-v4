@@ -22,20 +22,20 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $teams = Team::where('published', true)->orderBy('title', 'ASC')->get();
-        $fahrzeuges = Fahrzeug::where('published', true)->orderBy('updated_at', 'DESC')->get();
-        $albums = Album::where('published', true)->inRandomOrder()->get();
-        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->orderBy('datum_von', 'DESC')->limit(6)->get();
+        $teams = Team::where('published', true)->select('id', 'vorname', 'nachname', 'slug', 'facebook', 'tiktok', 'instagram', 'funktion', 'description', 'published_at', 'path', 'user_id', 'photo_id')->orderBy('title', 'ASC')->get();
+        $fahrzeuges = Fahrzeug::where('published', true)->select('slug', 'title', 'album_id', 'description', 'user_id')->orderBy('updated_at', 'DESC')->get();
+        $albums = Album::where('published', true)->select('thumbnail_id', 'path', 'id', 'slug', 'title', 'description')->inRandomOrder()->get();
+        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->select('datum_von', 'datum_bis', 'veranstaltung', 'veranstalter', 'eintritt', 'slug', 'veranstaltungsort', 'quelle')->orderBy('datum_von', 'DESC')->limit(6)->get();
         $preview = null;
         foreach ($albums as $album) {
             if (!empty($album->thumbnail_id)) {
-                $preview[$album->id] = $album->path.'/'.Photo::where('id', $album->thumbnail_id)->first()->images_thumbnail;
+                $preview[$album->id] = $album->path.'/'.Photo::where('id', $album->thumbnail_id)->select('images_thumbnail')->first()->images_thumbnail;
             }
         }
         $previewTeam = null;
         foreach ($teams as $team) {
             if (!empty($team->path)) {
-                $previewTeam[$team->id] = $team->path . '/' . Photo::where('team_id', $team->id)->first()->images;
+                $previewTeam[$team->id] = $team->path . '/' . Photo::where('team_id', $team->id)->select('images')->first()->images;
             }
         }
         $albums->preview = $preview;
@@ -43,7 +43,7 @@ class IndexController extends Controller
             'team' => $teams->count(),
             'fahrzeuge' => $fahrzeuges->count(),
             'treffen' => 0,
-            'projekte' => Album::where('kategorie', 'Projekte')->count(),
+            'projekte' => Album::where('kategorie', 'Projekte')->select('kategorie')->count(),
         ];
 //        Helpers::activityLogBesucher();
         return view('frontend.index', compact('teams', 'albums', 'fahrzeuges', 'preview', 'count', 'previewTeam', 'veranstaltungens'));

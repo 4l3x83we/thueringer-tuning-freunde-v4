@@ -23,6 +23,7 @@ class TeamController extends Controller
     public function index()
     {
         $teams = DB::table('teams')->where('published', true)->get();
+//        $teams = Team::where('published', true)->get();
         $zahlung = [];
         for ($i = 0; $i < count($teams) - 1; $i++) {
             $zahlung[$i] = $teams[$i]->zahlung;
@@ -36,7 +37,8 @@ class TeamController extends Controller
         $teams->jahr = $jahr;
         $teams->payments = $payments;*/
         $team = DB::table('teams')->find(1);
-        dd($team->payment_open_paids);
+//        $team = Team::find(1);
+//        dd($team);
         return view('intern.admin.team.team-zahlung', compact('teams'));
     }
 

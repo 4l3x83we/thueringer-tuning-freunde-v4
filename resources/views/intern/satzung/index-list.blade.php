@@ -94,8 +94,8 @@
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">3.</td>
                         <td>Der Club hat seinen Sitz unter folgender Adresse:<br>
-                            Rosenstraße 2a<br>
-                            06571 Roßleben
+                            {{ env('TTF_STRASSE') }}<br>
+                            {{ env('TTF_ORT') }}
                         </td>
                     </tr>
                     </tbody>
@@ -506,7 +506,7 @@
                                 <div>{{ $teams[$i]->plz . ' ' . $teams[$i]->wohnort }}</div>
                                 <div style="padding-top: 10px;">Telefon: @if($teams[$i]->telefon) {{ $teams[$i]->telefon }} @else {{ $teams[$i]->mobil }} @endif</div>
                                 @if($teams[$i]->telefon)
-                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $teams[$i]->mobil }}</div>
+                                    <div> {{ $teams[$i]->mobil }}</div>
                                 @endif
                                 <div style="padding-bottom: 10px;"></div>
                             </div>
@@ -521,7 +521,7 @@
                                 <div>{{ $teams[$i]->plz . ' ' . $teams[$i]->wohnort }}</div>
                                 <div style="padding-top: 10px;">Telefon: @if($teams[$i]->telefon) {{ $teams[$i]->telefon }} @else {{ $teams[$i]->mobil }} @endif</div>
                                 @if($teams[$i]->telefon)
-                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $teams[$i]->mobil }}</div>
+                                    <div> {{ $teams[$i]->mobil }}</div>
                                 @endif
                                 <div style="padding-bottom: 10px;"></div>
                             </div>
@@ -562,7 +562,7 @@
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">2.</td>
-                        <td>Die Nutzung der Werkstatt ist mit Heiko oder Roland abzusprechen sodass ihr Zugang erlangt.</td>
+                        <td>Die Nutzung der Werkstatt ist mit Heiko oder Roland abzusprechen sodass ihr Zugang erlangt. (Kalender nutzen auf Webseite sonst kein Zugang)</td>
                     </tr>
                     </tbody>
                 </table>
@@ -580,15 +580,15 @@
                     <tbody>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">1.</td>
-                        <td>Die Werkstatt ist aufgeräumt zu hinterlassen, jedes Werkzeug kommt wieder an seinen Platz. </td>
+                        <td>Die Werkstatt ist aufgeräumt zu hinterlassen, jedes Werkzeug kommt wieder an seinen Platz, es sei den es geht, am nächsten Tag weiter, aber sobald dein Auto fertig ist, kommt das Werkzeug an seinen Platz.</td>
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">2.</td>
-                        <td>Bei zu viel Dreck auf dem Boden (z. B.: durch Rost, Öl usw.) sind diese zu entfernen durch dich.</td>
+                        <td>Bei zu viel Dreck auf dem Boden (z. B.: durch Rost, Öl usw.) sind diese zu entfernen durch dich. (Ölbindemittel ist vorhanden)</td>
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">3.</td>
-                        <td>Altteile sind zu entsorgen, dafür steht euch im Hof eine Gitterbox zur Verfügung, dazu mehr unter Paragraf 4.</td>
+                        <td>Altteile sind zu entsorgen, dafür steht euch eine Box zur Verfügung, dazu mehr unter Paragraf 4.</td>
                     </tr>
                     </tbody>
                 </table>
@@ -606,15 +606,15 @@
                     <tbody>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">1.</td>
-                        <td>Die Parksituation ist so zu wählen, dass vorzugsweise auf dem Grundstück geparkt wird, der Platz vor dem Rolltor zum Showroom ist für Heiko und Roland freizuhalten, egal was ist.</td>
+                        <td>Die Parksituation ist so zu wählen, dass vorzugsweise auf dem Grundstück geparkt wird, die ersten 2 Parkplätze rechts neben dem Tor sind für Heiko und Roland freizuhalten, egal was ist.</td>
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">2.</td>
-                        <td>Sollte das Grundstück voll sein mit Fahrzeugen, so bitten wir euch ordnungsgemäß der STVO auf der Straße zu parken.</td>
+                        <td>Sollte das Grundstück voll sein mit Fahrzeugen, so bitten wir euch ordnungsgemäß neben dem Unterstand zu parken am Haupteingang.</td>
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">3.</td>
-                        <td>Der Lärm durch Motorengeräusche ist auf ein Minimum zu reduzieren, zum Wohle der Nachbarschaft.</td>
+                        <td>Der Lärm durch Motorengeräusche ist auf ein Minimum zu reduzieren, zum Wohle der Nachbarschaft und der Tiere.</td>
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">4.</td>
@@ -636,11 +636,11 @@
                     <tbody>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">1.</td>
-                        <td>Betriebsflüssigkeiten (Öl, Brems- & Kühlflüssigkeiten) werden durch uns getrennt entsorgt und gesondert berechnet, da wir an einem Umweltsystem angeschlossen sind und dies ist auch für uns als Club nicht kostenlos.</td>
+                        <td>Betriebsflüssigkeiten (Öl, Brems- & Kühlflüssigkeiten) werden durch uns getrennt entsorgt und gesondert <u style="font-weight: bold;">berechnet, da wir an einem Umweltsystem angeschlossen sind und dies ist auch für uns als Club nicht kostenlos.</u></td>
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">2.</td>
-                        <td>Papier, Pappe, Folien usw. sind in den bereitgestellten Containern zu entsorgen oder mitzunehmen.</td>
+                        <td>Papier, Pappe, Folien usw. müssen wieder mitgenommen werden.</td>
                     </tr>
                     </tbody>
                 </table>
@@ -662,16 +662,16 @@
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">2.</td>
-                        <td>Grillen oder Mittagessen ist möglich, sofern ihr euch was mitbringt und danach die Küche wieder sauber hinterlassen wird.</td>
+                        <td>Grillen oder Mittagessen ist möglich, sofern ihr euch was mitbringt und ihr danach den Küchenbereich wieder sauber verlasst.</td>
                     </tr>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">3.</td>
                         <td>Grillzubehör (Grillkohle, Anzünder) solltet ihr mitbringen.</td>
                     </tr>
-                    <tr>
+                    {{--<tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">4.</td>
                         <td>Die Punkte 1 – 3 gelten außerhalb unserer zweimal im Jahr stattfindenden Versammlung, denn dafür werden die Mitgliedsbeiträge genutzt.</td>
-                    </tr>
+                    </tr>--}}
                     </tbody>
                 </table>
             </td>
@@ -688,7 +688,7 @@
                     <tbody>
                     <tr>
                         <td style="width: 25px; text-align: right; padding-right: 5px; vertical-align: top;">1.</td>
-                        <td>Bei Widersetzen, das Paragrafen 2 und 3 wird mit einem Bußgeld von 5,00 € geahndet, welches dem allgemein wohl des Clubs zugutekommt.</td>
+                        <td>Bei Widersetzen, das Paragrafen 2 und 3 wird mit einem Bußgeld von 10,00 € geahndet, welches dem allgemein wohl des Clubs zugutekommt.</td>
                     </tr>
                     </tbody>
                 </table>
@@ -702,12 +702,10 @@
         <tbody>
         <tr>
             <td>
-                <p style="font-weight: bold;">Zeiten für die Nutzung der Werkstatt: (dies sind Richtwerte)</p>
-                <p>Montag ab 09:30 Uhr in Absprache mit Heiko</p>
-                <p>Dienstag nur in Absprache mit Roland oder am späten Nachmittag in Absprache mit Heiko.</p>
-                <p>Mittwoch ab 09:30 Uhr in Absprache mit Heiko</p>
-                <p>Donnerstag und Freitag in Absprache mit Heiko</p>
-                <p>Samstag steht euch die Werkstatt von 09:30 - 13:00 Uhr garantiert zur Verfügung, vorher bitte im Kalender schauen, ob die Hebebühne belegt ist.</p>
+                <p style="font-weight: bold;">Zeiten für die Nutzung der Werkstatt:</p>
+                <p>Montag bis Freitag in Absprache mit Heiko</p>
+                <p>Bitte nutzt den Kalender, da werden die richtigen Personen kontaktiert und bestätigen deinen Termin oder ändern ihn in Absprache mit dir.</p>
+                <p>Samstag steht euch die Werkstatt von 09:30 - 13:30 Uhr garantiert zur Verfügung, vorher bitte im Kalender schauen, ob die Hebebühne belegt ist.</p>
                 <p>Samstag könnt ihr gerne einfach so vorbeikommen, ohne dass ihr was machen müsst. In dem oben genannten Zeitraum sind auf jeden Fall immer Heiko, Roland und Alex vor Ort.</p>
                 <p><em><u>Sonntags ist die Nutzung der Werkstatt nur im äußersten Notfall zu nutzen.</u></em> Und <u>NUR</u> in Absprache mit Heiko möglich.</p>
             </td>
@@ -727,7 +725,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: right; padding: 5px; width: 15%;"><em>Montag</em></td>
-                        <td style="text-align: left; padding: 5px; border-left: 1px solid;">09:30 - 12:00 Uhr darüber hinaus auf Anfrage</td>
+                        <td style="text-align: left; padding: 5px; border-left: 1px solid;">auf Anfrage</td>
                     </tr>
                     <tr>
                         <td style="text-align: right; padding: 5px; width: 15%;"><em>Dienstag</em></td>
@@ -735,7 +733,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: right; padding: 5px; width: 15%;"><em>Mittwoch</em></td>
-                        <td style="text-align: left; padding: 5px; border-left: 1px solid;">09:30 - 12:00 Uhr darüber hinaus auf Anfrage</td>
+                        <td style="text-align: left; padding: 5px; border-left: 1px solid;">auf Anfrage</td>
                     </tr>
                     <tr>
                         <td style="text-align: right; padding: 5px; width: 15%;"><em>Donnerstag</em></td>
@@ -747,7 +745,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: right; padding: 5px; width: 15%;"><em>Samstag</em></td>
-                        <td style="text-align: left; padding: 5px; border-left: 1px solid;">09:30 - 13:00 Uhr darüber hinaus auf Anfrage</td>
+                        <td style="text-align: left; padding: 5px; border-left: 1px solid;">09:30 - 13:30 Uhr darüber hinaus auf Anfrage</td>
                     </tr>
                     <tr>
                         <td style="text-align: right; padding: 5px; width: 15%;"><em>Sonntag</em></td>
