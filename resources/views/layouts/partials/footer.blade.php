@@ -20,7 +20,7 @@
                         <li><em class="bi bi-arrow-right-short"></em><a href="#kontakt">Kontakt</a></li>
                         <li><em class="bi bi-arrow-right-short"></em><a href="{{ route('frontend.impressum') }}">Impressum / Disclaimer</a></li>
                         <li><em class="bi bi-arrow-right-short"></em><a href="{{ route('frontend.datenschutz') }}">Datenschutz-Bestimmungen</a></li>
-                        <li><em class="bi bi-arrow-right-short"></em><a href="#">Cookie Einstellungen</a></li>
+                        <li><em class="bi bi-arrow-right-short"></em><a href="#" onclick="CCM.openWidget(); return false;">Cookie Einstellungen</a></li>
                     </ul>
                 </div>
 

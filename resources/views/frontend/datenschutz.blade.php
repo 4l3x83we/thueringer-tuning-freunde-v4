@@ -16,7 +16,7 @@
 @section('content')
     <section id="datenschutz" class="datenschutz container">
 
-        <div class="row">
+        <div class="row g-3">
             <div class="col-lg-12">
                 <h1>Datenschutzerklärung</h1>
                 <h2 id="m14">Einleitung</h2>
@@ -50,6 +50,7 @@
                     <li><a class="index-link" href="#m15">Änderung und Aktualisierung der Datenschutzerklärung</a></li>
                     <li><a class="index-link" href="#m10">Rechte der betroffenen Personen</a></li>
                     <li><a class="index-link" href="#m42">Begriffsdefinitionen</a></li>
+                    <li><a class="index-link" href="#ccm19">CCM19 Cookies Consent</a></li>
                 </ul>
                 <h2 id="m3">Verantwortlicher</h2>
                 <p class="lead">{{ env('TTF_NAME1') }} / {{ env('TTF_NAME') }}<br>
@@ -791,6 +792,10 @@
                 <p class="seal">
                     <a href="https://datenschutz-generator.de/" title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken." target="_blank" rel="noopener noreferrer nofollow">Erstellt
                         mit kostenlosem Datenschutz-Generator.de von Dr. Thomas Schwenke</a></p>
+            </div>
+            <div class="col-lg-12">
+                <h3 id="ccm19">CCM19 Cookies Consent</h3>
+                <div class="ccm-cookie-declaration" data-lang="de_DE">Bitte aktivieren Sie Javascript, um die Liste aller deklarierten Cookies und ähnlicher Techniken zu sehen.</div>
             </div>
         </div>
 

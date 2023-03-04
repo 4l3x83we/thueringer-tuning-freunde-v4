@@ -29,6 +29,7 @@
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
+    <script src="https://cloud.ccm19.de/app.js?apiKey=11f2d495d42f7cf9c6f1bff5d966f69f74078b87d0cdd9ee&amp;domain=63ff8f241f29755625a94a3b" referrerpolicy="origin"></script>
     @stack('css')
 </head>
 <body>
