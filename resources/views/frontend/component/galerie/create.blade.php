@@ -22,6 +22,7 @@
                             <select class="form-select form-select-sm @error('kategorie') is-invalid @enderror" id="selectKategorie" name="kategorie">
                                 <option {{ old('kategorie') === 'Treffen' ? 'selected' : '' }} value="Treffen">Treffen</option>
                                 <option {{ old('kategorie') === 'Club-interne-Treffen' ? 'selected' : '' }} value="Club-interne-Treffen">Club interne Treffen</option>
+                                <option {{ old('kategorie') === 'Club-intern' ? 'selected' : '' }} value="Club-intern">Club intern</option>
                             </select>
                             @error('kategorie')
                             <span class="form-text text-danger">{{ $message }}</span>

@@ -37,16 +37,16 @@
                                                     <form action="{{ route('intern.galerie.published-galerie', $alben->slug) }}" method="POST" class="d-inline-block">
                                                         @csrf
                                                         @method('PATCH')
-                                                        <button type="submit" class="btn btn-sm btn-info" @if($alben->kategorie === 'Treffen' or $alben->kategorie === 'Club-interne-Treffen') style="border-radius: 0.25rem 0 0 0.25rem; @endif"><em class="bi bi-x-circle"></em></button>
+                                                        <button type="submit" class="btn btn-sm btn-info" @if($alben->kategorie === 'Treffen' or $alben->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern') style="border-radius: 0.25rem 0 0 0.25rem; @endif"><em class="bi bi-x-circle"></em></button>
                                                     </form>
                                                 @else
                                                     <form action="{{ route('intern.galerie.published-galerie', $alben->slug) }}" method="POST">
                                                         @csrf
                                                         @method('PATCH')
-                                                        <button type="submit" class="btn btn-sm btn-success" @if($alben->kategorie === 'Treffen' or $alben->kategorie === 'Club-interne-Treffen') style="border-radius: 0.25rem 0 0 0.25rem; @endif"><em class="bi bi-check-circle"></em></button>
+                                                        <button type="submit" class="btn btn-sm btn-success" @if($alben->kategorie === 'Treffen' or $alben->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern') style="border-radius: 0.25rem 0 0 0.25rem; @endif"><em class="bi bi-check-circle"></em></button>
                                                     </form>
                                                 @endif
-                                                @if($alben->kategorie === 'Treffen' or $alben->kategorie === 'Club-interne-Treffen')
+                                                @if($alben->kategorie === 'Treffen' or $alben->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern')
                                                     <button type="button" class="delete btn btn-sm btn-danger" style="border-radius: 0 0.25rem 0.25rem 0;" data-bs-toggle="modal" data-id="{{ $alben->id }}" data-bs-target="#galerieInternModal-{{ $alben->id }}"><em class="bi bi-trash"></em></button>
                                                     <script type="module">
                                                         $('.delete').click(function () {

@@ -47,7 +47,7 @@
                                                     @else
                                                         @include('frontend.component.galerie.forms.preview')
                                                     @endif
-                                                @elseif($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen')
+                                                @elseif($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern')
                                                     @if(auth()->user()->id === $photo->user_id)
                                                         @if($photo->id !== $galerie->thumbnail_id)
                                                             @can('edit')
@@ -101,7 +101,7 @@
                                 <li><a href="{{ route('frontend.fahrzeuge.show', $galerie->slug) }}" class="links-light"><strong><em class="bi bi-car-front"></em></strong>: zum Fahrzeug</a></li>
                             @endif
                             @hasanyrole('mitglied|super_admin|admin')
-                                @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or empty($galerie->fahrzeug_id))
+                                @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern' or empty($galerie->fahrzeug_id))
                                     @can('edit')
                                         @if($galerie->user_id === auth()->user()->id)
                                             <li><a data-bs-toggle="modal" data-id="{{ $galerie->id }}" data-bs-target="#galerieEditModal" class="editAlbum links-light-cursor"><strong><em class="bi bi-images"></em></strong>: Bearbeiten</a></li>
@@ -195,7 +195,7 @@
                         </div>
 
                         @hasanyrole('mitglied|super_admin|admin')
-                            @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen')
+                            @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern')
                                 @can('edit')
                                 <div class="imagesDirekt">
                                     <form action="{{ route('frontend.photos.store') }}" method="POST" enctype="multipart/form-data">
