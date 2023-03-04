@@ -7,28 +7,28 @@
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
         "autoprefixer": "^10.4.13",
-        "axios": "^1.2.0",
+        "axios": "^1.3.4",
         "bootstrap": "^5.2.3",
-        "laravel-vite-plugin": "^0.7.1",
+        "laravel-vite-plugin": "^0.7.4",
         "lodash": "^4.17.21",
         "path": "^0.12.7",
-        "postcss": "^8.4.19",
-        "sass": "^1.32.11",
-        "vite": "^3.2.4"
+        "postcss": "^8.4.21",
+        "sass": "^1.58.3",
+        "vite": "^4.1.4"
     },
     "dependencies": {
-        "@fancyapps/ui": "^4.0.31",
-        "@fortawesome/fontawesome-free": "^6.2.1",
+        "@fancyapps/ui": "^5.0.6",
+        "@fortawesome/fontawesome-free": "^6.3.0",
         "@srexi/purecounterjs": "^1.5.0",
         "aos": "^2.3.4",
         "bootstrap-fileinput": "^5.5.2",
-        "bootstrap-icons": "^1.10.2",
-        "datatables.net-bs5": "^1.13.1",
+        "bootstrap-icons": "^1.10.3",
+        "datatables.net-bs5": "^1.13.3",
         "glightbox": "^3.2.0",
         "isotope-layout": "^3.0.6",
-        "jquery": "^3.6.1",
+        "jquery": "^3.6.3",
         "lozad": "^1.16.0",
-        "swiper": "^8.4.5",
-        "vite-plugin-static-copy": "^0.12.0"
+        "swiper": "^9.1.0",
+        "vite-plugin-static-copy": "^0.13.1"
     }
 }
