@@ -142,7 +142,11 @@ class AlbumsController extends Controller
         $galerie->photoCount = Photo::where('album_id', $galerie->id)->where('published', true)->count();
         $galerie->photos = $photos;
         $galerie->pathUsername = explode('/', $galerie->images);
-        return view('frontend.component.galerie.show', compact('galerie'));
+        $preview = null;
+        foreach(Photo::where('id', $galerie->thumbnail_id)->get() as $thumbnail) {
+            $preview = $galerie->path.'/'.$thumbnail->images_thumbnail;
+        }
+        return view('frontend.component.galerie.show', compact('galerie', 'preview'));
     }
 
     public function edit(Album $galerie)

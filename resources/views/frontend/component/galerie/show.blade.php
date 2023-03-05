@@ -3,6 +3,7 @@
 @section('title'){{ $galerie->title . ' | ' . $galerie->photoCount . ' Fotos im Album' }}@endsection
 @section('description'){!! strip_tags(Str::limit($galerie->description, 155)) !!}@endsection
 @section('robots', 'INDEX,FOLLOW')
+@section('images'){{ asset($preview) }}@endsection
 
 @section('content')
     <!-- ======= Gallery Details Page ======= -->
@@ -22,7 +23,6 @@
                                                 <img src="{{ asset('images/default.png') }}" alt="{{ $photo->title . ' ID: #' . $photo->id }}" class="img-fluid lozad">
                                             @else
                                                 <img src="{{ asset('images/default.png') }}" data-src="{{ asset($galerie->path.'/'.$photo->images_thumbnail) }}" alt="{{ $photo->title . ' ID: #' . $photo->id }}" class="img-fluid lozad">
-                                                @section('images'){{ asset($galerie->path.'/'.$photo->images_thumbnail) }}@endsection
                                             @endif
                                         </div>
                                         <div class="caption description">

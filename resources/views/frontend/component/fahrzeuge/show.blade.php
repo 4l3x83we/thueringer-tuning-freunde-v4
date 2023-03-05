@@ -3,7 +3,7 @@
 @section('title'){{ $fahrzeuge->title }}@endsection
 @section('description'){!! strip_tags(Str::limit($fahrzeuge->description, 150)) !!}@endsection
 @section('robots', 'INDEX,FOLLOW')
-@section('images'){{ asset($fahrzeuge->images) }}@endsection
+@section('images'){{ asset($fahrzeuge->path.'/'.$preview->images) }}@endsection
 
 @section('content')
     <!-- ======= fahrzeuge Details Page ======= -->
