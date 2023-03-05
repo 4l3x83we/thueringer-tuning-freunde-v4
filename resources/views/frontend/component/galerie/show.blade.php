@@ -25,7 +25,6 @@
                                                 <img src="{{ asset('images/default.png') }}" data-src="{{ asset($galerie->path.'/'.$photo->images_thumbnail) }}" alt="{{ $photo->title . ' ID: #' . $photo->id }}" class="img-fluid lozad">
                                             @endif
                                         </div>
-                                        @hasanyrole('mitglied|super_admin|admin')
                                         <div class="caption description">
                                             <div class="text-center mb-2">
                                                 @if(empty($photo->images))
@@ -37,33 +36,34 @@
                                                         <em class="bi bi-arrows-fullscreen"></em>
                                                     </a>
                                                 @endif
-
-                                                @if(auth()->user()->id === $photo->user_id)
-                                                    @if($photo->id !== $galerie->thumbnail_id)
-                                                        <form action="{{ route('frontend.albums.update-preview', $photo->id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
-                                                            @include('frontend.component.galerie.forms.updatePreview')
-                                                        </form>
-                                                            @include('frontend.component.galerie.forms.deletePhoto')
-                                                    @else
-                                                        @include('frontend.component.galerie.forms.preview')
-                                                    @endif
-                                                @elseif($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern')
+                                                @hasanyrole('mitglied|super_admin|admin')
                                                     @if(auth()->user()->id === $photo->user_id)
                                                         @if($photo->id !== $galerie->thumbnail_id)
-                                                            @can('edit')
-                                                                <form action="{{ route('frontend.albums.update-preview', $photo->id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
-                                                                    @include('frontend.component.galerie.forms.updatePreview')
-                                                                </form>
-                                                            @endcan
-
-                                                            @can('destroy')
+                                                            <form action="{{ route('frontend.albums.update-preview', $photo->id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
+                                                                @include('frontend.component.galerie.forms.updatePreview')
+                                                            </form>
                                                                 @include('frontend.component.galerie.forms.deletePhoto')
-                                                            @endcan
                                                         @else
                                                             @include('frontend.component.galerie.forms.preview')
                                                         @endif
+                                                    @elseif($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern')
+                                                        @if(auth()->user()->id === $photo->user_id)
+                                                            @if($photo->id !== $galerie->thumbnail_id)
+                                                                @can('edit')
+                                                                    <form action="{{ route('frontend.albums.update-preview', $photo->id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
+                                                                        @include('frontend.component.galerie.forms.updatePreview')
+                                                                    </form>
+                                                                @endcan
+
+                                                                @can('destroy')
+                                                                    @include('frontend.component.galerie.forms.deletePhoto')
+                                                                @endcan
+                                                            @else
+                                                                @include('frontend.component.galerie.forms.preview')
+                                                            @endif
+                                                        @endif
                                                     @endif
-                                                @endif
+                                                @endhasanyrole
                                                 @hasanyrole('super_admin|admin')
                                                     @if(auth()->user()->id !== $photo->user_id)
                                                         @if($photo->id !== $galerie->thumbnail_id)
@@ -78,7 +78,6 @@
                                                 @endhasanyrole
                                             </div>
                                         </div>
-                                        @endhasanyrole
                                     </div>
                                 </div>
                             @endif
