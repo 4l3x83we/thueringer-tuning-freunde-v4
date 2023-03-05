@@ -1,6 +1,8 @@
 <!doctype html>
-{{--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">--}}
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+{{--    <script src="https://cloud.ccm19.de/app.js?apiKey=11f2d495d42f7cf9c6f1bff5d966f69f74078b87d0cdd9ee&amp;domain=63ff8f241f29755625a94a3b" referrerpolicy="origin"></script>--}}
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="41affcba-8993-4be4-97d5-fba87adff0fb" data-blockingmode="auto" type="text/javascript"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,7 +10,6 @@
     <meta http-equiv="Pragma" content="cache" />
     <meta name="robots" content="@yield('robots', 'INDEX,NOFOLLOW')" />
     <meta http-equiv="content-Language" content="de" />
-{{--    <meta name="description" content="@yield('description', 'Marken offener Tuningclub Keine Markenbindung alle Fahrzeugtypen sind willkommen bei uns. Auch du musst nicht der Jugendliche sein Tuning macht auch im Alter Spaß.')" />--}}
     <meta name="description" content="Marken offener Tuningclub Keine Markenbindung alle Fahrzeugtypen sind willkommen bei uns. Auch du musst nicht der Jugendliche sein Tuning macht auch im Alter Spaß." />
     <meta name="author" content="Alexander Guthmann" />
     <meta name="publisher" content="Thüringer Tuning Freunde" />
@@ -28,8 +29,8 @@
     <title>@yield('title') | {{ config('app.name', 'Thueringer Tuning Freunde') }}</title>
 
     <!-- Scripts -->
+    @laravelPWA
     @vite(['resources/js/app.js'])
-    <script src="https://cloud.ccm19.de/app.js?apiKey=11f2d495d42f7cf9c6f1bff5d966f69f74078b87d0cdd9ee&amp;domain=63ff8f241f29755625a94a3b" referrerpolicy="origin"></script>
     @stack('css')
 </head>
 <body>

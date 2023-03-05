@@ -1,5 +1,5 @@
 <div class="header">
-    <h1>Antragsteller</h1>
+    <div class="h1">Antragsteller</div>
     <small>* Pflichtfeld</small>
 </div>
 <div class="body">

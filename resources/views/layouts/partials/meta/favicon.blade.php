@@ -1,4 +1,4 @@
-<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/images/favicons/apple-touch-icon.png') }}">
+{{--<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/images/favicons/apple-touch-icon.png') }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/images/favicons/favicon-32x32.png') }}">
 <link rel="icon" type="image/png" sizes="194x194" href="{{ asset('/images/favicons/favicon-194x194.png') }}">
 <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('/images/favicons/android-chrome-192x192.png') }}">
@@ -10,4 +10,4 @@
 <meta name="application-name" content="Th&uuml;ringer Tuning Freunde">
 <meta name="msapplication-TileColor" content="#121212">
 <meta name="msapplication-config" content="{{ asset('/images/favicons/browserconfig.xml') }}">
-<meta name="theme-color" content="#121212">
+<meta name="theme-color" content="#121212">--}}

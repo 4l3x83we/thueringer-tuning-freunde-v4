@@ -28,7 +28,7 @@ use Yoeunes\Toastr\Facades\Toastr;
     dump($teams, $teams->fahrzeuges, $teams->albums);
 });*/
 
-Route::get('/testen', function () {
+/*Route::get('/testen', function () {
     $paids = App\Models\Frontend\Team\Team::select('vorname', 'nachname', 'zahlung', 'zahlungsArt')->where('published', true)->get();
     $dateNow = Carbon\Carbon::parse(now())->format('d.m.Y');
     $bezahlt = \App\Models\Intern\Admin\PaymentOpenPaid::all();
@@ -45,7 +45,7 @@ Route::get('/testen', function () {
         'bezahlt' => $bezahlt,
         'zahlung' => $zahlung,
     ];
-});
+});*/
 
 Route::namespace('App\Http\Controllers')->group(function () {
     Auth::routes(['register' => false]);
@@ -192,4 +192,8 @@ Route::middleware(['auth'])->group(function () {
         Toastr::success('View cache cleared', 'Erfolgreich');
         return redirect(route('frontend.index'));
     });
+});
+
+Route::get('/offline', function () {
+    return view('laravelpwa::offline');
 });

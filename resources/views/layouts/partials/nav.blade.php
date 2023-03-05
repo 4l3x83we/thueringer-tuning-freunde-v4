@@ -56,8 +56,8 @@
                             <li><a class="dropdown-item" href="{{ route('intern.kalender.index') }}"><em class="bi bi-calendar-event"></em> Kalender</a></li>
                             <li><a class="dropdown-item" href="{{ route('intern.pdf.satzung') }}"><em class="fa-solid fa-scale-unbalanced"></em> Satzung</a></li>
                             {{--                            <li><a class="dropdown-item" href="#"><em class="bi bi-shop"></em> Bestellung Textilien</a></li>--}}
-                            <hr>
-                            <li><a class="dropdown-item" href="{{ route('intern.dashboard.index') }}"><em class="bi bi-gear"></em> Einstellungen</a></li>
+{{--                            <hr>--}}
+{{--                            <li><a class="dropdown-item" href="{{ route('intern.dashboard.index') }}"><em class="bi bi-gear"></em> Einstellungen</a></li>--}}
                         </ul>
                     </li>
                     @endhasanyrole
@@ -80,10 +80,10 @@
 
                             <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @hasanyrole('super_admin|admin')
-                                <h6 class="dropdown-header">Interner Bereich</h6>
-                                <a href="{{ route('intern.admin.antrag.index') }}" class="dropdown-item">Anträge</a>
-                                <a href="{{ route('intern.admin.zahlungen.index') }}" class="dropdown-item">Zahlungen</a>
+                                    <h6 class="dropdown-header">Interner Bereich</h6>
+                                    <a href="{{ route('intern.admin.antrag.index') }}" class="dropdown-item">Anträge</a>
                                 @hasrole('super_admin')
+                                    <a href="{{ route('intern.admin.zahlungen.index') }}" class="dropdown-item">Zahlungen</a>
                                     <a href="{{ route('intern.admin.users.index') }}" class="dropdown-item">Mitglieder</a>
                                     <a href="{{ route('intern.admin.roles.index') }}" class="dropdown-item">Rollen</a>
                                 @endhasrole

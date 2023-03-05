@@ -1,4 +1,4 @@
-@include('helpers.component.recaptcha')
+{{--@include('helpers.component.recaptcha')--}}
 
 <section class="kontakt pb-0" id="kontakt">
     <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -10,7 +10,7 @@
     </div>
 
     <div>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2494.5373878205105!2d11.432863315977622!3d51.30123683357678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a405bfa95dab67%3A0x95ced3453404d44a!2sTh%C3%BCringer%20Tuning%20Freunde!5e0!3m2!1sde!2sde!4v1666588386559!5m2!1sde!2sde" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a href="https://www.google.de/maps/place/Th%C3%BCringer+Tuning+Freunde/@51.1431979,11.1046222,17z/data=!3m1!4b1!4m6!3m5!1s0x47a405bfa95dab67:0x95ced3453404d44a!8m2!3d51.1431946!4d11.1068162!16s%2Fg%2F11gnp4wp6x" target="_blank"><img src="{{ asset('images/default.png') }}" data-src="{{ Vite::asset('resources/images/googleMaps.png') }}" alt="GoogleMaps" title="Google Maps" class="img-fluid lozad"></a>
     </div>
 
     <div class="container my-5">

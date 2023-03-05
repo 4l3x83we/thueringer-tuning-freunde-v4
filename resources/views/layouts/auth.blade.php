@@ -27,9 +27,6 @@
 
     <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
 </head>

@@ -50,7 +50,7 @@
                     <li><a class="index-link" href="#m15">Änderung und Aktualisierung der Datenschutzerklärung</a></li>
                     <li><a class="index-link" href="#m10">Rechte der betroffenen Personen</a></li>
                     <li><a class="index-link" href="#m42">Begriffsdefinitionen</a></li>
-                    <li><a class="index-link" href="#ccm19">CCM19 Cookies Consent</a></li>
+                    <li><a class="index-link" href="#cookiebot">CCM19 Cookies Consent</a></li>
                 </ul>
                 <h2 id="m3">Verantwortlicher</h2>
                 <p class="lead">{{ env('TTF_NAME1') }} / {{ env('TTF_NAME') }}<br>
@@ -794,8 +794,8 @@
                         mit kostenlosem Datenschutz-Generator.de von Dr. Thomas Schwenke</a></p>
             </div>
             <div class="col-lg-12">
-                <h3 id="ccm19">CCM19 Cookies Consent</h3>
-                <div class="ccm-cookie-declaration" data-lang="de_DE">Bitte aktivieren Sie Javascript, um die Liste aller deklarierten Cookies und ähnlicher Techniken zu sehen.</div>
+                <h3 id="cookiebot">Cookiebot</h3>
+                <script id="CookieDeclaration" src="https://consent.cookiebot.com/41affcba-8993-4be4-97d5-fba87adff0fb/cd.js" type="text/javascript" async></script>
             </div>
         </div>
 
