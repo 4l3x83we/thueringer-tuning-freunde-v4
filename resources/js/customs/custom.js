@@ -232,14 +232,18 @@ $(() => {
             zoom: true,
         },
         Toolbar: {
-            display: [
-                "zoom",
-                "slideshow",
-                "fullscreen",
-                "download",
-                "thumbs",
-                "close",
-            ],
+            display: {
+                left: [],
+                middle: [],
+                right: [
+                    "zoom",
+                    "slideshow",
+                    "fullscreen",
+                    "download",
+                    "thumbs",
+                    "close",
+                ],
+            }
         }
     });
 
