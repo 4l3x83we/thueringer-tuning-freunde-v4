@@ -41,9 +41,9 @@ class AppServiceProvider extends ServiceProvider
             'edit' => 'bearbeiten',
             'create' => 'erstellen'
         ]);
-        /*view()->composer('*', function ($view) {
+        view()->composer('*', function ($view) {
             $geb = Team::where('published', true)->orderBy('title', 'ASC')->get();
             $view->with('geb', $geb);
-        });*/
+        });
     }
 }

@@ -145,7 +145,7 @@
                             <li>{{ env('TTF_STRASSE') }}</li>
                             <li>{{ env('TTF_ORT') }}</li>
                             <li>&nbsp;</li>
-                            <li>Telefon: {{ env('TTF_TELEFON') }}</li>
+{{--                            <li>Telefon: {{ env('TTF_TELEFON') }}</li>--}}
                             <li>E-Mail: {{ env('TTF_EMAIL') }}</li>
                         </ul>
                     </td>

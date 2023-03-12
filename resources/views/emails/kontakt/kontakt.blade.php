@@ -21,6 +21,10 @@
             <td style="width: 200px; vertical-align: top;">Nachricht:</td>
             <td>{!! nl2br($kontakt->message) !!}</td>
         </tr>
+        <tr>
+            <td style="width: 200px; vertical-align: top;">IP-Adresse:</td>
+            <td>{!! nl2br($kontakt->ip_adresse) !!}</td>
+        </tr>
         </tbody>
     </table>
 @endsection

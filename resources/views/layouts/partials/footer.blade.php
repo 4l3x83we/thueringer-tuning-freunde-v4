@@ -10,6 +10,7 @@
                     <div class="social-links mt-3">
                         <a href="{{ env('TTF_FACEBOOK') }}" class="facebook" target="_blank"><em class="bi bi-facebook"></em></a>
                         <a href="{{ env('TTF_INSTAGRAM') }}" class="instagram" target="_blank"><em class="bi bi-instagram"></em></a>
+                        <a href="{{ env('TTF_ANDROID') }}" class="android" target="_blank" download><em class="bi bi-android2"></em></a>
                     </div>
                 </div>
 
@@ -41,7 +42,7 @@
                         {{ env('TTF_NAME') }}<br>
                         {{ env('TTF_STRASSE') }}<br>
                         {{ env('TTF_ORT') }}<br>
-                        <strong>Telefon: </strong><a href="tel:{{ env('TTF_TELEFON') }}">{{ env('TTF_TELEFON') }}</a><br>
+{{--                        <strong>Telefon: </strong><a href="tel:{{ env('TTF_TELEFON') }}">{{ env('TTF_TELEFON') }}</a><br>--}}
                         <strong>E-Mail: </strong><a href="mailto:{{ env('TTF_EMAIL') }}">{{ env('TTF_EMAIL') }}</a><br>
                     </p>
                 </div>

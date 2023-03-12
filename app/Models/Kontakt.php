@@ -25,7 +25,8 @@ class Kontakt extends Model
         'email',
         'message',
         'subject',
-        'read'
+        'read',
+        'ip_adresse'
     ];
 
     public function getActivitylogOptions(): LogOptions

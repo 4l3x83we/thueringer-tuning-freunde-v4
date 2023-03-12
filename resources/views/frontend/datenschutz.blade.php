@@ -59,7 +59,7 @@
                 </p>
                 <p class="lead">Vertretungsberechtigte Personen: {{ env('TTF_NAME1') }}</p>
                 <p class="lead">E-Mail-Adresse: {{ env('TTF_EMAIL') }}</p>
-                <p class="lead">Telefon: {{ env('TTF_TELEFON') }}</p>
+{{--                <p class="lead">Telefon: {{ env('TTF_TELEFON') }}</p>--}}
                 <p class="lead">Impressum: <a href="https://www.thueringer-tuning-freunde.de/impressum" target="_blank">https://www.thueringer-tuning-freunde.de/impressum</a>
                 </p>
                 <h2 id="mOverview">Übersicht der Verarbeitungen</h2>

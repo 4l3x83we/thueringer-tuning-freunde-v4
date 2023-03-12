@@ -20,8 +20,8 @@
                 <p class="lead">Deutschland</p>
                 <h2 id="m56">Kontaktmöglichkeiten</h2>
                 <p class="mb-0 lead">E-Mail-Adresse: {{ env('TTF_EMAIL') }}</p>
-                <p class="mb-0 lead">Telefon: {{ env('TTF_TELEFON') }}</p>
-                <p class="lead">Fax: {{ env('TTF_FAX') }}</p>
+{{--                <p class="mb-0 lead">Telefon: {{ env('TTF_TELEFON') }}</p>--}}
+{{--                <p class="lead">Fax: {{ env('TTF_FAX') }}</p>--}}
                 <p class="lead">Kontaktformular:<br> <em class="bi bi-envelope"></em> <a href="https://www.thueringer-tuning-freunde.de/kontakt" target="_blank">https://www.thueringer-tuning-freunde.de/kontakt</a></p>
                 <h2 id="m172">Social Media und andere Onlinepräsenzen</h2>
                 <p class="lead">Dieses Impressum gilt auch für die folgenden Social-Media-Präsenzen und Onlineprofile:</p>

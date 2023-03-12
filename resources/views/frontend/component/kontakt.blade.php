@@ -28,7 +28,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="info-box shadow">
                             <em class="bi bi-envelope"></em>
                             <h3>Schreiben Sie uns eine E-Mail</h3>
@@ -36,13 +36,13 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    {{--<div class="col-md-6">
                         <div class="info-box shadow">
                             <em class="bi bi-telephone"></em>
                             <h3>Rufen Sie uns an</h3>
                             <p>{{ env('TTF_TELEFON') }}</p>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
 
             </div>

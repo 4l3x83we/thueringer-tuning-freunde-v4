@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-{{--    <script src="https://cloud.ccm19.de/app.js?apiKey=11f2d495d42f7cf9c6f1bff5d966f69f74078b87d0cdd9ee&amp;domain=63ff8f241f29755625a94a3b" referrerpolicy="origin"></script>--}}
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="41affcba-8993-4be4-97d5-fba87adff0fb" data-blockingmode="auto" type="text/javascript"></script>
+    @laravelPWA
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -22,26 +22,24 @@
     <link rel="canonical" href="{{ url()->full() }}">
     @include('layouts/partials/meta/meta')
     <meta name="referrer" content="origin" />
-    @include('layouts/partials/meta/favicon')
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title') | {{ config('app.name', 'Thueringer Tuning Freunde') }}</title>
 
     <!-- Scripts -->
-    @laravelPWA
     @vite(['resources/js/app.js'])
     @stack('css')
 </head>
 <body>
-    {{--@guest
+    @guest
     @else
         @foreach($geb as $team)
             @if(\Carbon\Carbon::parse($team->geburtsdatum)->format('d.m') == date('d.m'))
                 <div id="alertGeb" class="alert alert-success rounded-0 text-center m-0 p-1 fw-bold" style="font-size: 14px;" role="alert">Alles Gute {{ $team->title }} zum {{ \Carbon\Carbon::parse($team->geburtsdatum)->age . '. Geburtstag' }}</div>
             @endif
         @endforeach
-    @endguest--}}
+    @endguest
 
     @include('layouts.partials.nav')
 

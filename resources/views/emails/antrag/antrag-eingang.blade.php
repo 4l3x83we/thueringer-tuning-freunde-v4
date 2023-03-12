@@ -6,7 +6,7 @@
     <p>Dein Mitgliedsantrag ist eingegangen und wird nun geprüft, du wirst in Kürze von uns hören:</p>
     <p>Wir würden uns freuen dich an einem Samstag in <a href="https://www.google.de/maps/place/Schallenburger+Str.+37,+99610+S%C3%B6mmerda/@51.1431963,11.1057134,368m/data=!3m2!1e3!4b1!4m5!3m4!1s0x47a46abb19a61969:0x1150d22767f5ce38!8m2!3d51.1431946!4d11.1068162" target="_blank">Sömmerda in der Schallenburger Straße 37</a> begrüßen zu dürfen, <u>in der Zeit von 09:30 - 13:00 Uhr</u>, bitte kontaktiere uns vorher.</p>
     <p>E-Mail: {{ env('TTF_EMAIL') }}</p>
-    <p>Telefon: {{ env('TTF_TELEFON') }}</p>
+{{--    <p>Telefon: {{ env('TTF_TELEFON') }}</p>--}}
     <p>Hier nochmal deine Daten in der Übersicht:</p>
     <div style="width: 100%; background-color: #292929; color: white; text-align: center;">Persönliche Daten</div>
     <table width="100%" border="0">

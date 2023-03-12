@@ -6,9 +6,9 @@ return [
         'name' => env('APP_NAME', 'My PWA App'),
         'short_name' => 'Thüringer Tuning Freunde',
         'start_url' => '/',
-        'background_color' => '#292929',
+        'background_color' => '#cccccc',
         'theme_color' => '#ff4400',
-        'display' => 'standalone',
+        'display' => 'fullscreen',
         'orientation'=> 'any',
         'status_bar'=> 'black',
         'icons' => [
@@ -57,22 +57,48 @@ return [
             '1668x2388' => '/images/icons/splash-1668x2388.png',
             '2048x2732' => '/images/icons/splash-2048x2732.png',
         ],
-        /*'shortcuts' => [
-            [
-                'name' => 'Shortcut Link 1',
-                'description' => 'Shortcut Link 1 Description',
-                'url' => '/shortcutlink1',
-                'icons' => [
-                    "src" => "/images/icons/icon-72x72.png",
-                    "purpose" => "any"
-                ]
+        'custom' => [
+            "description" => "Wir sind ein Marken offener Tuningclub bei uns gibt es keine Markenbindung alle Fahrzeugtypen sind willkommen bei uns. Du musst auch nicht der Jugendliche sein Tuning macht auch im Alter Spaß.",
+              "dir" => "ltr",
+              "lang" => "de",
+              "display_override" => [
+                "fullscreen"
             ],
-            [
-                'name' => 'Shortcut Link 2',
-                'description' => 'Shortcut Link 2 Description',
-                'url' => '/shortcutlink2'
-            ]
-        ],*/
-        'custom' => []
+            "categories" => [
+                "social"
+            ],
+            "screenshots" => [
+                [
+                    "src" => "/images/screenshots/Screenshot_1.webp",
+                    "sizes" => "1052x2048",
+                    "type" => "image/webp",
+                    "description" => "Die Startseite unserer Homepage"
+                ],
+                [
+                    "src" => "/images/screenshots/Screenshot_2.webp",
+                    "sizes" => "1080x1944",
+                    "type" => "image/webp",
+                    "description" => "Über uns Teil 1"
+                ],
+                [
+                    "src" => "/images/screenshots/Screenshot_3.webp",
+                    "sizes" => "1080x2037",
+                    "type" => "image/webp",
+                    "description" => "Über uns Teil 2"
+                ],
+                [
+                    "src" => "/images/screenshots/Screenshot_4.webp",
+                    "sizes" => "1080x2050",
+                    "type" => "image/webp",
+                    "description" => "Fahrzeug Übersicht"
+                ],
+                [
+                    "src" => "/images/screenshots/Screenshot_5.webp",
+                    "sizes" => "1054x2046",
+                    "type" => "image/webp",
+                    "description" => "Galerie"
+                ],
+            ],
+        ],
     ]
 ];

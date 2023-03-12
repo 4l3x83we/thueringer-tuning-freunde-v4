@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\Kontakt\KontaktMail;
+use App\Mail\Kontakt\SpamMail;
 use App\Models\Kontakt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -22,7 +23,9 @@ class KontaktsController extends Controller
 {
     public function index()
     {
-        return view('frontend.kontakt');
+        $xml = simplexml_load_string(file_get_contents("https://www.stopforumspam.com/api?ip=" . urlencode($_SERVER['REMOTE_ADDR'])));
+
+        return view('frontend.kontakt', compact('xml'));
     }
 
     public function store(Request $request)
@@ -38,16 +41,25 @@ class KontaktsController extends Controller
             return redirect(route('frontend.kontakt.index'))->withErrors($validator)->withInput();
         }
 
+        $spamMail = simplexml_load_string(file_get_contents("https://www.stopforumspam.com/api?email=" . $request->email."&ip=" . urlencode($_SERVER['REMOTE_ADDR'])));
+
         $kontakt = new Kontakt();
         $kontakt->name = $request->name;
         $kontakt->email = $request->email;
         $kontakt->subject = $request->subject;
         $kontakt->message = $request->message;
         $kontakt->read = false;
-        $kontakt->save();
+        $kontakt->ip_adresse = $request->getClientIp();
+        if ($spamMail->appears == "no" and $spamMail->appears == "no") {
+            $kontakt->save();
 
-        Mail::to(env('TTF_EMAIL'))->send(new KontaktMail($kontakt));
-        Toastr::success('Kontaktanfrage wurde erfolgreich versendet', 'Erfolgreich versendet');
-        return redirect(route('frontend.kontakt.index'));
+            Mail::to(env('TTF_EMAIL'))->send(new KontaktMail($kontakt));
+            Toastr::success('Kontaktanfrage wurde erfolgreich versendet', 'Erfolgreich versendet');
+            return redirect(route('frontend.kontakt.index'));
+        } else {
+            Mail::to($request->email)->send(new SpamMail($kontakt));
+            Toastr::error("Your spam didn't go through have fun keeping spamming.", 'Spam Mail');
+            return redirect(route('frontend.index'));
+        }
     }
 }
