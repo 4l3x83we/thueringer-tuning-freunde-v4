@@ -15,14 +15,14 @@
                         <table class="table table-striped table-sm table-hover">
                             <thead>
                             <tr class="align-middle">
-                                <th>Log Name</th>
-                                <th>Beschreibung</th>
-                                <th>Thementyp</th>
-                                <th>Vorgang</th>
-                                <th>Betreff-ID</th>
-                                <th>Art der Ursache</th>
-                                <th>User</th>
-                                <th>Batch-UUID</th>
+                                <th style="min-width: 100px;">Log Name</th>
+                                <th style="min-width: 250px;">Beschreibung</th>
+                                <th style="min-width: 180px;">Thementyp</th>
+                                <th style="min-width: 100px;">Vorgang</th>
+                                <th style="min-width: 100px;">Betreff-ID</th>
+                                <th style="min-width: 180px;">Art der Ursache</th>
+                                <th style="min-width: 180px;">User</th>
+                                <th style="min-width: 100px;">Batch-UUID</th>
                             </tr>
                             </thead>
                             <tbody>
