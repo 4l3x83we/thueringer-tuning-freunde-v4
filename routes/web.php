@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\WelcomeNotification\WelcomesNewUsers;
 use Yoeunes\Toastr\Facades\Toastr;
+use Spatie\Activitylog\Models\Activity;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,6 +139,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::resource('/zahlungen', Admin\Team\TeamController::class);
                 Route::get('/zahlungen/bezahlt/{zahlung}/bearbeitung', [Admin\Team\TeamController::class, 'editEuro'])->name('zahlungen.edit-euro');
                 Route::match(['PUT', 'PATCH'], '/zahlungen/bezahlt/{zahlung}', [Admin\Team\TeamController::class, 'updateEuro'])->name('zahlungen.euro-update');
+
+                Route::get('/activityLog', function () {
+                    $activityLogs = Activity::paginate(30);
+                    return view('intern.admin.activity-log.activityLog', compact('activityLogs'));
+                })->name('activityLog');
             });
         });
     });

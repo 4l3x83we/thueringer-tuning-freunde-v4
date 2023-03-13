@@ -82,6 +82,7 @@
                                 @hasanyrole('super_admin|admin')
                                     <h6 class="dropdown-header">Interner Bereich</h6>
                                     <a href="{{ route('intern.admin.antrag.index') }}" class="dropdown-item">Anträge</a>
+                                    <a href="{{ route('intern.admin.activityLog') }}" class="dropdown-item">Aktivitätsprotokoll</a>
                                 @hasrole('super_admin')
                                     <a href="{{ route('intern.admin.zahlungen.index') }}" class="dropdown-item">Zahlungen</a>
                                     <a href="{{ route('intern.admin.users.index') }}" class="dropdown-item">Mitglieder</a>

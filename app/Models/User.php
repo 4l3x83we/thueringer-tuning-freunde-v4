@@ -113,4 +113,9 @@ class User extends Authenticatable
             ->useLogName('User')
             ->dontSubmitEmptyLogs();
     }
+
+    public static function userActivity($id)
+    {
+        return self::where('id', $id)->first()->name;
+    }
 }
