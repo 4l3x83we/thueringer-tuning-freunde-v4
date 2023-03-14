@@ -261,9 +261,9 @@ class Helpers
     public static function activityLogBesucher($title = '')
     {
         if (auth()->check()) {
-            activity('Besucher')->causedBy(auth()->user())->log(auth()->user()->name." besucht {$title}".\request()->fullUrl());
+            activity('Besucher')->causedBy(auth()->user())->log(auth()->user()->name." besucht {$title}".\request()->fullUrl() . ", IP-Adresse: " . \request()->ip());
         } else {
-            activity('Besucher')->log("Ein Gast besucht ".\request()->fullUrl());
+            activity('Besucher')->log("Ein Gast besucht ".\request()->fullUrl() . ", IP-Adresse: " . \request()->ip());
         }
     }
 }
