@@ -3,6 +3,7 @@
 
         <div class="section-title">
             <h2>Veranstaltungen</h2>
+            @if(Request::is('/'))<a href="{{ route('frontend.veranstaltungen.index') }}">Übersicht</a>@endif
         </div>
 
         <div class="row">
@@ -82,6 +83,13 @@
                         </div>
                     @endif
                 @endforeach
+
+                @if(!Request::is('/'))
+                    <div class="mt-3">
+                        {{ $veranstaltungens->links() }}
+                    </div>
+                @endif
+
             @else
                 <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
                     <div class="rounded shadow no-event">

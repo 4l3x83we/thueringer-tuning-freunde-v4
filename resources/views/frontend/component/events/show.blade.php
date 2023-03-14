@@ -20,7 +20,7 @@
                     <div></div>
                 @endif
                 <div class="alert alert-link pe-0 ps-0">
-                    <a href="{{ route('frontend.index').'#veranstaltungen' }}">
+                    <a href="{{ route('frontend.veranstaltungen.index') }}">
                         <div class="btn-content-title d-inline">Übersicht</div>
                     </a>
                 </div>

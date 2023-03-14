@@ -25,7 +25,9 @@ class VeranstaltungensController extends Controller
 {
     public function index()
     {
+        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->select('datum_von', 'datum_bis', 'veranstaltung', 'veranstalter', 'eintritt', 'slug', 'veranstaltungsort', 'quelle')->orderBy('datum_von', 'ASC')->paginate(10);
 
+        return view('frontend.veranstaltungen', compact('veranstaltungens'));
     }
 
     public function create()
@@ -49,7 +51,7 @@ class VeranstaltungensController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('frontend.index').'#veranstaltungen')->withErrors($validator)->withInput();
+            return redirect(route('frontend.veranstaltungen.index'))->withErrors($validator)->withInput();
         }
 
         $slug = SlugService::createSlug(Veranstaltungen::class, 'slug', $request->veranstaltung);
@@ -65,7 +67,7 @@ class VeranstaltungensController extends Controller
             Mail::to(env('TTF_EMAIL'))->send(new VeranstaltungenMail($veranstaltungen));
             Toastr::info('Deine Veranstaltung wurde gespeichert und wird nun von einem Admin geprüft und freigeschaltet.', 'In Prüfung!');
         }
-        return redirect(route('frontend.index') . '#veranstaltungen');
+        return redirect(route('frontend.veranstaltungen.index'));
     }
 
     public function show(Veranstaltungen $veranstaltungen)
@@ -94,7 +96,7 @@ class VeranstaltungensController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('frontend.index').'#veranstaltungen')->withErrors($validator)->withInput();
+            return redirect(route('frontend.veranstaltungen.index'))->withErrors($validator)->withInput();
         }
 
         $slug = $request->veranstaltung === $veranstaltungen->veranstaltung ? $veranstaltungen->slug : SlugService::createSlug(Veranstaltungen::class, 'slug', $request->veranstaltung);
@@ -108,7 +110,7 @@ class VeranstaltungensController extends Controller
             Mail::to(env('TTF_EMAIL'))->send(new VeranstaltungenEditMail($veranstaltungen));
             Toastr::info('Deine Veranstaltung wurde geändert und durch eine Admin erneut geprüft!', 'In Prüfung!');
         }
-        return redirect(route('frontend.index').'#veranstaltungen');
+        return redirect(route('frontend.veranstaltungen.index'));
     }
 
     public function published(Request $request, Veranstaltungen $veranstaltungen)
@@ -131,7 +133,7 @@ class VeranstaltungensController extends Controller
     {
         $veranstaltungen->delete();
         Toastr::error('Veranstaltung wurde gelöscht!', 'Gelöscht!');
-        return redirect(route('frontend.index').'#veranstaltungen');
+        return redirect(route('frontend.veranstaltungen.index'));
     }
 
     /**
