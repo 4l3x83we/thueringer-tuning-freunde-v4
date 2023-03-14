@@ -45,7 +45,7 @@ class IndexController extends Controller
             'treffen' => 0,
             'projekte' => Album::where('kategorie', 'Projekte')->select('kategorie')->count(),
         ];
-        Helpers::activityLogBesucher();
+//        Helpers::activityLogBesucher();
         return view('frontend.index', compact('teams', 'albums', 'fahrzeuges', 'preview', 'count', 'previewTeam', 'veranstaltungens'));
     }
 

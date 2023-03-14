@@ -69,4 +69,6 @@ class PDFController extends Controller
 
         return view('intern.satzung.index', compact('team', 'teams', 'teamCount'));
     }
+
+
 }

@@ -8,6 +8,11 @@
 
         <div class="row">
 
+            @if(!Request::is('/'))
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('frontend.veranstaltungen.list', ['download' => 'pdf']) }}" class="btn btn-link print-btn p-0 text-decoration-none d-print-none me-3" style="font-size: 18px;"><em class="bi bi-printer"></em> Drucken</a>
+                </div>
+            @endif
             @if(count($veranstaltungens) > 0)
                 @foreach($veranstaltungens as $veranstaltungen)
                     @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD.MM.YYYY') != date('d.m.Y') or \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD.MM.YYYY') == date('d.m.Y'))
@@ -17,19 +22,13 @@
                                     <div class="event-box-time">
                                         <time datetime="{{ $veranstaltungen->datum_von }}">
                                             <span class="day">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD') }}</span>
-                                            @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('MM') != \Carbon\Carbon::now()->isoFormat('MM'))
-                                                <span class="month">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->shortMonthName }}</span>
-                                            @endif
-                                            @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') != \Carbon\Carbon::now()->isoFormat('YYYY'))
-                                                <span class="year">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') }}</span>
-                                            @endif
                                             @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD.MM.YYYY') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD.MM.YYYY'))
                                                 <em class="bi bi-dash"></em>
                                             @endif
                                             @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD'))
                                                 <span class="day">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('DD') }}</span>
                                             @endif
-                                            @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('MM') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('MM'))
+                                            @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('MM') === \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('MM'))
                                             <span class="month">{{ \Carbon\Carbon::parse($veranstaltungen->datum_bis)->shortMonthName }}</span>
                                             @endif
                                             @if(\Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('YYYY') != \Carbon\Carbon::parse($veranstaltungen->datum_bis)->isoFormat('YYYY'))

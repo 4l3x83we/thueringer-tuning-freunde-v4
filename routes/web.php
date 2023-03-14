@@ -24,9 +24,7 @@ use Spatie\Activitylog\Models\Activity;
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 /*Route::get('/test', function () {
-    $teams = \App\Models\Frontend\Album\Photo::find(1);
-    dump($teams->teams, $teams->users);
-    dump($teams, $teams->fahrzeuges, $teams->albums);
+
 });*/
 
 /*Route::get('/testen', function () {
@@ -72,6 +70,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
         // Veranstaltungen
         Route::resource('/veranstaltungen', Frontend\Veranstaltungen\VeranstaltungensController::class);
         Route::match(['PUT', 'PATCH'], '/veranstaltungen/published/{veranstaltungen}', [Frontend\Veranstaltungen\VeranstaltungensController::class, 'published'])->name('veranstaltungen.published');
+        Route::get('/veranstaltungenliste', [Frontend\PDFController::class, 'veranstaltungen'])->name('veranstaltungen.list');
 
         // Gallery
         Route::resource('galerie', Frontend\Album\AlbumsController::class);
@@ -141,7 +140,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
                 Route::match(['PUT', 'PATCH'], '/zahlungen/bezahlt/{zahlung}', [Admin\Team\TeamController::class, 'updateEuro'])->name('zahlungen.euro-update');
 
                 Route::get('/activityLog', function () {
-                    $activityLogs = Activity::paginate(30);
+                    $activityLogs = Activity::orderBy('id', 'DESC')->paginate(30);
                     return view('intern.admin.activity-log.activityLog', compact('activityLogs'));
                 })->name('activityLog');
             });
