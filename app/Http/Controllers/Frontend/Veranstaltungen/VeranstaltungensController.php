@@ -19,13 +19,14 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Mail;
+use Spatie\Emoji\Emoji;
 use Yoeunes\Toastr\Facades\Toastr;
 
 class VeranstaltungensController extends Controller
 {
     public function index()
     {
-        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->select('datum_von', 'datum_bis', 'veranstaltung', 'veranstalter', 'eintritt', 'slug', 'veranstaltungsort', 'quelle')->orderBy('datum_von', 'ASC')->paginate(10);
+        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->select('id', 'anwesend', 'datum_von', 'datum_bis', 'veranstaltung', 'veranstalter', 'eintritt', 'slug', 'veranstaltungsort', 'quelle')->orderBy('datum_von', 'ASC')->paginate(10);
 
         return view('frontend.veranstaltungen', compact('veranstaltungens'));
     }
@@ -127,6 +128,19 @@ class VeranstaltungensController extends Controller
             'updated_at' => now(),
         ]);
         return redirect(route('frontend.veranstaltungen.show', $veranstaltungen->slug));
+    }
+
+    public function anwesend(Request $request)
+    {
+        Veranstaltungen::where('id', $request->id)->update([
+            'anwesend' => $request->anwesend,
+        ]);
+        if ($request->anwesend) {
+            Toastr::info('Ihr habt wirklich vor dahin zu fahren ' . Emoji::rollingOnTheFloorLaughing(), 'Anwesend');
+        } else {
+            Toastr::error('Schade das ihr nun doch absagt ' . Emoji::loudlyCryingFace(), 'Absage');
+        }
+        return redirect(route('frontend.veranstaltungen.index'));
     }
 
     public function destroy(Veranstaltungen $veranstaltungen)

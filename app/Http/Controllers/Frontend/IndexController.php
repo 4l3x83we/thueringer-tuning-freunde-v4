@@ -25,7 +25,7 @@ class IndexController extends Controller
         $teams = Team::where('published', true)->select('id', 'vorname', 'nachname', 'slug', 'facebook', 'tiktok', 'instagram', 'funktion', 'description', 'published_at', 'path', 'user_id', 'photo_id')->orderBy('title', 'ASC')->get();
         $fahrzeuges = Fahrzeug::where('published', true)->select('slug', 'title', 'album_id', 'description', 'user_id')->orderBy('updated_at', 'DESC')->get();
         $albums = Album::where('published', true)->select('thumbnail_id', 'path', 'id', 'slug', 'title', 'description')->inRandomOrder()->get();
-        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->select('datum_von', 'datum_bis', 'veranstaltung', 'veranstalter', 'eintritt', 'slug', 'veranstaltungsort', 'quelle')->orderBy('datum_von', 'ASC')->limit(6)->get();
+        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->select('id', 'anwesend', 'datum_von', 'datum_bis', 'veranstaltung', 'veranstalter', 'eintritt', 'slug', 'veranstaltungsort', 'quelle')->orderBy('datum_von', 'ASC')->limit(6)->get();
         $preview = null;
         foreach ($albums as $album) {
             if (!empty($album->thumbnail_id)) {

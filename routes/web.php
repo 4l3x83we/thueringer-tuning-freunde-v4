@@ -70,6 +70,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
         // Veranstaltungen
         Route::resource('/veranstaltungen', Frontend\Veranstaltungen\VeranstaltungensController::class);
         Route::match(['PUT', 'PATCH'], '/veranstaltungen/published/{veranstaltungen}', [Frontend\Veranstaltungen\VeranstaltungensController::class, 'published'])->name('veranstaltungen.published');
+        Route::post('/veranstaltungen/anwesend', [Frontend\Veranstaltungen\VeranstaltungensController::class, 'anwesend'])->name('veranstaltungen.anwesend');
         Route::get('/veranstaltungenliste', [Frontend\PDFController::class, 'veranstaltungen'])->name('veranstaltungen.list');
 
         // Gallery

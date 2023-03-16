@@ -30,7 +30,7 @@ class CalendarEintragEingegangenMail extends Mailable
             $subject = 'Eine neue Versammlung steht an!';
         } elseif ($this->kalender['type']['cp_user_id'] === 2) {
             $subject = 'Auf dich wartet Arbeit! :-), '. Team::where('user_id', $this->kalender['type']['cp_user_id'])->first()->vorname;
-        } elseif($this->kalender['type']['cp_user_id'] === 3) {
+        } elseif($this->kalender['type']['cp_user_id'] === 2) {
             $subject = 'Auf dich wartet Arbeit! :-), '. Team::where('user_id', $this->kalender['type']['cp_user_id'])->first()->vorname;
         } elseif($this->kalender['type']['id'] === 1) {
             $subject = 'Eine neue Versammlung steht an!';

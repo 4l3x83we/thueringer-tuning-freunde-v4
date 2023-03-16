@@ -106,7 +106,7 @@
                             @foreach($veranstaltungens as $veranstaltungen)
                                 <div class="col-lg-12 mt-4">
                                     <div class="event-box shadow">
-                                        <div class="event-box-time-social" data-aos="flip-down" data-aos-delay="300">
+                                        <div class="event-box-time-social @if($veranstaltungen->anwesend) text-bg-success @endif" data-aos="flip-down" data-aos-delay="300">
                                             <div class="event-box-time">
                                                 <time datetime="{{ $veranstaltungen->datum_von }}">
                                                     <span class="day">{{ \Carbon\Carbon::parse($veranstaltungen->datum_von)->isoFormat('DD') }}</span>
@@ -130,6 +130,25 @@
                                                     @endif
                                                 </time>
                                             </div>
+                                            @hasanyrole('super_admin|admin')
+                                            <div class="event-box-social">
+                                                @if(!$veranstaltungen->anwesend)
+                                                    <form action="{{ route('frontend.veranstaltungen.anwesend') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $veranstaltungen->id }}">
+                                                        <input type="hidden" name="anwesend" value="1">
+                                                        <button type="submit" class="btn btn-link btn-sm p-0"><em class="bi bi-check-circle text-success fw-bold pe-0"></em></button>
+                                                    </form>
+                                                @else
+                                                    <form action="{{ route('frontend.veranstaltungen.anwesend') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $veranstaltungen->id }}">
+                                                        <input type="hidden" name="anwesend" value="0">
+                                                        <button type="submit" class="btn btn-link btn-sm p-0"><em class="bi bi-x-circle text-danger fw-bold pe-0"></em></button>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                            @endhasanyrole
                                         </div>
                                         <div class="event-box-content" data-aos="flip-down" data-aos-delay="500">
                                             <h4>{{ $veranstaltungen->veranstaltung }}</h4>
