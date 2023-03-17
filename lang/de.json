@@ -796,5 +796,7 @@
     "write": "schreiben",
     "edit": "bearbeiten",
     "publish": "veröffentlichen",
-    "destroy": "löschen"
+    "destroy": "löschen",
+    "attributes": "Attribute",
+    "old": "alte Daten"
 }

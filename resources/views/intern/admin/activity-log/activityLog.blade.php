@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('title', 'Aktivitätsprotokoll')
-@section('description'){!! Str::limit('Hier kannst du alle Aktivitäten auf der Webseite sehen.', 150) !!}@endsection
+@section('description')
+    {!! Str::limit('Hier kannst du alle Aktivitäten auf der Webseite sehen.', 150) !!}
+@endsection
 @section('robots', 'NOINDEX,NOFOLLOW')
 
 @section('content')
@@ -34,32 +36,38 @@
                                     <td>{{ $activityLog->event }}</td>
                                     <td>{{ $activityLog->subject_id }}</td>
                                     <td>{{ $activityLog->causer_type }}</td>
-                                    <td>@if($activityLog->causer_id) {{ \App\Models\User::userActivity($activityLog->causer_id) }} @endif</td>
+                                    <td>@if($activityLog->causer_id)
+                                            {{ \App\Models\User::userActivity($activityLog->causer_id) }}
+                                        @endif</td>
                                     <td>{{ $activityLog->batch_uuid }}</td>
                                 </tr>
-                                @php
-                                    $properties = json_decode($activityLog->properties);
-                                @endphp
-                                @if($properties !== [])
-                                <tr>
-                                    <td colspan="8">
-                                        <table class="table mb-0">
-                                            <tbody>
-                                            @foreach($properties->attributes as $a => $values)
-                                            <tr>
-                                                @if('user_id' === $a)
-                                                    <th>Mitglied</th>
-                                                    <td>{!! \App\Models\User::userActivity($values) !!}</td>
-                                                @else
-                                                    <th>{{ $a }}</th>
-                                                    <td>{!! $values !!}</td>
-                                                @endif
-                                            </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
+                                @if($activityLog->changes)
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="table-responsive">
+                                                <table class="table mb-0">
+                                                    <thead>
+                                                    <tr>
+                                                        @foreach($activityLog->changes as $field => $value)
+                                                            @foreach($value as $key => $item)
+                                                                <th>{{ $key }}</th>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        @foreach($activityLog->changes as $field => $value)
+                                                            @foreach($value as $key => $item)
+                                                                <td>{!! $item !!}</td>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endif
                             @endforeach
                             </tbody>

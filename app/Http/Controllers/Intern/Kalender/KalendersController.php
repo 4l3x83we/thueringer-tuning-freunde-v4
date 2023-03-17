@@ -284,7 +284,7 @@ class KalendersController extends Controller
         $event->name = $type->type . ' Reserviert von: ' . $team->vorname . ' ' . $team->nachname[0] . '.';
         $event->startDateTime = Carbon::parse($kalender->von);
         $event->endDateTime = Carbon::parse($kalender->bis);
-        $event->description = $kalender->description . "\n\nEigenes Fahrzeug: " . ($kalender->eigenesFZ === 1 ? "Ja" : "Nein");
+        $event->description = $kalender->description . "\n\nEigenes Fahrzeug: " . ($kalender->eigenesFZ === 1 ? "Nein" : "Ja");
         $newEvent = $event->save();
         return $newEvent;
     }
