@@ -86,8 +86,7 @@
                         <div class="row">
                             <div class="col-lg-12 mt-4">
                                 <div class="rounded shadow no-event">
-                                    <p class="align-middle text-center fw-bold p-3" style="font-size: 150%;">Aktuell ist
-                                        die Werkstatt frei, du kannst hier einen Wunschtermin eintragen.</p>
+                                    <p class="align-middle text-center fw-bold p-3" style="font-size: 150%;">Aktuell ist die Werkstatt frei, du kannst hier einen Wunschtermin eintragen.</p>
                                     <div class="text-center pb-3">
                                         <a href="#" class="btn btn-success text-black btn-sm shadow" data-bs-toggle="modal" data-bs-target="#calendarCreate"><em class="bi bi-pencil text-black"></em> Termin eintragen</a>
                                         @hasanyrole('super_admin|admin')

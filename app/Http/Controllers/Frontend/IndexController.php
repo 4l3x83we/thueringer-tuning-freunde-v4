@@ -42,7 +42,7 @@ class IndexController extends Controller
         $count = [
             'team' => $teams->count(),
             'fahrzeuge' => $fahrzeuges->count(),
-            'treffen' => 0,
+            'treffen' => Veranstaltungen::where('anwesend', '=', 1)->count(),
             'projekte' => Album::where('kategorie', 'Projekte')->select('kategorie')->count(),
         ];
 //        Helpers::activityLogBesucher();

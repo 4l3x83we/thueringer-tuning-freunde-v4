@@ -13,7 +13,7 @@
                 <div class="icon-box shadow">
                     <em class="bi bi-wrench-adjustable"></em>
                     <h3><span>Werkstatt</span></h3>
-                    <p class="lead">Kleine Werkstatt mit ca. 245 m² steht euch jederzeit zur Verfügung. Und circa 250 m² Außenfläche. Hier befindet sich auch unser Club.</p>
+                    <p class="lead">Kleine Werkstatt mit ca. 245 m² steht euch jederzeit zur Verfügung. Hier befindet sich auch unser Club.</p>
                 </div>
             </div>
             <div class="col-lg-4 mt-4 mt-lg-0">

@@ -44,7 +44,7 @@ class KalendersController extends Controller
     public function index()
     {
         $kalenders = $this->kalender->showIndex();
-        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->where('anwesend', true)->get();
+        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->where('anwesend', true)->orderBy('datum_von', 'asc')->get();
         return view('intern.calendar.index', compact('veranstaltungens', 'kalenders'));
     }
 

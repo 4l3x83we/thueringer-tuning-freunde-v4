@@ -26,7 +26,7 @@ class VeranstaltungensController extends Controller
 {
     public function index()
     {
-        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->select('id', 'anwesend', 'datum_von', 'datum_bis', 'veranstaltung', 'veranstalter', 'eintritt', 'slug', 'veranstaltungsort', 'quelle')->orderBy('datum_von', 'ASC')->paginate(10);
+        $veranstaltungens = Veranstaltungen::where('datum_bis', '>=', now())->where('datum_von', '>=', now())->select('id', 'anwesend', 'datum_von', 'datum_bis', 'veranstaltung', 'veranstalter', 'eintritt', 'slug', 'veranstaltungsort', 'quelle')->orderBy('datum_von', 'asc')->paginate(10);
 
         return view('frontend.veranstaltungen', compact('veranstaltungens'));
     }
