@@ -15,7 +15,9 @@ use App\Mail\Kontakt\KontaktMail;
 use App\Mail\Kontakt\SpamMail;
 use App\Models\Kontakt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Yoeunes\Toastr\Facades\Toastr;
 
@@ -59,6 +61,8 @@ class KontaktsController extends Controller
         } else {
             Mail::to($request->email)->send(new SpamMail($kontakt));
             Toastr::error("Your spam didn't go through have fun keeping spamming.", 'Spam Mail');
+            $spamString = 'username='. urlencode($request->name) . '&ip_addr=' . urlencode($request->getClientIp()) . '&evidence=' . urlencode($request->message) . '&email=' . urlencode($request->email) .'&api_key=' . urlencode('r65dkc4ipgt17m');
+            Http::get('https://www.stopforumspam.com/add.php?'.htmlentities($spamString));
             return redirect(route('frontend.index'));
         }
     }
