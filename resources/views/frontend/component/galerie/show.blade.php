@@ -36,7 +36,7 @@
                                                         <em class="bi bi-arrows-fullscreen"></em>
                                                     </a>
                                                 @endif
-                                                @hasanyrole('mitglied|super_admin|admin')
+                                                @hasanyrole('member|super_admin|admin')
                                                     @if(auth()->user()->id === $photo->user_id)
                                                         @if($photo->id !== $galerie->thumbnail_id)
                                                             <form action="{{ route('frontend.albums.update-preview', $photo->id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
@@ -99,7 +99,7 @@
                             @if($galerie->kategorie === 'Fahrzeuge' or $galerie->kategorie === 'Projekte')
                                 <li><a href="{{ route('frontend.fahrzeuge.show', $galerie->slug) }}" class="links-light"><strong><em class="bi bi-car-front"></em></strong>: zum Fahrzeug</a></li>
                             @endif
-                            @hasanyrole('mitglied|super_admin|admin')
+                            @hasanyrole('member|super_admin|admin')
                                 @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern' or empty($galerie->fahrzeug_id))
                                     @can('edit')
                                         @if($galerie->user_id === auth()->user()->id)
@@ -158,7 +158,7 @@
                                 </div>
                                 <span> = Vollbild</span>
                             </div>
-                            @hasanyrole('mitglied|super_admin|admin')
+                            @hasanyrole('member|super_admin|admin')
                                 @if(auth()->user()->id === $galerie->user_id)
                                     <div>
                                         <div class="btn btn-sm btn-secondary my-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vorschaubild">
@@ -193,7 +193,7 @@
                             @endhasanyrole
                         </div>
 
-                        @hasanyrole('mitglied|super_admin|admin')
+                        @hasanyrole('member|super_admin|admin')
                             @if($galerie->kategorie === 'Treffen' or $galerie->kategorie === 'Club-interne-Treffen' or $galerie->kategorie === 'Club-intern')
                                 @can('edit')
                                 <div class="imagesDirekt">

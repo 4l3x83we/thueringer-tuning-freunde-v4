@@ -41,7 +41,7 @@
                     <li class="nav-item">
                         <a href="{{ route('frontend.gaestebuch.index') }}" class="nav-link {{ Request::is('gaestebuch') ? 'active' : '' }}">Gästebuch</a>
                     </li>
-                    @hasanyrole('super_admin|admin|mitglied')
+                    @hasanyrole('super_admin|admin|member')
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mitglieder Bereich

@@ -53,7 +53,7 @@
 
     @include('layouts.partials.footer')
 
-    @hasanyrole('mitglied|super_admin|admin')
+    @hasanyrole('member|super_admin|admin')
         <!-- ======= Fahrzeug Create ======= -->
         @include('frontend.component.fahrzeuge.create')
         <!-- ======= Galerie Create ======= -->

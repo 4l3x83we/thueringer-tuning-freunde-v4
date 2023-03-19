@@ -179,7 +179,7 @@
                             </div>
                             @endhasanyrole
 
-                            @hasanyrole('mitglied|silent member')
+                            @hasanyrole('member|silent member')
                             @if(auth()->user()->id === $team->user_id)
                             <hr data-aos="fade-left" data-aos-delay="500">
                             <div class="row m-0 w-100" data-aos="fade-left" data-aos-delay="500">
