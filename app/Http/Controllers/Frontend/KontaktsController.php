@@ -59,10 +59,10 @@ class KontaktsController extends Controller
             Toastr::success('Kontaktanfrage wurde erfolgreich versendet', 'Erfolgreich versendet');
             return redirect(route('frontend.kontakt.index'));
         } else {
+            $spamString = '?username='. htmlentities(urlencode($request->name), ENT_COMPAT, 'UTF-8') . '&ip_addr=' . urlencode($request->getClientIp()) . '&evidence=' . htmlentities(urlencode($request->message), ENT_COMPAT, 'UTF-8') . '&email=' . urlencode($request->email) .'&api_key=r65dkc4ipgt17m';
+            Http::get('https://www.stopforumspam.com/add.php'.$spamString);
             Mail::to($request->email)->send(new SpamMail($kontakt));
             Toastr::error("Your spam didn't go through have fun keeping spamming.", 'Spam Mail');
-            $spamString = 'username='. urlencode($request->name) . '&ip_addr=' . urlencode($request->getClientIp()) . '&evidence=' . urlencode($request->message) . '&email=' . urlencode($request->email) .'&api_key=' . urlencode('r65dkc4ipgt17m');
-            Http::get('https://www.stopforumspam.com/add.php?'.htmlentities($spamString));
             return redirect(route('frontend.index'));
         }
     }
