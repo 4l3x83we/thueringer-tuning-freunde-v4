@@ -34,7 +34,7 @@ class KontaktsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:4',
-            'email' => 'required|email',
+            'email' => 'required|email:rfc,dns',
             'subject' => 'required|min:8',
             'message' => 'required'
         ]);
@@ -61,7 +61,6 @@ class KontaktsController extends Controller
         } else {
             $spamString = '?username='. htmlentities(urlencode($request->name), ENT_COMPAT, 'UTF-8') . '&ip_addr=' . urlencode($request->getClientIp()) . '&evidence=' . htmlentities(urlencode($request->message), ENT_COMPAT, 'UTF-8') . '&email=' . urlencode($request->email) .'&api_key=r65dkc4ipgt17m';
             Http::get('https://www.stopforumspam.com/add.php'.$spamString);
-            Mail::to($request->email)->send(new SpamMail($kontakt));
             Toastr::error("Your spam didn't go through have fun keeping spamming.", 'Spam Mail');
             return redirect(route('frontend.index'));
         }
