@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="text-center">
-                            <button class="btn btn-sm btn-primary text-black position-relative submit" onclick="this.classList.toggle('btn-loading')" type="submit">
+                            <button class="btn btn-sm btn-primary text-black position-relative submit g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}" data-callback='onSubmit' data-action='store' onclick="this.classList.toggle('btn-loading')">
                                 <span class="btn-text">Nachricht senden</span>
                             </button>
                         </div>
@@ -94,3 +94,11 @@
 
     </div>
 </section>
+
+@push('js')
+    <script>
+        function onSubmit(token) {
+            document.getElementById("kontaktForm").submit();
+        }
+    </script>
+@endpush

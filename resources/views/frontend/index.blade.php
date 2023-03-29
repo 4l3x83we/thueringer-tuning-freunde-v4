@@ -23,5 +23,5 @@
     <!-- ======= Veranstaltungen ======= -->
     @include('frontend.index.veranstaltungen')
     <!-- ======= Kontakt ======= -->
-    @include('frontend.component.kontakt')
+{{--    @include('frontend.component.kontakt')--}}
 @endsection

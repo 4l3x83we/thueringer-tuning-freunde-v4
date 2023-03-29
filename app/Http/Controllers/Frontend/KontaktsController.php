@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\Kontakt\KontaktMail;
 use App\Mail\Kontakt\SpamMail;
 use App\Models\Kontakt;
+use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
@@ -36,7 +37,17 @@ class KontaktsController extends Controller
             'name' => 'required|min:4',
             'email' => 'required|email:rfc,dns',
             'subject' => 'required|min:8',
-            'message' => 'required'
+            'message' => 'required',
+            'g-recaptcha-response' => ['required', function (string $attribute, mixed $value, Closure $fail) {
+            $g_response = Http::asForm()->post("https://www.google.com/recaptcha/api/siteverify", [
+                'secret' => config('services.recaptcha.secret_key'),
+                'response' => $value,
+                'remoteip' => \request()->ip()
+            ]);
+                if (!$g_response->json('success')) {
+                    $fail("Das {$attribute} ist ungültig.");
+                }
+            },]
         ]);
 
         if ($validator->fails()) {

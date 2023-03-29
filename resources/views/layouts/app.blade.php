@@ -29,6 +29,7 @@
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     @stack('css')
 </head>
 <body>
