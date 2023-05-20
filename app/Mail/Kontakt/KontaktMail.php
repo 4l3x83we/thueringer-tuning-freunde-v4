@@ -35,7 +35,7 @@ class KontaktMail extends Mailable
             $email = 'noreplay@thueringer-tuning-freunde.de';
         }
 
-        return $this->from($email)->subject('Neue Kontaktanfrage!')
+        return $this->from($email)->replyTo($this->kontakt['email'])->subject('Neue Kontaktanfrage!')
             ->view('emails.kontakt.kontakt')->with('kontakt', $this->kontakt);
     }
 }
