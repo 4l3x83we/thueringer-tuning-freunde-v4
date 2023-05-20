@@ -29,7 +29,7 @@ class AntragGenehmigtClubMail extends Mailable
 
     public function build()
     {
-        return $this->from('webmaster@thueringer-tuning-freunde.de')->subject('Mitgliedsantrag von ' . $this->antrag['title'] . ' wurde genehmigt.')
+        return $this->from('webmaster@thueringer-tuning-freunde.de')->replyTo($this->antrag['email'])->subject('Mitgliedsantrag von ' . $this->antrag['title'] . ' wurde genehmigt.')
             ->view('emails.antrag.antrag-genehmigt-club')->with('antrag', $this->antrag);
     }
 }

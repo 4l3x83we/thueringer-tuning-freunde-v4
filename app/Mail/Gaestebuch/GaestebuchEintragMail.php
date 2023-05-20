@@ -34,7 +34,7 @@ class GaestebuchEintragMail extends Mailable
             $email = 'noreplay@thueringer-tuning-freunde.de';
         }
 
-        return $this->from($email)->subject('Neuer Gästebucheintrag ist eingegangen!')
+        return $this->from($email)->replyTo($this->gästebuch['email'])->subject('Neuer Gästebucheintrag ist eingegangen!')
             ->view('emails.gaestebuch.gaestebuch-eintrag')->with('gästebuch', $this->gästebuch);
     }
 }

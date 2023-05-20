@@ -29,7 +29,7 @@ class AntragEingangMail extends Mailable
 
     public function build()
     {
-        return $this->from('noreplay@thueringer-tuning-freunde.de')->subject('Dein Mitgliedsantrag bei den Thüringer Tuning Freunden wird geprüft.')
+        return $this->from('noreplay@thueringer-tuning-freunde.de')->replyTo($this->team['email'])->subject('Dein Mitgliedsantrag bei den Thüringer Tuning Freunden wird geprüft.')
             ->view('emails.antrag.antrag-eingang')->with('team', $this->team);
     }
 }

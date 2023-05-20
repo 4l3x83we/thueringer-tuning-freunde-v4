@@ -35,7 +35,7 @@ class AntragEingangAdminMail extends Mailable
             $email = 'noreplay@thueringer-tuning-freunde.de';
         }
 
-        return $this->from($email)->subject('Neuer Mitgliedsantrag ist eingegangen.')
+        return $this->from($email)->replyTo($this->team['email'])->subject('Neuer Mitgliedsantrag ist eingegangen.')
             ->view('emails.antrag.antrag-eingang-admin')->with('team', $this->team);
     }
 }

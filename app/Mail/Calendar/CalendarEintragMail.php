@@ -28,7 +28,7 @@ class CalendarEintragMail extends Mailable
         }else {
             $email = 'noreplay@thueringer-tuning-freunde.de';
         }
-        return $this->from($email)->subject('Neuer Kalendereintrag erstellt!')
+        return $this->from($email)->replyTo($this->kalender['email'])->subject('Neuer Kalendereintrag erstellt!')
             ->view('emails.calendar.calendar-eintrag')->with('kontakt', $this->kalender);
     }
 }

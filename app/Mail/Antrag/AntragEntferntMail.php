@@ -29,7 +29,7 @@ class AntragEntferntMail extends Mailable
 
     public function build()
     {
-        return $this->from('webmaster@thueringer-tuning-freunde.de')->subject('verlassen von '. $this->antrag['vorname'] .'.')
+        return $this->from('webmaster@thueringer-tuning-freunde.de')->replyTo($this->antrag['email'])->subject('verlassen von '. $this->antrag['vorname'] .'.')
             ->view('emails.antrag.antrag-entfernt')->with('antrag', $this->antrag);
     }
 }
