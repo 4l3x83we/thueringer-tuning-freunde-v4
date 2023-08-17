@@ -25,6 +25,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use File;
+use Google\Service\AdExchangeBuyer\DimensionDimensionValue;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -129,6 +130,7 @@ class AntragController extends Controller
         $profilPath = 'images/' . $teamMitglied . '/profil';
         $profilImage = Helpers::imageUpload($request, 'profilbild', $profilPath);
 
+
         if (!$request->fahrzeugvorhanden) {
             $title = $request->fahrzeug;
             $slug = SlugService::createSlug(Fahrzeug::class, 'slug', $title);
@@ -203,6 +205,7 @@ class AntragController extends Controller
             $team->path = $profilPath;
             $team->published = 0;
             $team->save();
+
 
             if (!empty($request->file('profilbild'))) {
                 $teamPhoto = [
@@ -376,12 +379,12 @@ class AntragController extends Controller
 
     public function revoke(Request $request, $id)
     {
-        $antrag = Team::findOrFail($id);
+        $antrag = Team::findOrFile($id);
         $antrag->fahrzeuge = Fahrzeug::where('team_id', $id)->first();
         $antrag->photos = Photo::where('album_id', $antrag->fahrzeuge->album_id)->get();
         $antrag->photoProfil = Photo::where('id', $antrag->photo_id)->first();
 
-        Team::where('antrag_id', $id)->update([
+        Team::where('id', $id)->update([
             'published' => 0,
             'title' => null,
             'slug' => null,
@@ -389,6 +392,8 @@ class AntragController extends Controller
             'updated_at' => now(),
             'published_at' => null,
         ]);
+
+        DB::table('activity_log')->where('causer_id', '=', $id)->delete();
 
         Fahrzeug::where('team_id', $id)->update([
             'published' => 0,
